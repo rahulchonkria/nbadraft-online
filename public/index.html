@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Sequence Online</title>
+<style>
+/* ── Reset & Base ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #0b3d1a;
+  color: #e8e0d0;
+  display: flex; flex-direction: column; align-items: center;
+  user-select: none;
+}
+
+/* ── Lobby ──────────────────────────────────────────────────────── */
+#lobby, #waiting-room, #game-screen { display: none; width: 100%; height: 100%; }
+#lobby.active, #waiting-room.active, #game-screen.active { display: flex; }
+
+#lobby {
+  flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+}
+#lobby h1 {
+  font-size: 52px; font-weight: 800; letter-spacing: 3px;
+  background: linear-gradient(135deg, #ffd700, #ff8c00);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  text-shadow: none; filter: drop-shadow(0 2px 8px rgba(255,180,0,.4));
+}
+#lobby h1 span { font-size: 18px; display: block; letter-spacing: 1px;
+  background: linear-gradient(135deg, #c8b97a, #a89860);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.lobby-box {
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px; padding: 28px 32px; width: 360px;
+  backdrop-filter: blur(12px);
+}
+.lobby-box h2 { font-size: 18px; margin-bottom: 16px; color: #ffd700; }
+.lobby-box input, .lobby-box button {
+  display: block; width: 100%; padding: 12px 16px; border-radius: 10px;
+  font-size: 15px; border: none; outline: none; margin-bottom: 10px;
+}
+.lobby-box input {
+  background: rgba(0,0,0,0.35); color: #fff; border: 1px solid rgba(255,255,255,0.15);
+}
+.lobby-box input::placeholder { color: rgba(255,255,255,0.35); }
+.lobby-box input:focus { border-color: #ffd700; }
+.btn-primary {
+  background: linear-gradient(135deg, #ffd700, #e6a800); color: #1a1a1a;
+  font-weight: 700; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
+  margin-bottom: 0;
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(255,200,0,.4); }
+.btn-secondary {
+  background: rgba(255,255,255,0.08); color: #e8e0d0; cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.15); margin-bottom: 0;
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.14); }
+.error-msg { color: #ff6b6b; font-size: 13px; text-align: center; min-height: 18px; }
+.or-divider { text-align: center; color: rgba(255,255,255,0.35); font-size: 13px; margin: 14px 0 18px; }
+
+/* ── Waiting Room ───────────────────────────────────────────────── */
+#waiting-room {
+  flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+}
+.room-code-display {
+  font-size: 40px; font-weight: 800; letter-spacing: 8px; color: #ffd700;
+  background: rgba(0,0,0,0.3); padding: 12px 32px; border-radius: 14px;
+  cursor: pointer; transition: background .2s;
+}
+.room-code-display:hover { background: rgba(0,0,0,0.45); }
+.room-code-display small { display: block; font-size: 11px; letter-spacing: 1px; color: rgba(255,255,255,0.4); font-weight: 400; }
+.player-list { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 500px; }
+.player-list li {
+  padding: 8px 18px; border-radius: 20px; font-size: 14px; font-weight: 600;
+}
+.team-config { display: flex; gap: 10px; align-items: center; }
+.team-config label { font-size: 14px; color: rgba(255,255,255,0.6); }
+.team-config select {
+  padding: 8px 12px; border-radius: 8px; background: rgba(0,0,0,0.35);
+  color: #fff; border: 1px solid rgba(255,255,255,0.15); font-size: 14px;
+}
+
+/* ── Game Screen ────────────────────────────────────────────────── */
+#game-screen { flex-direction: column; align-items: center; overflow: hidden; }
+
+/* Top bar */
+.top-bar {
+  width: 100%; padding: 6px 16px; display: flex; justify-content: space-between;
+  align-items: center; background: rgba(0,0,0,0.3); flex-shrink: 0; min-height: 40px;
+}
+.top-bar .room-info { font-size: 12px; color: rgba(255,255,255,0.5); }
+.top-bar .room-info strong { color: #ffd700; font-size: 14px; letter-spacing: 2px; }
+.top-bar .turn-info { font-size: 14px; font-weight: 600; }
+.top-bar .score-info { display: flex; gap: 12px; font-size: 13px; }
+.score-badge { padding: 2px 10px; border-radius: 10px; font-weight: 700; }
+
+/* Board */
+.board-container {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: 8px; overflow: hidden; min-height: 0;
+}
+.board {
+  display: grid; grid-template-columns: repeat(10, 1fr); grid-template-rows: repeat(10, 1fr);
+  gap: 3px; padding: 12px; border-radius: 16px;
+  background: linear-gradient(145deg, #14522a, #0d3d1e);
+  border: 3px solid #1a6b35;
+  box-shadow: inset 0 2px 20px rgba(0,0,0,0.4), 0 8px 32px rgba(0,0,0,0.5);
+  aspect-ratio: 1 / 1;
+  max-height: calc(100vh - 200px);
+  max-width: calc(100vh - 200px);
+  width: 100%;
+}
+
+/* Board cells */
+.cell {
+  position: relative; border-radius: 5px; display: flex;
+  flex-direction: column; align-items: center; justify-content: center;
+  cursor: pointer; transition: transform 0.12s, box-shadow 0.12s;
+  background: #f5f0e0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  overflow: hidden;
+  min-width: 0; min-height: 0;
+}
+.cell:hover { transform: scale(1.08); z-index: 2; box-shadow: 0 3px 12px rgba(0,0,0,0.4); }
+.cell.free-corner {
+  background: linear-gradient(135deg, #ffd700, #ff8c00);
+}
+.cell .rank {
+  font-weight: 800; line-height: 1;
+  font-size: clamp(8px, 2.2vmin, 18px);
+}
+.cell .suit {
+  line-height: 1;
+  font-size: clamp(7px, 1.8vmin, 15px);
+}
+.cell.red .rank, .cell.red .suit { color: #c0392b; }
+.cell.black .rank, .cell.black .suit { color: #2c3e50; }
+.cell.free-corner .rank { color: #1a1a1a; font-size: clamp(6px, 1.6vmin, 13px); }
+.cell.free-corner .suit { color: #1a1a1a; font-size: clamp(12px, 3vmin, 28px); }
+
+/* Chips */
+.chip {
+  position: absolute; inset: 15%; border-radius: 50%;
+  opacity: 0.92; z-index: 1;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.35), inset 0 -2px 4px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.3);
+  animation: chipDrop 0.25s ease-out;
+}
+@keyframes chipDrop {
+  from { transform: scale(0) translateY(-20px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 0.92; }
+}
+
+/* Sequence highlight */
+.cell.in-sequence::after {
+  content: ''; position: absolute; inset: 0; border: 2px solid #ffd700;
+  border-radius: 5px; z-index: 3;
+  animation: sequenceGlow 1.5s ease-in-out infinite alternate;
+}
+@keyframes sequenceGlow {
+  from { box-shadow: 0 0 4px #ffd700; }
+  to { box-shadow: 0 0 12px #ffd700, 0 0 20px rgba(255,215,0,0.3); }
+}
+
+/* Highlight matching cells when card selected */
+.cell.highlight {
+  box-shadow: 0 0 0 2px #ffd700, 0 0 12px rgba(255,215,0,0.5);
+  z-index: 2;
+}
+.cell.highlight-remove {
+  box-shadow: 0 0 0 2px #ff4444, 0 0 12px rgba(255,68,68,0.5);
+  z-index: 2;
+}
+
+/* Last move indicator */
+.cell.last-move::before {
+  content: ''; position: absolute; inset: -2px; border: 2px solid #fff;
+  border-radius: 6px; z-index: 4; opacity: 0.7;
+  animation: lastMovePulse 2s ease-in-out infinite;
+}
+@keyframes lastMovePulse {
+  0%, 100% { opacity: 0.7; } 50% { opacity: 0.2; }
+}
+
+/* ── Hand ───────────────────────────────────────────────────────── */
+.hand-container {
+  width: 100%; padding: 8px 12px; background: rgba(0,0,0,0.4);
+  flex-shrink: 0; border-top: 1px solid rgba(255,255,255,0.1);
+}
+.hand-label { font-size: 11px; color: rgba(255,255,255,0.4); text-align: center; margin-bottom: 4px; }
+.hand {
+  display: flex; justify-content: center; gap: 6px; flex-wrap: nowrap;
+  overflow-x: auto; padding: 2px 0;
+}
+.hand-card {
+  width: clamp(44px, 8vw, 72px); height: clamp(62px, 11vw, 100px);
+  border-radius: 8px; background: #fffdf5; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  transition: transform 0.15s, box-shadow 0.15s;
+  flex-shrink: 0; position: relative;
+  border: 2px solid transparent;
+}
+.hand-card:hover { transform: translateY(-6px); box-shadow: 0 6px 16px rgba(0,0,0,0.4); }
+.hand-card.selected { border-color: #ffd700; transform: translateY(-10px); box-shadow: 0 8px 24px rgba(255,200,0,0.4); }
+.hand-card.dead { opacity: 0.45; }
+.hand-card .h-rank {
+  font-weight: 800; font-size: clamp(14px, 3vw, 22px); line-height: 1;
+}
+.hand-card .h-suit {
+  font-size: clamp(16px, 3.5vw, 28px); line-height: 1;
+}
+.hand-card.h-red .h-rank, .hand-card.h-red .h-suit { color: #c0392b; }
+.hand-card.h-black .h-rank, .hand-card.h-black .h-suit { color: #2c3e50; }
+.dead-badge {
+  position: absolute; top: 2px; right: 3px; font-size: 9px; background: #ff4444;
+  color: #fff; border-radius: 4px; padding: 1px 3px; font-weight: 700;
+}
+
+/* ── Toast ──────────────────────────────────────────────────────── */
+.toast {
+  position: fixed; top: 50px; left: 50%; transform: translateX(-50%);
+  background: rgba(0,0,0,0.85); color: #fff; padding: 12px 24px;
+  border-radius: 12px; font-size: 14px; font-weight: 600; z-index: 100;
+  pointer-events: none; opacity: 0; transition: opacity 0.3s;
+}
+.toast.show { opacity: 1; }
+
+/* ── Win Overlay ────────────────────────────────────────────────── */
+.win-overlay {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.75); align-items: center; justify-content: center;
+  flex-direction: column; gap: 20px;
+}
+.win-overlay.active { display: flex; }
+.win-overlay h2 { font-size: 42px; font-weight: 800; }
+.win-overlay p { font-size: 18px; color: rgba(255,255,255,0.7); }
+
+/* ── Team Colors ────────────────────────────────────────────────── */
+.team-0 { background: #2980b9; color: #fff; }
+.team-1 { background: #c0392b; color: #fff; }
+.team-2 { background: #27ae60; color: #fff; }
+.chip-0 { background: radial-gradient(circle at 35% 35%, #5dade2, #2471a3); }
+.chip-1 { background: radial-gradient(circle at 35% 35%, #e74c3c, #a93226); }
+.chip-2 { background: radial-gradient(circle at 35% 35%, #2ecc71, #1e8449); }
+.team-color-0 { color: #5dade2; }
+.team-color-1 { color: #e74c3c; }
+.team-color-2 { color: #2ecc71; }
+
+/* ── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 500px) {
+  .board { gap: 2px; padding: 6px; border-radius: 10px; border-width: 2px; }
+  .cell { border-radius: 3px; }
+  .top-bar { padding: 4px 8px; }
+  .hand-container { padding: 6px 8px; }
+  .lobby-box { width: 90%; padding: 20px; }
+  #lobby h1 { font-size: 36px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ LOBBY ═══ -->
+<div id="lobby" class="active">
+  <h1>SEQUENCE<span>Online Multiplayer</span></h1>
+  <div class="lobby-box">
+    <h2>Start Playing</h2>
+    <input type="text" id="playerName" placeholder="Your name" maxlength="20" autocomplete="off">
+    <button class="btn-primary" onclick="createGame()">Create Game</button>
+    <div class="or-divider">— or join an existing game —</div>
+    <input type="text" id="joinCode" placeholder="Room code" maxlength="6" autocomplete="off" style="text-transform:uppercase; letter-spacing:3px; text-align:center;">
+    <button class="btn-secondary" onclick="joinGame()">Join Game</button>
+    <div class="error-msg" id="lobbyError"></div>
+  </div>
+</div>
+
+<!-- ═══ WAITING ROOM ═══ -->
+<div id="waiting-room">
+  <div class="room-code-display" onclick="copyCode()" title="Click to copy">
+    <small>ROOM CODE (click to copy)</small>
+    <span id="displayCode"></span>
+  </div>
+  <div class="team-config" id="teamConfig">
+    <label>Teams:</label>
+    <select id="teamSelect" onchange="setTeams(this.value)">
+      <option value="2">2 Teams</option>
+      <option value="3">3 Teams / Players</option>
+    </select>
+  </div>
+  <ul class="player-list" id="playerList"></ul>
+  <button class="btn-primary" id="startBtn" onclick="startGame()" style="width:200px;">Start Game</button>
+  <div class="error-msg" id="waitError"></div>
+</div>
+
+<!-- ═══ GAME SCREEN ═══ -->
+<div id="game-screen">
+  <div class="top-bar">
+    <div class="room-info">Room: <strong id="gameRoomCode"></strong></div>
+    <div class="turn-info" id="turnInfo"></div>
+    <div class="score-info" id="scoreInfo"></div>
+  </div>
+  <div class="board-container">
+    <div class="board" id="board"></div>
+  </div>
+  <div class="hand-container">
+    <div class="hand-label">YOUR HAND <span id="handHint"></span></div>
+    <div class="hand" id="hand"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Win Overlay -->
+<div class="win-overlay" id="winOverlay">
+  <h2 id="winText"></h2>
+  <p id="winSub"></p>
+  <button class="btn-primary" onclick="location.reload()" style="width:200px;padding:14px;">Play Again</button>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+// ── Constants ──────────────────────────────────────────────────────
+const BOARD_LAYOUT = [
+  ['FR','2S','3S','4S','5S','6S','7S','8S','9S','FR'],
+  ['6C','5C','4C','3C','2C','AH','KH','QH','TH','TS'],
+  ['7C','AS','2D','3D','4D','5D','6D','7D','9H','QS'],
+  ['8C','KS','6C','5C','4C','3C','2C','8D','8H','KS'],
+  ['9C','QS','7C','6H','5H','4H','AC','9D','7H','AS'],
+  ['TC','TS','8C','7H','2H','3H','KC','TD','6H','2D'],
+  ['QC','9S','9C','8H','9H','TH','QC','QD','5H','3D'],
+  ['KC','8S','TC','QH','KH','AH','AD','KD','4H','4D'],
+  ['AC','7S','6S','5S','4S','3S','2S','2H','3H','5D'],
+  ['FR','AD','KD','QD','TD','9D','8D','7D','6D','FR'],
+];
+
+const SUIT_SYMBOLS = { S: '♠', H: '♥', D: '♦', C: '♣' };
+const RANK_DISPLAY = { '2':'2','3':'3','4':'4','5':'5','6':'6','7':'7','8':'8','9':'9','T':'10','J':'J','Q':'Q','K':'K','A':'A' };
+const TEAM_NAMES = ['Blue', 'Red', 'Green'];
+
+function isRed(suit) { return suit === 'H' || suit === 'D'; }
+function isTwoEyedJack(card) { return card === 'JD' || card === 'JC'; }
+function isOneEyedJack(card) { return card === 'JH' || card === 'JS'; }
+
+// ── State ──────────────────────────────────────────────────────────
+let socket;
+let state = null;
+let selectedCardIndex = null;
+let myId = null;
+
+// ── Socket ─────────────────────────────────────────────────────────
+function initSocket() {
+  socket = io();
+  myId = socket.id;
+  socket.on('connect', () => { myId = socket.id; });
+  socket.on('game-state', (s) => {
+    state = s;
+    render();
+  });
+  socket.on('player-left', ({ name }) => {
+    showToast(`${name} left the game`);
+  });
+}
+initSocket();
+
+// ── Lobby Actions ──────────────────────────────────────────────────
+function createGame() {
+  const name = document.getElementById('playerName').value.trim();
+  if (!name) return showLobbyError('Please enter your name');
+  socket.emit('create-game', { name }, (res) => {
+    if (!res.ok) return showLobbyError(res.error);
+    switchTo('waiting-room');
+  });
+}
+
+function joinGame() {
+  const name = document.getElementById('playerName').value.trim();
+  const code = document.getElementById('joinCode').value.trim();
+  if (!name) return showLobbyError('Please enter your name');
+  if (!code) return showLobbyError('Please enter a room code');
+  socket.emit('join-game', { name, roomCode: code }, (res) => {
+    if (!res.ok) return showLobbyError(res.error);
+    switchTo('waiting-room');
+  });
+}
+
+function setTeams(n) {
+  socket.emit('set-teams', { numTeams: parseInt(n) });
+}
+
+function startGame() {
+  socket.emit('start-game', {}, (res) => {
+    if (!res.ok) {
+      document.getElementById('waitError').textContent = res.error;
+    }
+  });
+}
+
+function copyCode() {
+  if (state) navigator.clipboard.writeText(state.roomCode);
+  showToast('Room code copied!');
+}
+
+// ── Card Selection & Board Clicks ──────────────────────────────────
+function selectCard(index) {
+  if (!state || state.currentPlayerId !== myId) return;
+  if (selectedCardIndex === index) {
+    selectedCardIndex = null;
+  } else {
+    selectedCardIndex = index;
+  }
+  renderHand();
+  renderBoardHighlights();
+}
+
+function clickCell(row, col) {
+  if (!state || state.currentPlayerId !== myId) return;
+  if (selectedCardIndex === null) return;
+
+  socket.emit('play-card', { cardIndex: selectedCardIndex, row, col }, (res) => {
+    if (!res.ok) {
+      showToast(res.error);
+    } else {
+      selectedCardIndex = null;
+    }
+  });
+}
+
+function discardDead(index) {
+  socket.emit('discard-dead', { cardIndex: index }, (res) => {
+    if (!res.ok) showToast(res.error);
+    else showToast('Dead card discarded, new card drawn');
+  });
+}
+
+// ── Render ─────────────────────────────────────────────────────────
+function render() {
+  if (!state) return;
+  if (!state.started) {
+    renderWaitingRoom();
+    if (document.getElementById('game-screen').classList.contains('active')) return;
+    switchTo('waiting-room');
+  } else {
+    renderGameScreen();
+    switchTo('game-screen');
+  }
+}
+
+function renderWaitingRoom() {
+  document.getElementById('displayCode').textContent = state.roomCode;
+  document.getElementById('gameRoomCode').textContent = state.roomCode;
+
+  const isHost = state.hostId === myId;
+  document.getElementById('teamConfig').style.display = isHost ? 'flex' : 'none';
+  document.getElementById('startBtn').style.display = isHost ? 'block' : 'none';
+  document.getElementById('teamSelect').value = state.numTeams;
+
+  const list = document.getElementById('playerList');
+  list.innerHTML = '';
+  state.players.forEach(p => {
+    const li = document.createElement('li');
+    li.className = `team-${p.teamIndex}`;
+    li.textContent = p.name + (p.id === state.hostId ? ' ★' : '');
+    list.appendChild(li);
+  });
+}
+
+function renderGameScreen() {
+  // Room code
+  document.getElementById('gameRoomCode').textContent = state.roomCode;
+
+  // Turn info
+  const turnEl = document.getElementById('turnInfo');
+  const cp = state.players.find(p => p.isCurrentTurn);
+  if (state.winner !== null) {
+    turnEl.innerHTML = `<span class="team-color-${state.winner}">${TEAM_NAMES[state.winner]} Wins!</span>`;
+  } else if (cp) {
+    const isMe = cp.id === myId;
+    turnEl.innerHTML = isMe
+      ? '<span style="color:#ffd700;">Your Turn</span>'
+      : `<span class="team-color-${cp.teamIndex}">${cp.name}'s Turn</span>`;
+  }
+
+  // Score
+  const scoreEl = document.getElementById('scoreInfo');
+  scoreEl.innerHTML = '';
+  for (let t = 0; t < state.numTeams; t++) {
+    const badge = document.createElement('span');
+    badge.className = `score-badge team-${t}`;
+    badge.textContent = `${TEAM_NAMES[t]}: ${state.teamSequenceCount[t] || 0}/${state.neededToWin}`;
+    scoreEl.appendChild(badge);
+  }
+
+  renderBoard();
+  renderHand();
+
+  // Win overlay
+  if (state.winner !== null) {
+    const overlay = document.getElementById('winOverlay');
+    overlay.classList.add('active');
+    const myPlayer = state.players.find(p => p.id === myId);
+    const won = myPlayer && myPlayer.teamIndex === state.winner;
+    document.getElementById('winText').textContent = won ? 'You Win!' : `${TEAM_NAMES[state.winner]} Team Wins!`;
+    document.getElementById('winText').className = `team-color-${state.winner}`;
+    document.getElementById('winSub').textContent = won ? 'Congratulations!' : 'Better luck next time!';
+  }
+}
+
+function renderBoard() {
+  const boardEl = document.getElementById('board');
+  boardEl.innerHTML = '';
+
+  const seqSet = new Set(state.sequenceCells || []);
+
+  for (let r = 0; r < 10; r++) {
+    for (let c = 0; c < 10; c++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+      const cardCode = BOARD_LAYOUT[r][c];
+      const boardCell = state.board[r][c];
+
+      if (cardCode === 'FR') {
+        cell.classList.add('free-corner');
+        cell.innerHTML = '<span class="suit">★</span><span class="rank">FREE</span>';
+      } else {
+        const rank = cardCode[0];
+        const suit = cardCode[1];
+        cell.classList.add(isRed(suit) ? 'red' : 'black');
+        cell.innerHTML = `<span class="rank">${RANK_DISPLAY[rank]}</span><span class="suit">${SUIT_SYMBOLS[suit]}</span>`;
+      }
+
+      // Chip
+      if (boardCell.chip !== null) {
+        const chip = document.createElement('div');
+        chip.className = `chip chip-${boardCell.chip}`;
+        cell.appendChild(chip);
+      }
+
+      // Sequence highlight
+      if (seqSet.has(`${r},${c}`)) {
+        cell.classList.add('in-sequence');
+      }
+
+      // Last move
+      if (state.lastMove && state.lastMove.row === r && state.lastMove.col === c) {
+        cell.classList.add('last-move');
+      }
+
+      cell.addEventListener('click', () => clickCell(r, c));
+      boardEl.appendChild(cell);
+    }
+  }
+
+  renderBoardHighlights();
+}
+
+function renderBoardHighlights() {
+  if (!state) return;
+  const cells = document.querySelectorAll('.board .cell');
+
+  cells.forEach((cell, idx) => {
+    cell.classList.remove('highlight', 'highlight-remove');
+  });
+
+  if (selectedCardIndex === null || !state.hand[selectedCardIndex]) return;
+  const card = state.hand[selectedCardIndex];
+
+  if (isTwoEyedJack(card)) {
+    // Highlight all empty non-free cells
+    for (let r = 0; r < 10; r++) {
+      for (let c = 0; c < 10; c++) {
+        if (BOARD_LAYOUT[r][c] !== 'FR' && state.board[r][c].chip === null) {
+          cells[r * 10 + c].classList.add('highlight');
+        }
+      }
+    }
+  } else if (isOneEyedJack(card)) {
+    // Highlight opponent chips (not in sequences)
+    const myPlayer = state.players.find(p => p.id === myId);
+    const seqSet = new Set(state.sequenceCells || []);
+    for (let r = 0; r < 10; r++) {
+      for (let c = 0; c < 10; c++) {
+        const chip = state.board[r][c].chip;
+        if (chip !== null && chip !== myPlayer.teamIndex && !seqSet.has(`${r},${c}`)) {
+          cells[r * 10 + c].classList.add('highlight-remove');
+        }
+      }
+    }
+  } else {
+    // Normal card: highlight matching empty positions
+    for (let r = 0; r < 10; r++) {
+      for (let c = 0; c < 10; c++) {
+        if (BOARD_LAYOUT[r][c] === card && state.board[r][c].chip === null) {
+          cells[r * 10 + c].classList.add('highlight');
+        }
+      }
+    }
+  }
+}
+
+function renderHand() {
+  const handEl = document.getElementById('hand');
+  handEl.innerHTML = '';
+
+  if (!state || !state.hand) return;
+
+  const isMyTurn = state.currentPlayerId === myId;
+
+  // Determine dead cards
+  const deadCards = new Set();
+  state.hand.forEach((card, i) => {
+    if (card.startsWith('J')) return;
+    const positions = [];
+    for (let r = 0; r < 10; r++) {
+      for (let c = 0; c < 10; c++) {
+        if (BOARD_LAYOUT[r][c] === card) positions.push([r, c]);
+      }
+    }
+    if (positions.every(([r, c]) => state.board[r][c].chip !== null)) {
+      deadCards.add(i);
+    }
+  });
+
+  state.hand.forEach((card, index) => {
+    const el = document.createElement('div');
+    const rank = card[0];
+    const suit = card[1];
+    el.className = 'hand-card' + (isRed(suit) ? ' h-red' : ' h-black');
+    if (index === selectedCardIndex) el.classList.add('selected');
+    if (deadCards.has(index)) el.classList.add('dead');
+
+    el.innerHTML = `<span class="h-rank">${RANK_DISPLAY[rank]}</span><span class="h-suit">${SUIT_SYMBOLS[suit]}</span>`;
+
+    if (deadCards.has(index)) {
+      el.innerHTML += '<span class="dead-badge">DEAD</span>';
+    }
+
+    el.addEventListener('click', (e) => {
+      if (!isMyTurn) return showToast("Not your turn");
+      if (deadCards.has(index)) {
+        // Double-click or tap dead card to discard
+        if (selectedCardIndex === index) {
+          discardDead(index);
+          selectedCardIndex = null;
+        } else {
+          selectedCardIndex = index;
+          showToast('Tap again to discard dead card');
+        }
+        renderHand();
+        renderBoardHighlights();
+      } else {
+        selectCard(index);
+      }
+    });
+
+    handEl.appendChild(el);
+  });
+
+  // Hint
+  const hint = document.getElementById('handHint');
+  if (!isMyTurn) {
+    hint.textContent = '(waiting for your turn)';
+    hint.style.color = 'rgba(255,255,255,0.3)';
+  } else if (selectedCardIndex !== null) {
+    const card = state.hand[selectedCardIndex];
+    if (isTwoEyedJack(card)) hint.textContent = '— Place chip anywhere (Wild)';
+    else if (isOneEyedJack(card)) hint.textContent = '— Remove an opponent\'s chip';
+    else hint.textContent = '— Tap a highlighted space';
+    hint.style.color = '#ffd700';
+  } else {
+    hint.textContent = '— Select a card to play';
+    hint.style.color = '#ffd700';
+  }
+}
+
+// ── UI Helpers ─────────────────────────────────────────────────────
+function switchTo(screen) {
+  document.querySelectorAll('#lobby, #waiting-room, #game-screen').forEach(el => el.classList.remove('active'));
+  document.getElementById(screen).classList.add('active');
+}
+
+function showLobbyError(msg) {
+  document.getElementById('lobbyError').textContent = msg;
+  setTimeout(() => { document.getElementById('lobbyError').textContent = ''; }, 3000);
+}
+
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// Enter key support
+document.getElementById('playerName').addEventListener('keydown', e => { if (e.key === 'Enter') createGame(); });
+document.getElementById('joinCode').addEventListener('keydown', e => { if (e.key === 'Enter') joinGame(); });
+</script>
+</body>
+</html>
