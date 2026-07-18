@@ -1,0 +1,19 @@
+# Render Blueprint for NBA All-Time Draft
+# Free plan note: a free web service CANNOT have a disk, so saved rooms are lost on
+# restart. To keep persistence, use a paid instance (this file sets 'starter') with
+# the disk below. To run free instead, delete the 'plan' and 'disk' sections and the
+# DATA_DIR env var.
+services:
+  - type: web
+    name: nba-draft
+    runtime: node
+    plan: starter                 # paid tier required for the persistent disk
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: DATA_DIR
+        value: /var/data          # points saved rooms at the mounted disk
+    disk:
+      name: nba-draft-data
+      mountPath: /var/data        # persistent storage that survives restarts
+      sizeGB: 1

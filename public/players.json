@@ -1,0 +1,3155 @@
+[
+ {
+  "name": "LeBron James ('16)",
+  "overall": 99,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'8\"",
+  "team": "2015-16 Cleveland Cavaliers",
+  "era": "classic",
+  "id": 1
+ },
+ {
+  "name": "Michael Jordan ('96)",
+  "overall": 99,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'6\"",
+  "team": "1995-96 Chicago Bulls",
+  "era": "classic",
+  "id": 2
+ },
+ {
+  "name": "Kevin Durant ('17)",
+  "overall": 98,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'9\"",
+  "team": "2016-17 Golden State Warriors",
+  "era": "classic",
+  "id": 3
+ },
+ {
+  "name": "Kobe Bryant ('01)",
+  "overall": 98,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'6\"",
+  "team": "2000-01 Los Angeles Lakers",
+  "era": "classic",
+  "id": 4
+ },
+ {
+  "name": "Larry Bird ('86)",
+  "overall": 98,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'9\"",
+  "team": "1985-86 Boston Celtics",
+  "era": "classic",
+  "id": 5
+ },
+ {
+  "name": "Nikola Jokic",
+  "overall": 98,
+  "positions": [
+   "C"
+  ],
+  "height": "6'11\"",
+  "team": "Denver Nuggets",
+  "era": "current",
+  "id": 6
+ },
+ {
+  "name": "Shai Gilgeous-Alexander",
+  "overall": 98,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'6\"",
+  "team": "Oklahoma City Thunder",
+  "era": "current",
+  "id": 7
+ },
+ {
+  "name": "Tim Duncan ('05)",
+  "overall": 98,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "6'11\"",
+  "team": "2004-05 San Antonio Spurs",
+  "era": "classic",
+  "id": 8
+ },
+ {
+  "name": "Giannis Antetokounmpo",
+  "overall": 97,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "6'11\"",
+  "team": "Miami Heat",
+  "era": "current",
+  "id": 9
+ },
+ {
+  "name": "Hakeem Olajuwon ('94)",
+  "overall": 97,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "7'0\"",
+  "team": "1993-94 Houston Rockets",
+  "era": "classic",
+  "id": 10
+ },
+ {
+  "name": "Kareem Abdul-Jabbar ('71)",
+  "overall": 97,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "7'2\"",
+  "team": "1970-71 Milwaukee Bucks",
+  "era": "classic",
+  "id": 11
+ },
+ {
+  "name": "Kevin Garnett ('04)",
+  "overall": 97,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "6'11\"",
+  "team": "2003-04 Minnesota Timberwolves",
+  "era": "classic",
+  "id": 12
+ },
+ {
+  "name": "Luka Doncic",
+  "overall": 97,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'8\"",
+  "team": "Los Angeles Lakers",
+  "era": "current",
+  "id": 13
+ },
+ {
+  "name": "Stephen Curry ('17)",
+  "overall": 97,
+  "positions": [
+   "PG"
+  ],
+  "height": "6'3\"",
+  "team": "2016-17 Golden State Warriors",
+  "era": "classic",
+  "id": 14
+ },
+ {
+  "name": "Victor Wembanyama",
+  "overall": 97,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "7'4\"",
+  "team": "San Antonio Spurs",
+  "era": "current",
+  "id": 15
+ },
+ {
+  "name": "Anthony Edwards",
+  "overall": 96,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'4\"",
+  "team": "Minnesota Timberwolves",
+  "era": "current",
+  "id": 16
+ },
+ {
+  "name": "Dirk Nowitzki ('11)",
+  "overall": 96,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "7'1\"",
+  "team": "2010-11 Dallas Mavericks",
+  "era": "classic",
+  "id": 17
+ },
+ {
+  "name": "Jalen Brunson",
+  "overall": 96,
+  "positions": [
+   "PG"
+  ],
+  "height": "6'2\"",
+  "team": "New York Knicks",
+  "era": "current",
+  "id": 18
+ },
+ {
+  "name": "Karl Malone ('98)",
+  "overall": 96,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "6'9\"",
+  "team": "1997-98 Utah Jazz",
+  "era": "classic",
+  "id": 19
+ },
+ {
+  "name": "Kawhi Leonard ('19)",
+  "overall": 96,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'7\"",
+  "team": "2018-19 Toronto Raptors",
+  "era": "classic",
+  "id": 20
+ },
+ {
+  "name": "Magic Johnson ('87)",
+  "overall": 96,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'9\"",
+  "team": "1986-87 Los Angeles Lakers",
+  "era": "classic",
+  "id": 21
+ },
+ {
+  "name": "Scottie Pippen ('96)",
+  "overall": 96,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'8\"",
+  "team": "1995-96 Chicago Bulls",
+  "era": "classic",
+  "id": 22
+ },
+ {
+  "name": "Shaquille O\u2019Neal ('01)",
+  "overall": 96,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "7'1\"",
+  "team": "2000-01 Los Angeles Lakers",
+  "era": "classic",
+  "id": 23
+ },
+ {
+  "name": "Cade Cunningham",
+  "overall": 95,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'6\"",
+  "team": "Detroit Pistons",
+  "era": "current",
+  "id": 24
+ },
+ {
+  "name": "Dwyane Wade ('06)",
+  "overall": 95,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'4\"",
+  "team": "2005-06 Miami Heat",
+  "era": "classic",
+  "id": 25
+ },
+ {
+  "name": "Jaylen Brown",
+  "overall": 95,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'6\"",
+  "team": "Philadelphia 76ers",
+  "era": "current",
+  "id": 26
+ },
+ {
+  "name": "Jerry West ('71)",
+  "overall": 95,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'2\"",
+  "team": "1970-71 Los Angeles Lakers",
+  "era": "classic",
+  "id": 27
+ },
+ {
+  "name": "Kawhi Leonard",
+  "overall": 95,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'7\"",
+  "team": "Toronto Raptors",
+  "era": "current",
+  "id": 28
+ },
+ {
+  "name": "Stephen Curry",
+  "overall": 95,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'2\"",
+  "team": "Golden State Warriors",
+  "era": "current",
+  "id": 29
+ },
+ {
+  "name": "Steve Nash ('05)",
+  "overall": 95,
+  "positions": [
+   "PG"
+  ],
+  "height": "6'3\"",
+  "team": "2004-05 Phoenix Suns",
+  "era": "classic",
+  "id": 30
+ },
+ {
+  "name": "Derrick Rose ('11)",
+  "overall": 94,
+  "positions": [
+   "PG"
+  ],
+  "height": "6'3\"",
+  "team": "2010-11 Chicago Bulls",
+  "era": "classic",
+  "id": 31
+ },
+ {
+  "name": "Julius Erving ('77)",
+  "overall": 94,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'7\"",
+  "team": "1976-77 Philadelphia 76ers",
+  "era": "classic",
+  "id": 32
+ },
+ {
+  "name": "Vince Carter ('00)",
+  "overall": 94,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'6\"",
+  "team": "1999-00 Toronto Raptors",
+  "era": "classic",
+  "id": 33
+ },
+ {
+  "name": "Allen Iverson ('01)",
+  "overall": 93,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'0\"",
+  "team": "2000-01 Philadelphia 76ers",
+  "era": "classic",
+  "id": 34
+ },
+ {
+  "name": "Alonzo Mourning ('97)",
+  "overall": 93,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "6'10\"",
+  "team": "1996-97 Miami Heat",
+  "era": "classic",
+  "id": 35
+ },
+ {
+  "name": "Carmelo Anthony ('08)",
+  "overall": 93,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'8\"",
+  "team": "2007-08 Denver Nuggets",
+  "era": "classic",
+  "id": 36
+ },
+ {
+  "name": "Devin Booker",
+  "overall": 93,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'5\"",
+  "team": "Phoenix Suns",
+  "era": "current",
+  "id": 37
+ },
+ {
+  "name": "Donovan Mitchell",
+  "overall": 93,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'2\"",
+  "team": "Cleveland Cavaliers",
+  "era": "current",
+  "id": 38
+ },
+ {
+  "name": "Jayson Tatum",
+  "overall": 93,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'8\"",
+  "team": "Boston Celtics",
+  "era": "current",
+  "id": 39
+ },
+ {
+  "name": "John Stockton ('98)",
+  "overall": 93,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'1\"",
+  "team": "1997-98 Utah Jazz",
+  "era": "classic",
+  "id": 40
+ },
+ {
+  "name": "Kevin Durant",
+  "overall": 93,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'11\"",
+  "team": "Houston Rockets",
+  "era": "current",
+  "id": 41
+ },
+ {
+  "name": "Tyrese Haliburton",
+  "overall": 93,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'5\"",
+  "team": "Indiana Pacers",
+  "era": "current",
+  "id": 42
+ },
+ {
+  "name": "Tyrese Maxey",
+  "overall": 93,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'2\"",
+  "team": "Philadelphia 76ers",
+  "era": "current",
+  "id": 43
+ },
+ {
+  "name": "Anthony Davis",
+  "overall": 92,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "6'10\"",
+  "team": "Washington Wizards",
+  "era": "current",
+  "id": 44
+ },
+ {
+  "name": "Joel Embiid",
+  "overall": 92,
+  "positions": [
+   "C"
+  ],
+  "height": "7'0\"",
+  "team": "Philadelphia 76ers",
+  "era": "current",
+  "id": 45
+ },
+ {
+  "name": "LeBron James",
+  "overall": 92,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'9\"",
+  "team": "Free Agency",
+  "era": "current",
+  "id": 46
+ },
+ {
+  "name": "Wilt Chamberlain ('71)",
+  "overall": 92,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "7'1\"",
+  "team": "1970-71 Los Angeles Lakers",
+  "era": "classic",
+  "id": 47
+ },
+ {
+  "name": "Karl-Anthony Towns",
+  "overall": 91,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "7'0\"",
+  "team": "New York Knicks",
+  "era": "current",
+  "id": 48
+ },
+ {
+  "name": "Kyrie Irving",
+  "overall": 90,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'2\"",
+  "team": "Dallas Mavericks",
+  "era": "current",
+  "id": 49
+ },
+ {
+  "name": "Bam Adebayo",
+  "overall": 89,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "6'9\"",
+  "team": "Miami Heat",
+  "era": "current",
+  "id": 50
+ },
+ {
+  "name": "Jalen Johnson",
+  "overall": 89,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'8\"",
+  "team": "Atlanta Hawks",
+  "era": "current",
+  "id": 51
+ },
+ {
+  "name": "Jamal Murray",
+  "overall": 89,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'4\"",
+  "team": "Denver Nuggets",
+  "era": "current",
+  "id": 52
+ },
+ {
+  "name": "James Harden",
+  "overall": 89,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'5\"",
+  "team": "Free Agency",
+  "era": "current",
+  "id": 53
+ },
+ {
+  "name": "Scottie Barnes",
+  "overall": 89,
+  "positions": [
+   "PF",
+   "PG"
+  ],
+  "height": "6'8\"",
+  "team": "Toronto Raptors",
+  "era": "current",
+  "id": 54
+ },
+ {
+  "name": "Trae Young",
+  "overall": 89,
+  "positions": [
+   "PG"
+  ],
+  "height": "6'2\"",
+  "team": "Washington Wizards",
+  "era": "current",
+  "id": 55
+ },
+ {
+  "name": "Alperen Sengun",
+  "overall": 88,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "6'11\"",
+  "team": "Houston Rockets",
+  "era": "current",
+  "id": 56
+ },
+ {
+  "name": "Cooper Flagg",
+  "overall": 88,
+  "positions": [
+   "SF",
+   "PG"
+  ],
+  "height": "6'9\"",
+  "team": "Dallas Mavericks",
+  "era": "current",
+  "id": 57
+ },
+ {
+  "name": "Damian Lillard",
+  "overall": 88,
+  "positions": [
+   "PG"
+  ],
+  "height": "6'2\"",
+  "team": "Portland Trail Blazers",
+  "era": "current",
+  "id": 58
+ },
+ {
+  "name": "Deni Avdija",
+  "overall": 88,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'8\"",
+  "team": "Portland Trail Blazers",
+  "era": "current",
+  "id": 59
+ },
+ {
+  "name": "Jimmy Butler",
+  "overall": 88,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'6\"",
+  "team": "Golden State Warriors",
+  "era": "current",
+  "id": 60
+ },
+ {
+  "name": "LaMelo Ball",
+  "overall": 88,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'7\"",
+  "team": "Minnesota Timberwolves",
+  "era": "current",
+  "id": 61
+ },
+ {
+  "name": "OG Anunoby",
+  "overall": 88,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'7\"",
+  "team": "New York Knicks",
+  "era": "current",
+  "id": 62
+ },
+ {
+  "name": "Paolo Banchero",
+  "overall": 88,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'10\"",
+  "team": "Orlando Magic",
+  "era": "current",
+  "id": 63
+ },
+ {
+  "name": "Stephon Castle",
+  "overall": 88,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'6\"",
+  "team": "San Antonio Spurs",
+  "era": "current",
+  "id": 64
+ },
+ {
+  "name": "Amen Thompson",
+  "overall": 87,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'7\"",
+  "team": "Houston Rockets",
+  "era": "current",
+  "id": 65
+ },
+ {
+  "name": "Austin Reaves",
+  "overall": 87,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'5\"",
+  "team": "Los Angeles Lakers",
+  "era": "current",
+  "id": 66
+ },
+ {
+  "name": "Brandon Miller",
+  "overall": 87,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'7\"",
+  "team": "Charlotte Hornets",
+  "era": "current",
+  "id": 67
+ },
+ {
+  "name": "Chet Holmgren",
+  "overall": 87,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "7'1\"",
+  "team": "Oklahoma City Thunder",
+  "era": "current",
+  "id": 68
+ },
+ {
+  "name": "Evan Mobley",
+  "overall": 87,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "6'11\"",
+  "team": "Cleveland Cavaliers",
+  "era": "current",
+  "id": 69
+ },
+ {
+  "name": "Franz Wagner",
+  "overall": 87,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'10\"",
+  "team": "Orlando Magic",
+  "era": "current",
+  "id": 70
+ },
+ {
+  "name": "Ja Morant",
+  "overall": 87,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'2\"",
+  "team": "Portland Trail Blazers",
+  "era": "current",
+  "id": 71
+ },
+ {
+  "name": "Jalen Williams",
+  "overall": 87,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'5\"",
+  "team": "Oklahoma City Thunder",
+  "era": "current",
+  "id": 72
+ },
+ {
+  "name": "Keyonte George",
+  "overall": 87,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'4\"",
+  "team": "Utah Jazz",
+  "era": "current",
+  "id": 73
+ },
+ {
+  "name": "Lauri Markkanen",
+  "overall": 87,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "7'1\"",
+  "team": "Utah Jazz",
+  "era": "current",
+  "id": 74
+ },
+ {
+  "name": "Pascal Siakam",
+  "overall": 87,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "6'8\"",
+  "team": "Indiana Pacers",
+  "era": "current",
+  "id": 75
+ },
+ {
+  "name": "Tyler Herro",
+  "overall": 87,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'5\"",
+  "team": "Milwaukee Bucks",
+  "era": "current",
+  "id": 76
+ },
+ {
+  "name": "Ausar Thompson",
+  "overall": 86,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'7\"",
+  "team": "Detroit Pistons",
+  "era": "current",
+  "id": 77
+ },
+ {
+  "name": "Brandon Ingram",
+  "overall": 86,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'8\"",
+  "team": "Los Angeles Clippers",
+  "era": "current",
+  "id": 78
+ },
+ {
+  "name": "Desmond Bane",
+  "overall": 86,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'6\"",
+  "team": "Orlando Magic",
+  "era": "current",
+  "id": 79
+ },
+ {
+  "name": "De\u2019Aaron Fox",
+  "overall": 86,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'3\"",
+  "team": "San Antonio Spurs",
+  "era": "current",
+  "id": 80
+ },
+ {
+  "name": "Domantas Sabonis",
+  "overall": 86,
+  "positions": [
+   "C"
+  ],
+  "height": "6'10\"",
+  "team": "Sacramento Kings",
+  "era": "current",
+  "id": 81
+ },
+ {
+  "name": "Jaren Jackson Jr.",
+  "overall": 86,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "6'10\"",
+  "team": "Utah Jazz",
+  "era": "current",
+  "id": 82
+ },
+ {
+  "name": "Jarrett Allen",
+  "overall": 86,
+  "positions": [
+   "C"
+  ],
+  "height": "6'9\"",
+  "team": "Cleveland Cavaliers",
+  "era": "current",
+  "id": 83
+ },
+ {
+  "name": "Kon Knueppel",
+  "overall": 86,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'6\"",
+  "team": "Charlotte Hornets",
+  "era": "current",
+  "id": 84
+ },
+ {
+  "name": "Michael Porter Jr.",
+  "overall": 86,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'10\"",
+  "team": "Brooklyn Nets",
+  "era": "current",
+  "id": 85
+ },
+ {
+  "name": "Zion Williamson",
+  "overall": 86,
+  "positions": [
+   "PF",
+   "PG"
+  ],
+  "height": "6'6\"",
+  "team": "New Orleans Pelicans",
+  "era": "current",
+  "id": 86
+ },
+ {
+  "name": "Darius Garland",
+  "overall": 85,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'1\"",
+  "team": "Los Angeles Clippers",
+  "era": "current",
+  "id": 87
+ },
+ {
+  "name": "Derrick White",
+  "overall": 85,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'4\"",
+  "team": "Boston Celtics",
+  "era": "current",
+  "id": 88
+ },
+ {
+  "name": "Dylan Harper",
+  "overall": 85,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'5\"",
+  "team": "San Antonio Spurs",
+  "era": "current",
+  "id": 89
+ },
+ {
+  "name": "Ivica Zubac",
+  "overall": 85,
+  "positions": [
+   "C"
+  ],
+  "height": "7'0\"",
+  "team": "Indiana Pacers",
+  "era": "current",
+  "id": 90
+ },
+ {
+  "name": "Jaden McDaniels",
+  "overall": 85,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'9\"",
+  "team": "Minnesota Timberwolves",
+  "era": "current",
+  "id": 91
+ },
+ {
+  "name": "Jalen Duren",
+  "overall": 85,
+  "positions": [
+   "C"
+  ],
+  "height": "6'10\"",
+  "team": "Detroit Pistons",
+  "era": "current",
+  "id": 92
+ },
+ {
+  "name": "Julius Randle",
+  "overall": 85,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "6'9\"",
+  "team": "Minnesota Timberwolves",
+  "era": "current",
+  "id": 93
+ },
+ {
+  "name": "Norman Powell",
+  "overall": 85,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'4\"",
+  "team": "Chicago Bulls",
+  "era": "current",
+  "id": 94
+ },
+ {
+  "name": "Rudy Gobert",
+  "overall": 85,
+  "positions": [
+   "C"
+  ],
+  "height": "7'1\"",
+  "team": "Minnesota Timberwolves",
+  "era": "current",
+  "id": 95
+ },
+ {
+  "name": "Trey Murphy III",
+  "overall": 85,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'8\"",
+  "team": "New Orleans Pelicans",
+  "era": "current",
+  "id": 96
+ },
+ {
+  "name": "Ajay Mitchell",
+  "overall": 84,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'4\"",
+  "team": "Oklahoma City Thunder",
+  "era": "current",
+  "id": 97
+ },
+ {
+  "name": "Alex Sarr",
+  "overall": 84,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "7'0\"",
+  "team": "Washington Wizards",
+  "era": "current",
+  "id": 98
+ },
+ {
+  "name": "DeMar DeRozan",
+  "overall": 84,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'6\"",
+  "team": "Free Agency",
+  "era": "current",
+  "id": 99
+ },
+ {
+  "name": "Dejounte Murray",
+  "overall": 84,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'4\"",
+  "team": "New Orleans Pelicans",
+  "era": "current",
+  "id": 100
+ },
+ {
+  "name": "Dillon Brooks",
+  "overall": 84,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'7\"",
+  "team": "Phoenix Suns",
+  "era": "current",
+  "id": 101
+ },
+ {
+  "name": "Immanuel Quickley",
+  "overall": 84,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'2\"",
+  "team": "Toronto Raptors",
+  "era": "current",
+  "id": 102
+ },
+ {
+  "name": "Isaiah Hartenstein",
+  "overall": 84,
+  "positions": [
+   "C"
+  ],
+  "height": "7'0\"",
+  "team": "Oklahoma City Thunder",
+  "era": "current",
+  "id": 103
+ },
+ {
+  "name": "Mikal Bridges",
+  "overall": 84,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'6\"",
+  "team": "New York Knicks",
+  "era": "current",
+  "id": 104
+ },
+ {
+  "name": "Saddiq Bey",
+  "overall": 84,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'8\"",
+  "team": "New Orleans Pelicans",
+  "era": "current",
+  "id": 105
+ },
+ {
+  "name": "Aaron Gordon",
+  "overall": 83,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "6'8\"",
+  "team": "Denver Nuggets",
+  "era": "current",
+  "id": 106
+ },
+ {
+  "name": "Ayo Dosunmu",
+  "overall": 83,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'4\"",
+  "team": "Minnesota Timberwolves",
+  "era": "current",
+  "id": 107
+ },
+ {
+  "name": "CJ McCollum",
+  "overall": 83,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'3\"",
+  "team": "Atlanta Hawks",
+  "era": "current",
+  "id": 108
+ },
+ {
+  "name": "Cason Wallace",
+  "overall": 83,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'3\"",
+  "team": "Oklahoma City Thunder",
+  "era": "current",
+  "id": 109
+ },
+ {
+  "name": "Donovan Clingan",
+  "overall": 83,
+  "positions": [
+   "C"
+  ],
+  "height": "7'2\"",
+  "team": "Portland Trail Blazers",
+  "era": "current",
+  "id": 110
+ },
+ {
+  "name": "Dyson Daniels",
+  "overall": 83,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'7\"",
+  "team": "Atlanta Hawks",
+  "era": "current",
+  "id": 111
+ },
+ {
+  "name": "Josh Giddey",
+  "overall": 83,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'8\"",
+  "team": "Chicago Bulls",
+  "era": "current",
+  "id": 112
+ },
+ {
+  "name": "Kristaps Porzingis",
+  "overall": 83,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "7'2\"",
+  "team": "Golden State Warriors",
+  "era": "current",
+  "id": 113
+ },
+ {
+  "name": "Nickeil Alexander-Walker",
+  "overall": 83,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'5\"",
+  "team": "Atlanta Hawks",
+  "era": "current",
+  "id": 114
+ },
+ {
+  "name": "Paul George",
+  "overall": 83,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'8\"",
+  "team": "Philadelphia 76ers",
+  "era": "current",
+  "id": 115
+ },
+ {
+  "name": "RJ Barrett",
+  "overall": 83,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'6\"",
+  "team": "Toronto Raptors",
+  "era": "current",
+  "id": 116
+ },
+ {
+  "name": "Shaedon Sharpe",
+  "overall": 83,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'5\"",
+  "team": "Portland Trail Blazers",
+  "era": "current",
+  "id": 117
+ },
+ {
+  "name": "Tobias Harris",
+  "overall": 83,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'8\"",
+  "team": "Detroit Pistons",
+  "era": "current",
+  "id": 118
+ },
+ {
+  "name": "Ty Jerome",
+  "overall": 83,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'5\"",
+  "team": "Memphis Grizzlies",
+  "era": "current",
+  "id": 119
+ },
+ {
+  "name": "VJ Edgecombe",
+  "overall": 83,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'4\"",
+  "team": "Philadelphia 76ers",
+  "era": "current",
+  "id": 120
+ },
+ {
+  "name": "Walker Kessler",
+  "overall": 83,
+  "positions": [
+   "C"
+  ],
+  "height": "7'2\"",
+  "team": "Los Angeles Lakers",
+  "era": "current",
+  "id": 121
+ },
+ {
+  "name": "Zach LaVine",
+  "overall": 83,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'5\"",
+  "team": "Sacramento Kings",
+  "era": "current",
+  "id": 122
+ },
+ {
+  "name": "Alex Caruso",
+  "overall": 82,
+  "positions": [
+   "SF",
+   "PG"
+  ],
+  "height": "6'5\"",
+  "team": "Oklahoma City Thunder",
+  "era": "current",
+  "id": 123
+ },
+ {
+  "name": "Andrew Nembhard",
+  "overall": 82,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'4\"",
+  "team": "Indiana Pacers",
+  "era": "current",
+  "id": 124
+ },
+ {
+  "name": "Anthony Black",
+  "overall": 82,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'7\"",
+  "team": "Orlando Magic",
+  "era": "current",
+  "id": 125
+ },
+ {
+  "name": "Bennedict Mathurin",
+  "overall": 82,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'5\"",
+  "team": "Los Angeles Clippers",
+  "era": "current",
+  "id": 126
+ },
+ {
+  "name": "Devin Vassell",
+  "overall": 82,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'5\"",
+  "team": "San Antonio Spurs",
+  "era": "current",
+  "id": 127
+ },
+ {
+  "name": "Isaiah Collier",
+  "overall": 82,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'4\"",
+  "team": "Utah Jazz",
+  "era": "current",
+  "id": 128
+ },
+ {
+  "name": "Jabari Smith Jr.",
+  "overall": 82,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'10\"",
+  "team": "Houston Rockets",
+  "era": "current",
+  "id": 129
+ },
+ {
+  "name": "Jalen Green",
+  "overall": 82,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'4\"",
+  "team": "Phoenix Suns",
+  "era": "current",
+  "id": 130
+ },
+ {
+  "name": "Josh Hart",
+  "overall": 82,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'5\"",
+  "team": "New York Knicks",
+  "era": "current",
+  "id": 131
+ },
+ {
+  "name": "Jrue Holiday",
+  "overall": 82,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'4\"",
+  "team": "Portland Trail Blazers",
+  "era": "current",
+  "id": 132
+ },
+ {
+  "name": "Jusuf Nurkic",
+  "overall": 82,
+  "positions": [
+   "C"
+  ],
+  "height": "6'11\"",
+  "team": "Utah Jazz",
+  "era": "current",
+  "id": 133
+ },
+ {
+  "name": "Kevin Porter Jr.",
+  "overall": 82,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'4\"",
+  "team": "Milwaukee Bucks",
+  "era": "current",
+  "id": 134
+ },
+ {
+  "name": "KyShawn George",
+  "overall": 82,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'8\"",
+  "team": "Washington Wizards",
+  "era": "current",
+  "id": 135
+ },
+ {
+  "name": "Mark Williams",
+  "overall": 82,
+  "positions": [
+   "C"
+  ],
+  "height": "7'1\"",
+  "team": "Phoenix Suns",
+  "era": "current",
+  "id": 136
+ },
+ {
+  "name": "Matas Buzelis",
+  "overall": 82,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'8\"",
+  "team": "Chicago Bulls",
+  "era": "current",
+  "id": 137
+ },
+ {
+  "name": "Naz Reid",
+  "overall": 82,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "6'9\"",
+  "team": "Charlotte Hornets",
+  "era": "current",
+  "id": 138
+ },
+ {
+  "name": "Onyeka Okongwu",
+  "overall": 82,
+  "positions": [
+   "C"
+  ],
+  "height": "6'10\"",
+  "team": "Atlanta Hawks",
+  "era": "current",
+  "id": 139
+ },
+ {
+  "name": "Payton Pritchard",
+  "overall": 82,
+  "positions": [
+   "PG"
+  ],
+  "height": "6'1\"",
+  "team": "Boston Celtics",
+  "era": "current",
+  "id": 140
+ },
+ {
+  "name": "Peyton Watson",
+  "overall": 82,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'7\"",
+  "team": "Denver Nuggets",
+  "era": "current",
+  "id": 141
+ },
+ {
+  "name": "Ryan Rollins",
+  "overall": 82,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'3\"",
+  "team": "Milwaukee Bucks",
+  "era": "current",
+  "id": 142
+ },
+ {
+  "name": "Zach Edey",
+  "overall": 82,
+  "positions": [
+   "C"
+  ],
+  "height": "7'4\"",
+  "team": "Memphis Grizzlies",
+  "era": "current",
+  "id": 143
+ },
+ {
+  "name": "Ace Bailey",
+  "overall": 81,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'9\"",
+  "team": "Utah Jazz",
+  "era": "current",
+  "id": 144
+ },
+ {
+  "name": "Andrew Wiggins",
+  "overall": 81,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'7\"",
+  "team": "Miami Heat",
+  "era": "current",
+  "id": 145
+ },
+ {
+  "name": "Brandin Podziemski",
+  "overall": 81,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'4\"",
+  "team": "Golden State Warriors",
+  "era": "current",
+  "id": 146
+ },
+ {
+  "name": "Brice Sensabaugh",
+  "overall": 81,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'6\"",
+  "team": "Utah Jazz",
+  "era": "current",
+  "id": 147
+ },
+ {
+  "name": "Coby White",
+  "overall": 81,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'4\"",
+  "team": "Charlotte Hornets",
+  "era": "current",
+  "id": 148
+ },
+ {
+  "name": "Collin Gillespie",
+  "overall": 81,
+  "positions": [
+   "PG"
+  ],
+  "height": "6'1\"",
+  "team": "Phoenix Suns",
+  "era": "current",
+  "id": 149
+ },
+ {
+  "name": "Collin Murray-Boyles",
+  "overall": 81,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "6'7\"",
+  "team": "Toronto Raptors",
+  "era": "current",
+  "id": 150
+ },
+ {
+  "name": "Collin Sexton",
+  "overall": 81,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'3\"",
+  "team": "Los Angeles Lakers",
+  "era": "current",
+  "id": 151
+ },
+ {
+  "name": "Grayson Allen",
+  "overall": 81,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'3\"",
+  "team": "Charlotte Hornets",
+  "era": "current",
+  "id": 152
+ },
+ {
+  "name": "Jalen Suggs",
+  "overall": 81,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'5\"",
+  "team": "Orlando Magic",
+  "era": "current",
+  "id": 153
+ },
+ {
+  "name": "Jarace Walker",
+  "overall": 81,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'7\"",
+  "team": "Indiana Pacers",
+  "era": "current",
+  "id": 154
+ },
+ {
+  "name": "Jerami Grant",
+  "overall": 81,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'7\"",
+  "team": "Memphis Grizzlies",
+  "era": "current",
+  "id": 155
+ },
+ {
+  "name": "John Collins",
+  "overall": 81,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "6'9\"",
+  "team": "Los Angeles Clippers",
+  "era": "current",
+  "id": 156
+ },
+ {
+  "name": "Keldon Johnson",
+  "overall": 81,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'6\"",
+  "team": "San Antonio Spurs",
+  "era": "current",
+  "id": 157
+ },
+ {
+  "name": "Maxime Raynaud",
+  "overall": 81,
+  "positions": [
+   "C"
+  ],
+  "height": "7'1\"",
+  "team": "Sacramento Kings",
+  "era": "current",
+  "id": 158
+ },
+ {
+  "name": "Miles Bridges",
+  "overall": 81,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'7\"",
+  "team": "Charlotte Hornets",
+  "era": "current",
+  "id": 159
+ },
+ {
+  "name": "Naji Marshall",
+  "overall": 81,
+  "positions": [
+   "SF",
+   "PG"
+  ],
+  "height": "6'6\"",
+  "team": "Dallas Mavericks",
+  "era": "current",
+  "id": 160
+ },
+ {
+  "name": "Neemias Queta",
+  "overall": 81,
+  "positions": [
+   "C"
+  ],
+  "height": "7'0\"",
+  "team": "Boston Celtics",
+  "era": "current",
+  "id": 161
+ },
+ {
+  "name": "Nic Claxton",
+  "overall": 81,
+  "positions": [
+   "C"
+  ],
+  "height": "6'11\"",
+  "team": "Chicago Bulls",
+  "era": "current",
+  "id": 162
+ },
+ {
+  "name": "Rui Hachimura",
+  "overall": 81,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'8\"",
+  "team": "Los Angeles Lakers",
+  "era": "current",
+  "id": 163
+ },
+ {
+  "name": "Russell Westbrook",
+  "overall": 81,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'4\"",
+  "team": "Sacramento Kings",
+  "era": "current",
+  "id": 164
+ },
+ {
+  "name": "Santi Aldama",
+  "overall": 81,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "7'0\"",
+  "team": "Memphis Grizzlies",
+  "era": "current",
+  "id": 165
+ },
+ {
+  "name": "Scoot Henderson",
+  "overall": 81,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'3\"",
+  "team": "Portland Trail Blazers",
+  "era": "current",
+  "id": 166
+ },
+ {
+  "name": "T.J. McConnell",
+  "overall": 81,
+  "positions": [
+   "PG"
+  ],
+  "height": "6'1\"",
+  "team": "Indiana Pacers",
+  "era": "current",
+  "id": 167
+ },
+ {
+  "name": "Toumani Camara",
+  "overall": 81,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'7\"",
+  "team": "Portland Trail Blazers",
+  "era": "current",
+  "id": 168
+ },
+ {
+  "name": "Tre Jones",
+  "overall": 81,
+  "positions": [
+   "PG"
+  ],
+  "height": "6'1\"",
+  "team": "Chicago Bulls",
+  "era": "current",
+  "id": 169
+ },
+ {
+  "name": "Will Riley",
+  "overall": 81,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'9\"",
+  "team": "Washington Wizards",
+  "era": "current",
+  "id": 170
+ },
+ {
+  "name": "Aaron Nesmith",
+  "overall": 80,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'6\"",
+  "team": "Indiana Pacers",
+  "era": "current",
+  "id": 171
+ },
+ {
+  "name": "Anfernee Simons",
+  "overall": 80,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'3\"",
+  "team": "Philadelphia 76ers",
+  "era": "current",
+  "id": 172
+ },
+ {
+  "name": "Bobby Portis",
+  "overall": 80,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "6'10\"",
+  "team": "Miami Heat",
+  "era": "current",
+  "id": 173
+ },
+ {
+  "name": "Brandon Williams",
+  "overall": 80,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'1\"",
+  "team": "Free Agency",
+  "era": "current",
+  "id": 174
+ },
+ {
+  "name": "Cameron Johnson",
+  "overall": 80,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'8\"",
+  "team": "Denver Nuggets",
+  "era": "current",
+  "id": 175
+ },
+ {
+  "name": "Cedric Coward",
+  "overall": 80,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'5\"",
+  "team": "Memphis Grizzlies",
+  "era": "current",
+  "id": 176
+ },
+ {
+  "name": "Christian Braun",
+  "overall": 80,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'6\"",
+  "team": "Denver Nuggets",
+  "era": "current",
+  "id": 177
+ },
+ {
+  "name": "Daniel Gafford",
+  "overall": 80,
+  "positions": [
+   "C"
+  ],
+  "height": "6'10\"",
+  "team": "Dallas Mavericks",
+  "era": "current",
+  "id": 178
+ },
+ {
+  "name": "Daniss Jenkins",
+  "overall": 80,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'4\"",
+  "team": "Detroit Pistons",
+  "era": "current",
+  "id": 179
+ },
+ {
+  "name": "Derik Queen",
+  "overall": 80,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "6'9\"",
+  "team": "New Orleans Pelicans",
+  "era": "current",
+  "id": 180
+ },
+ {
+  "name": "Donte DiVincenzo",
+  "overall": 80,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'4\"",
+  "team": "Minnesota Timberwolves",
+  "era": "current",
+  "id": 181
+ },
+ {
+  "name": "Duncan Robinson",
+  "overall": 80,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'7\"",
+  "team": "Detroit Pistons",
+  "era": "current",
+  "id": 182
+ },
+ {
+  "name": "Fred VanVleet",
+  "overall": 80,
+  "positions": [
+   "PG"
+  ],
+  "height": "6'0\"",
+  "team": "Houston Rockets",
+  "era": "current",
+  "id": 183
+ },
+ {
+  "name": "GG Jackson",
+  "overall": 80,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'9\"",
+  "team": "Memphis Grizzlies",
+  "era": "current",
+  "id": 184
+ },
+ {
+  "name": "Gui Santos",
+  "overall": 80,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'7\"",
+  "team": "Golden State Warriors",
+  "era": "current",
+  "id": 185
+ },
+ {
+  "name": "Jaime Jaquez Jr.",
+  "overall": 80,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'6\"",
+  "team": "Miami Heat",
+  "era": "current",
+  "id": 186
+ },
+ {
+  "name": "Jakob Poeltl",
+  "overall": 80,
+  "positions": [
+   "C"
+  ],
+  "height": "7'0\"",
+  "team": "Toronto Raptors",
+  "era": "current",
+  "id": 187
+ },
+ {
+  "name": "Jared McCain",
+  "overall": 80,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'3\"",
+  "team": "Oklahoma City Thunder",
+  "era": "current",
+  "id": 188
+ },
+ {
+  "name": "Jeremiah Fears",
+  "overall": 80,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'3\"",
+  "team": "New Orleans Pelicans",
+  "era": "current",
+  "id": 189
+ },
+ {
+  "name": "Kelly Oubre Jr.",
+  "overall": 80,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'8\"",
+  "team": "Indiana Pacers",
+  "era": "current",
+  "id": 190
+ },
+ {
+  "name": "Kel\u2019el Ware",
+  "overall": 80,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "7'0\"",
+  "team": "Milwaukee Bucks",
+  "era": "current",
+  "id": 191
+ },
+ {
+  "name": "Kyle Kuzma",
+  "overall": 80,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'9\"",
+  "team": "Milwaukee Bucks",
+  "era": "current",
+  "id": 192
+ },
+ {
+  "name": "Luguentz Dort",
+  "overall": 80,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'4\"",
+  "team": "Oklahoma City Thunder",
+  "era": "current",
+  "id": 193
+ },
+ {
+  "name": "Malik Monk",
+  "overall": 80,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'3\"",
+  "team": "Sacramento Kings",
+  "era": "current",
+  "id": 194
+ },
+ {
+  "name": "Marcus Smart",
+  "overall": 80,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'3\"",
+  "team": "Houston Rockets",
+  "era": "current",
+  "id": 195
+ },
+ {
+  "name": "Mitchell Robinson",
+  "overall": 80,
+  "positions": [
+   "C"
+  ],
+  "height": "7'0\"",
+  "team": "Boston Celtics",
+  "era": "current",
+  "id": 196
+ },
+ {
+  "name": "Moussa Diabate",
+  "overall": 80,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "6'10\"",
+  "team": "Charlotte Hornets",
+  "era": "current",
+  "id": 197
+ },
+ {
+  "name": "Obi Toppin",
+  "overall": 80,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "6'9\"",
+  "team": "Indiana Pacers",
+  "era": "current",
+  "id": 198
+ },
+ {
+  "name": "P.J. Washington",
+  "overall": 80,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'7\"",
+  "team": "Dallas Mavericks",
+  "era": "current",
+  "id": 199
+ },
+ {
+  "name": "Pelle Larsson",
+  "overall": 80,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'5\"",
+  "team": "Miami Heat",
+  "era": "current",
+  "id": 200
+ },
+ {
+  "name": "Reed Sheppard",
+  "overall": 80,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'2\"",
+  "team": "Houston Rockets",
+  "era": "current",
+  "id": 201
+ },
+ {
+  "name": "Robert Williams III",
+  "overall": 80,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "6'9\"",
+  "team": "Portland Trail Blazers",
+  "era": "current",
+  "id": 202
+ },
+ {
+  "name": "Ryan Kalkbrenner",
+  "overall": 80,
+  "positions": [
+   "C"
+  ],
+  "height": "7'1\"",
+  "team": "Charlotte Hornets",
+  "era": "current",
+  "id": 203
+ },
+ {
+  "name": "Tim Hardaway Jr.",
+  "overall": 80,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'5\"",
+  "team": "Denver Nuggets",
+  "era": "current",
+  "id": 204
+ },
+ {
+  "name": "Wendell Carter Jr.",
+  "overall": 80,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "6'10\"",
+  "team": "Orlando Magic",
+  "era": "current",
+  "id": 205
+ },
+ {
+  "name": "Al Horford",
+  "overall": 79,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "6'8\"",
+  "team": "Golden State Warriors",
+  "era": "current",
+  "id": 206
+ },
+ {
+  "name": "Bilal Coulibaly",
+  "overall": 79,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'7\"",
+  "team": "Washington Wizards",
+  "era": "current",
+  "id": 207
+ },
+ {
+  "name": "Cam Spencer",
+  "overall": 79,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'3\"",
+  "team": "Memphis Grizzlies",
+  "era": "current",
+  "id": 208
+ },
+ {
+  "name": "Caris LeVert",
+  "overall": 79,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'7\"",
+  "team": "Milwaukee Bucks",
+  "era": "current",
+  "id": 209
+ },
+ {
+  "name": "Davion Mitchell",
+  "overall": 79,
+  "positions": [
+   "PG",
+   "SG"
+  ],
+  "height": "6'0\"",
+  "team": "Miami Heat",
+  "era": "current",
+  "id": 210
+ },
+ {
+  "name": "Deandre Ayton",
+  "overall": 79,
+  "positions": [
+   "C"
+  ],
+  "height": "7'0\"",
+  "team": "Washington Wizards",
+  "era": "current",
+  "id": 211
+ },
+ {
+  "name": "Dereck Lively II",
+  "overall": 79,
+  "positions": [
+   "C"
+  ],
+  "height": "7'1\"",
+  "team": "Dallas Mavericks",
+  "era": "current",
+  "id": 212
+ },
+ {
+  "name": "Derrick Jones Jr.",
+  "overall": 79,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'6\"",
+  "team": "Los Angeles Clippers",
+  "era": "current",
+  "id": 213
+ },
+ {
+  "name": "De\u2019Andre Hunter",
+  "overall": 79,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'7\"",
+  "team": "Sacramento Kings",
+  "era": "current",
+  "id": 214
+ },
+ {
+  "name": "De\u2019Anthony Melton",
+  "overall": 79,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'2\"",
+  "team": "Golden State Warriors",
+  "era": "current",
+  "id": 215
+ },
+ {
+  "name": "Draymond Green",
+  "overall": 79,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "6'6\"",
+  "team": "Golden State Warriors",
+  "era": "current",
+  "id": 216
+ },
+ {
+  "name": "Gary Payton II",
+  "overall": 79,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'2\"",
+  "team": "Golden State Warriors",
+  "era": "current",
+  "id": 217
+ },
+ {
+  "name": "Herbert Jones",
+  "overall": 79,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'7\"",
+  "team": "New Orleans Pelicans",
+  "era": "current",
+  "id": 218
+ },
+ {
+  "name": "Isaiah Joe",
+  "overall": 79,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'4\"",
+  "team": "Detroit Pistons",
+  "era": "current",
+  "id": 219
+ },
+ {
+  "name": "Jalen Smith",
+  "overall": 79,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "6'8\"",
+  "team": "Chicago Bulls",
+  "era": "current",
+  "id": 220
+ },
+ {
+  "name": "Jaxson Hayes",
+  "overall": 79,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "7'0\"",
+  "team": "Utah Jazz",
+  "era": "current",
+  "id": 221
+ },
+ {
+  "name": "Jay Huff",
+  "overall": 79,
+  "positions": [
+   "C"
+  ],
+  "height": "7'1\"",
+  "team": "Indiana Pacers",
+  "era": "current",
+  "id": 222
+ },
+ {
+  "name": "Jaylen Wells",
+  "overall": 79,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'8\"",
+  "team": "Memphis Grizzlies",
+  "era": "current",
+  "id": 223
+ },
+ {
+  "name": "Jaylin Williams",
+  "overall": 79,
+  "positions": [
+   "C"
+  ],
+  "height": "6'9\"",
+  "team": "Oklahoma City Thunder",
+  "era": "current",
+  "id": 224
+ },
+ {
+  "name": "Jonas Valanciunas",
+  "overall": 79,
+  "positions": [
+   "C"
+  ],
+  "height": "6'11\"",
+  "team": "Free Agency",
+  "era": "current",
+  "id": 225
+ },
+ {
+  "name": "Jonathan Kuminga",
+  "overall": 79,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'7\"",
+  "team": "Atlanta Hawks",
+  "era": "current",
+  "id": 226
+ },
+ {
+  "name": "Keegan Murray",
+  "overall": 79,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'8\"",
+  "team": "Sacramento Kings",
+  "era": "current",
+  "id": 227
+ },
+ {
+  "name": "Kyle Filipowski",
+  "overall": 79,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "6'11\"",
+  "team": "Utah Jazz",
+  "era": "current",
+  "id": 228
+ },
+ {
+  "name": "Marvin Bagley III",
+  "overall": 79,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "6'11\"",
+  "team": "Denver Nuggets",
+  "era": "current",
+  "id": 229
+ },
+ {
+  "name": "Max Strus",
+  "overall": 79,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'5\"",
+  "team": "Cleveland Cavaliers",
+  "era": "current",
+  "id": 230
+ },
+ {
+  "name": "Miles McBride",
+  "overall": 79,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'2\"",
+  "team": "New York Knicks",
+  "era": "current",
+  "id": 231
+ },
+ {
+  "name": "Moses Moody",
+  "overall": 79,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'5\"",
+  "team": "Golden State Warriors",
+  "era": "current",
+  "id": 232
+ },
+ {
+  "name": "Nikola Vucevic",
+  "overall": 79,
+  "positions": [
+   "C"
+  ],
+  "height": "6'9\"",
+  "team": "Orlando Magic",
+  "era": "current",
+  "id": 233
+ },
+ {
+  "name": "Paul Reed",
+  "overall": 79,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "6'9\"",
+  "team": "Detroit Pistons",
+  "era": "current",
+  "id": 234
+ },
+ {
+  "name": "Precious Achiuwa",
+  "overall": 79,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "6'8\"",
+  "team": "Sacramento Kings",
+  "era": "current",
+  "id": 235
+ },
+ {
+  "name": "Quentin Grimes",
+  "overall": 79,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'4\"",
+  "team": "Los Angeles Lakers",
+  "era": "current",
+  "id": 236
+ },
+ {
+  "name": "Sandro Mamukelashvili",
+  "overall": 79,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "6'9\"",
+  "team": "Toronto Raptors",
+  "era": "current",
+  "id": 237
+ },
+ {
+  "name": "Tari Eason",
+  "overall": 79,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'8\"",
+  "team": "Houston Rockets",
+  "era": "current",
+  "id": 238
+ },
+ {
+  "name": "Aaron Wiggins",
+  "overall": 78,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'5\"",
+  "team": "Oklahoma City Thunder",
+  "era": "current",
+  "id": 239
+ },
+ {
+  "name": "Brook Lopez",
+  "overall": 78,
+  "positions": [
+   "C"
+  ],
+  "height": "7'1\"",
+  "team": "Los Angeles Clippers",
+  "era": "current",
+  "id": 240
+ },
+ {
+  "name": "Dean Wade",
+  "overall": 78,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'9\"",
+  "team": "Cleveland Cavaliers",
+  "era": "current",
+  "id": 241
+ },
+ {
+  "name": "Egor Demin",
+  "overall": 78,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'8\"",
+  "team": "Brooklyn Nets",
+  "era": "current",
+  "id": 242
+ },
+ {
+  "name": "Jaden Ivey",
+  "overall": 78,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'4\"",
+  "team": "Free Agency",
+  "era": "current",
+  "id": 243
+ },
+ {
+  "name": "Javonte Green",
+  "overall": 78,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'5\"",
+  "team": "Detroit Pistons",
+  "era": "current",
+  "id": 244
+ },
+ {
+  "name": "Ja\u2019Kobe Walter",
+  "overall": 78,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'4\"",
+  "team": "Toronto Raptors",
+  "era": "current",
+  "id": 245
+ },
+ {
+  "name": "Josh Minott",
+  "overall": 78,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "6'8\"",
+  "team": "Brooklyn Nets",
+  "era": "current",
+  "id": 246
+ },
+ {
+  "name": "Justin Champagnie",
+  "overall": 78,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'6\"",
+  "team": "Washington Wizards",
+  "era": "current",
+  "id": 247
+ },
+ {
+  "name": "Kenrich Williams",
+  "overall": 78,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "6'7\"",
+  "team": "Oklahoma City Thunder",
+  "era": "current",
+  "id": 248
+ },
+ {
+  "name": "Klay Thompson",
+  "overall": 78,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'5\"",
+  "team": "Dallas Mavericks",
+  "era": "current",
+  "id": 249
+ },
+ {
+  "name": "Luke Kennard",
+  "overall": 78,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'5\"",
+  "team": "Phoenix Suns",
+  "era": "current",
+  "id": 250
+ },
+ {
+  "name": "Malik Beasley",
+  "overall": 78,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'4\"",
+  "team": "Free Agency",
+  "era": "current",
+  "id": 251
+ },
+ {
+  "name": "Olivier-Maxence Prosper",
+  "overall": 78,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "6'7\"",
+  "team": "Memphis Grizzlies",
+  "era": "current",
+  "id": 252
+ },
+ {
+  "name": "Ron Holland",
+  "overall": 78,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'8\"",
+  "team": "Detroit Pistons",
+  "era": "current",
+  "id": 253
+ },
+ {
+  "name": "Sam Hauser",
+  "overall": 78,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'7\"",
+  "team": "Boston Celtics",
+  "era": "current",
+  "id": 254
+ },
+ {
+  "name": "Sam Merrill",
+  "overall": 78,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'4\"",
+  "team": "Cleveland Cavaliers",
+  "era": "current",
+  "id": 255
+ },
+ {
+  "name": "Tre Johnson",
+  "overall": 78,
+  "positions": [
+   "SG",
+   "PG"
+  ],
+  "height": "6'5\"",
+  "team": "Washington Wizards",
+  "era": "current",
+  "id": 256
+ },
+ {
+  "name": "Tristan da Silva",
+  "overall": 78,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'8\"",
+  "team": "Orlando Magic",
+  "era": "current",
+  "id": 257
+ },
+ {
+  "name": "Yves Missi",
+  "overall": 78,
+  "positions": [
+   "C",
+   "PF"
+  ],
+  "height": "6'11\"",
+  "team": "New Orleans Pelicans",
+  "era": "current",
+  "id": 258
+ },
+ {
+  "name": "Ziaire Williams",
+  "overall": 78,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'9\"",
+  "team": "Brooklyn Nets",
+  "era": "current",
+  "id": 259
+ },
+ {
+  "name": "Carter Bryant",
+  "overall": 77,
+  "positions": [
+   "SF",
+   "PF"
+  ],
+  "height": "6'6\"",
+  "team": "San Antonio Spurs",
+  "era": "current",
+  "id": 260
+ },
+ {
+  "name": "Danny Wolf",
+  "overall": 77,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'11\"",
+  "team": "Brooklyn Nets",
+  "era": "current",
+  "id": 261
+ },
+ {
+  "name": "Kevin Huerter",
+  "overall": 77,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'6\"",
+  "team": "Detroit Pistons",
+  "era": "current",
+  "id": 262
+ },
+ {
+  "name": "Max Christie",
+  "overall": 77,
+  "positions": [
+   "SG",
+   "SF"
+  ],
+  "height": "6'5\"",
+  "team": "Dallas Mavericks",
+  "era": "current",
+  "id": 263
+ },
+ {
+  "name": "Nique Clifford",
+  "overall": 77,
+  "positions": [
+   "SF",
+   "SG"
+  ],
+  "height": "6'5\"",
+  "team": "Sacramento Kings",
+  "era": "current",
+  "id": 264
+ },
+ {
+  "name": "Noah Clowney",
+  "overall": 77,
+  "positions": [
+   "PF",
+   "C"
+  ],
+  "height": "6'10\"",
+  "team": "Brooklyn Nets",
+  "era": "current",
+  "id": 265
+ },
+ {
+  "name": "Royce O\u2019Neale",
+  "overall": 77,
+  "positions": [
+   "PF",
+   "SF"
+  ],
+  "height": "6'6\"",
+  "team": "Phoenix Suns",
+  "era": "current",
+  "id": 266
+ }
+]

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NBA All-Time Draft</title>
+<style>
+:root{
+  --bg:#0e1320; --panel:#151c2e; --panel2:#1c2540; --line:#2a3455; --ink:#eaf0ff;
+  --mut:#93a0c4; --acc:#f97316; --acc2:#38bdf8; --good:#22c55e; --bad:#ef4444;
+  --gold:#fbbf24; --shadow:0 8px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;background:
+  radial-gradient(1200px 600px at 80% -10%, #1a2b4a 0, transparent 60%),
+  radial-gradient(900px 500px at -10% 10%, #17223d 0, transparent 55%), var(--bg);
+  color:var(--ink);min-height:100vh}
+a{color:var(--acc2)}
+.wrap{max-width:1200px;margin:0 auto;padding:16px}
+h1,h2,h3{margin:.2em 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.5px;font-size:20px}
+.brand .ball{font-size:24px}
+.tag{color:var(--mut);font-size:13px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow)}
+.btn{background:var(--acc);color:#151107;border:none;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer;font-size:14px}
+.btn:hover{filter:brightness(1.08)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.sec{background:var(--panel2);color:var(--ink);border:1px solid var(--line)}
+.btn.ghost{background:transparent;color:var(--mut);border:1px solid var(--line)}
+.btn.sm{padding:6px 10px;font-size:12px;border-radius:8px}
+.btn.good{background:var(--good);color:#04220f}
+input,select{background:#0c1120;border:1px solid var(--line);color:var(--ink);border-radius:9px;padding:9px 11px;font-size:14px;outline:none}
+input:focus,select:focus{border-color:var(--acc2)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.grid{display:grid;gap:14px}
+.mut{color:var(--mut)}
+.pill{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:2px 9px;font-size:11px;color:var(--mut)}
+.center{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:78vh;gap:16px}
+.hidden{display:none!important}
+.badge-host{background:var(--gold);color:#3a2a00;border-radius:6px;font-size:10px;padding:1px 6px;font-weight:800;margin-left:6px}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}
+.dot.on{background:var(--good)} .dot.off{background:#64748b}
+table{border-collapse:collapse;width:100%}
+.ovr{font-weight:800;background:linear-gradient(135deg,var(--acc),#fb923c);color:#1a1206;border-radius:8px;padding:3px 8px;min-width:34px;text-align:center;display:inline-block}
+.ovr.c2{background:linear-gradient(135deg,var(--acc2),#60a5fa);color:#05121f}
+.era{font-size:10px;font-weight:800;padding:1px 6px;border-radius:5px}
+.era.current{background:#0e3a2a;color:#5ee9b5} .era.classic{background:#3a2f0e;color:#fbbf24}
+.pos{font-size:11px;color:var(--mut);font-weight:700}
+.pool{max-height:62vh;overflow:auto;border:1px solid var(--line);border-radius:12px}
+.prow{display:grid;grid-template-columns:46px 1fr auto;gap:10px;align-items:center;padding:8px 12px;border-bottom:1px solid #202942}
+.prow:hover{background:#111a30}
+.prow.taken{opacity:.32}
+.pname{font-weight:600}
+.psub{font-size:11px;color:var(--mut)}
+.clock{font-variant-numeric:tabular-nums;font-weight:800}
+.clock.warn{color:var(--bad)}
+.feed{max-height:20vh;overflow:auto;font-size:13px}
+.feed .fitem{padding:4px 0;border-bottom:1px solid #1b2237}
+.teamcol{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:10px}
+.teamcol.clock{outline:2px solid var(--acc)}
+.roster-li{display:flex;justify-content:space-between;gap:8px;padding:3px 0;font-size:13px;border-bottom:1px solid #1b2237}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.tab{padding:6px 12px;border-radius:8px;border:1px solid var(--line);cursor:pointer;font-size:13px;background:var(--panel2)}
+.tab.active{background:var(--acc);color:#181206;border-color:var(--acc);font-weight:700}
+.catbox{border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px;background:var(--panel2)}
+.votebtn{padding:8px 12px;border-radius:9px;border:1px solid var(--line);background:#0c1120;color:var(--ink);cursor:pointer;font-size:13px}
+.votebtn.mine{background:var(--acc2);color:#05121f;border-color:var(--acc2);font-weight:700}
+.winner{color:var(--gold);font-weight:800}
+.bar{height:10px;background:#0c1120;border-radius:6px;overflow:hidden}
+.bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--acc),#fb923c)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--bad);color:#fff;padding:10px 16px;border-radius:10px;box-shadow:var(--shadow);z-index:50}
+.small{font-size:12px}
+.kv{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1b2237}
+@media(max-width:820px){.prow{grid-template-columns:40px 1fr auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="row" style="justify-content:space-between;margin-bottom:12px">
+    <div class="brand"><span class="ball">🏀</span> NBA All-Time Draft</div>
+    <div class="tag" id="roomTag"></div>
+  </div>
+  <div id="app"></div>
+</div>
+<div id="toast" class="toast hidden"></div>
+
+<script>
+// ---------------- client state ----------------
+let ws, WS_READY=false;
+let ME={playerId:null, token:null, isHost:false, roomCode:null};
+let STATE=null;
+let PLAYERS=[], BYID={};
+let ui={ tab:'pool', filterPos:'ALL', filterEra:'ALL', minOvr:0, search:'', teamTab:null, catInput:'' };
+let toastTimer=null;
+
+const $=(s,el=document)=>el.querySelector(s);
+const el=(h)=>{const t=document.createElement('template');t.innerHTML=h.trim();return t.content.firstChild;};
+const esc=(s)=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.add('hidden'),3200);}
+
+function saveSession(){try{localStorage.setItem('nbaDraft',JSON.stringify({roomCode:ME.roomCode,token:ME.token}));}catch(e){}}
+function clearSession(){try{localStorage.removeItem('nbaDraft');}catch(e){}}
+
+// ---------------- networking ----------------
+function connect(then){
+  const proto=location.protocol==='https:'?'wss':'ws';
+  ws=new WebSocket(proto+'://'+location.host);
+  ws.onopen=()=>{WS_READY=true; then&&then();};
+  ws.onclose=()=>{WS_READY=false; setTimeout(()=>connect(()=>tryRejoin()),1200);};
+  ws.onmessage=(e)=>{
+    let m; try{m=JSON.parse(e.data);}catch(_){return;}
+    if(m.type==='joined'){
+      ME.playerId=m.playerId; ME.token=m.token; ME.isHost=m.isHost; ME.roomCode=m.roomCode;
+      saveSession(); render();
+    } else if(m.type==='state'){
+      STATE=m.state;
+      ME.isHost = STATE.hostId===ME.playerId;
+      if(!ui.teamTab) ui.teamTab=ME.playerId;
+      render();
+    } else if(m.type==='error'){
+      toast(m.message||'Error');
+      if(m.fatal){clearSession(); ME={playerId:null,token:null,isHost:false,roomCode:null}; STATE=null; render();}
+    }
+  };
+}
+function sendMsg(o){ if(WS_READY) ws.send(JSON.stringify(o)); }
+
+function tryRejoin(){
+  let s; try{s=JSON.parse(localStorage.getItem('nbaDraft'));}catch(e){}
+  if(s&&s.roomCode&&s.token){ ME.roomCode=s.roomCode; ME.token=s.token; sendMsg({type:'rejoin',roomCode:s.roomCode,token:s.token}); }
+}
+
+// ---------------- boot ----------------
+fetch('players.json').then(r=>r.json()).then(d=>{
+  PLAYERS=d; d.forEach(p=>BYID[p.id]=p);
+  connect(()=>tryRejoin());
+  render();
+});
+
+// ---------------- render root ----------------
+function render(){
+  $('#roomTag').textContent = (STATE&&STATE.code)? ('Room '+STATE.code+' · '+STATE.players.length+' drafter'+(STATE.players.length!==1?'s':'')) : '';
+  const app=$('#app'); app.innerHTML='';
+  if(!STATE || !ME.playerId){ app.appendChild(viewLanding()); return; }
+  if(STATE.phase==='lobby') app.appendChild(viewLobby());
+  else if(STATE.phase==='draft') app.appendChild(viewDraft());
+  else if(STATE.phase==='voting_setup'||STATE.phase==='voting') app.appendChild(viewVoting());
+  else if(STATE.phase==='results') app.appendChild(viewResults());
+}
+
+// ---------------- landing ----------------
+function viewLanding(){
+  const c=el('<div class="center"></div>');
+  c.appendChild(el('<div class="tag" style="text-align:center;max-width:520px">Draft your ultimate NBA roster from '+PLAYERS.length+' current stars & all-time legends — ratings from 2K. Everyone joins from their own device.</div>'));
+  const card=el('<div class="card" style="width:min(440px,92vw)"></div>');
+  card.innerHTML=`
+    <h2>Start a game</h2>
+    <p class="mut small">Create a room and share the 4-letter code. Up to 16 drafters.</p>
+    <div class="grid">
+      <input id="nmC" maxlength="24" placeholder="Your name / team name"/>
+      <button class="btn" id="btnCreate">Create room</button>
+    </div>
+    <hr style="border-color:var(--line);margin:18px 0"/>
+    <h3>Join a game</h3>
+    <div class="row">
+      <input id="code" maxlength="4" placeholder="CODE" style="text-transform:uppercase;width:110px;letter-spacing:3px;font-weight:800"/>
+      <input id="nmJ" maxlength="24" placeholder="Your name / team name" style="flex:1;min-width:140px"/>
+    </div>
+    <button class="btn sec" id="btnJoin" style="margin-top:10px;width:100%">Join room</button>`;
+  c.appendChild(card);
+  card.querySelector('#btnCreate').onclick=()=>{const n=card.querySelector('#nmC').value.trim();if(!n)return toast('Enter a name');sendMsg({type:'create',name:n});};
+  card.querySelector('#btnJoin').onclick=()=>{const code=card.querySelector('#code').value.trim().toUpperCase();const n=card.querySelector('#nmJ').value.trim();if(!code||!n)return toast('Enter code and name');sendMsg({type:'join',roomCode:code,name:n});};
+  return c;
+}
+
+// ---------------- lobby ----------------
+function viewLobby(){
+  const s=STATE, host=ME.isHost;
+  const c=el('<div class="grid" style="grid-template-columns:1fr 1fr;gap:16px"></div>');
+  // left: room + players
+  const left=el('<div class="card"></div>');
+  left.innerHTML=`<h2>Lobby</h2>
+    <div class="row" style="justify-content:space-between">
+      <div>Room code: <span style="font-size:26px;font-weight:900;letter-spacing:4px;color:var(--acc)">${s.code}</span></div>
+      <button class="btn ghost sm" id="copy">Copy invite link</button>
+    </div>
+    <p class="mut small">Share the code (or link) so others join from their phones/laptops on the same server.</p>
+    <h3>Drafters (${s.players.length}/16)</h3>
+    <div id="plist"></div>`;
+  const pl=left.querySelector('#plist');
+  s.players.forEach(p=>{
+    const li=el(`<div class="kv"><div><span class="dot ${p.connected?'on':'off'}"></span>${esc(p.teamName)}${p.id===s.hostId?'<span class="badge-host">HOST</span>':''}${p.id===ME.playerId?' <span class="pill">you</span>':''}</div><div></div></div>`);
+    if(host && p.id!==ME.playerId){const k=el('<button class="btn ghost sm">remove</button>');k.onclick=()=>sendMsg({type:'kick',playerId:p.id});li.lastElementChild.appendChild(k);}
+    pl.appendChild(li);
+  });
+  left.querySelector('#copy').onclick=()=>{const url=location.origin+'/?room='+s.code;navigator.clipboard&&navigator.clipboard.writeText(url);toast('Invite link copied');};
+  c.appendChild(left);
+
+  // right: settings + your team + start
+  const right=el('<div class="card"></div>');
+  const me=s.players.find(p=>p.id===ME.playerId);
+  right.innerHTML=`<h2>Your team</h2>
+    <div class="row"><input id="tn" maxlength="28" value="${esc(me?me.teamName:'')}" style="flex:1"/><button class="btn sec sm" id="saveTn">Save</button></div>
+    <hr style="border-color:var(--line);margin:16px 0"/>
+    <h2>Settings ${host?'':'<span class="pill">host controls</span>'}</h2>
+    <div class="grid" style="grid-template-columns:1fr 1fr">
+      <label class="small mut">Roster size (rounds)<br><input id="rs" type="number" min="1" max="15" value="${s.settings.rosterSize}" ${host?'':'disabled'} style="width:100%"/></label>
+      <label class="small mut">Pick timer (sec, 0=off)<br><input id="ps" type="number" min="0" max="600" value="${s.settings.pickSeconds}" ${host?'':'disabled'} style="width:100%"/></label>
+    </div>
+    <p class="mut small">${s.players.length} teams × ${s.settings.rosterSize} = <b>${s.players.length*s.settings.rosterSize}</b> total picks · snake order.</p>
+    ${host?`<div class="row" style="margin-top:8px"><button class="btn sec" id="shuffle">🎲 Shuffle draft order</button><button class="btn good" id="start">Start draft →</button></div>
+    <p class="mut small" id="orderPrev"></p>`:'<p class="mut">Waiting for the host to start…</p>'}`;
+  right.querySelector('#saveTn').onclick=()=>{const v=right.querySelector('#tn').value.trim();if(v)sendMsg({type:'setTeamName',name:v});};
+  if(host){
+    const rs=right.querySelector('#rs'), ps=right.querySelector('#ps');
+    const pushCfg=()=>sendMsg({type:'config',rosterSize:rs.value,pickSeconds:ps.value});
+    rs.onchange=pushCfg; ps.onchange=pushCfg;
+    right.querySelector('#shuffle').onclick=()=>{ lobbyOrder=shuffle(s.players.map(p=>p.id)); showOrder(right,s); };
+    right.querySelector('#start').onclick=()=>{ if(s.players.length<2)return toast('Need at least 2 drafters'); sendMsg({type:'startDraft',order:lobbyOrder&&lobbyOrder.length===s.players.length?lobbyOrder:null}); };
+    showOrder(right,s);
+  }
+  c.appendChild(right);
+  return c;
+}
+let lobbyOrder=null;
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function showOrder(right,s){const o=(lobbyOrder&&lobbyOrder.length===s.players.length)?lobbyOrder:s.players.map(p=>p.id);const names=o.map((id,i)=>(i+1)+'. '+(s.players.find(p=>p.id===id)||{teamName:'?'}).teamName);const pv=right.querySelector('#orderPrev');if(pv)pv.innerHTML='<b>Order:</b> '+names.map(esc).join('  ·  ');}
+
+// ---------------- draft ----------------
+function teamName(id){const p=STATE.players.find(x=>x.id===id);return p?p.teamName:'?';}
+function viewDraft(){
+  const s=STATE;
+  const onClock=s.onClock;
+  const myTurn=onClock===ME.playerId;
+  const finished=s.pickNo>=s.totalPicks;
+  const c=el('<div></div>');
+  // header
+  let timer='';
+  if(s.clockEnds){const left=Math.max(0,Math.ceil((s.clockEnds-Date.now())/1000));timer=`<span class="clock ${left<=5?'warn':''}">⏱ ${left}s</span>`;}
+  const hdr=el(`<div class="card" style="margin-bottom:14px"><div class="row" style="justify-content:space-between">
+    <div><b>Round ${s.round}</b> / ${s.rounds} · Pick ${Math.min(s.pickNo+1,s.totalPicks)} of ${s.totalPicks}</div>
+    <div class="row">${timer}<div>On the clock: <b style="color:${myTurn?'var(--good)':'var(--acc)'}">${esc(teamName(onClock))}${myTurn?' — that\\'s you!':''}</b></div></div>
+  </div></div>`);
+  c.appendChild(hdr);
+
+  const main=el('<div class="grid" style="grid-template-columns:1.6fr 1fr;gap:16px"></div>');
+  // left: player pool
+  const poolCard=el('<div class="card"></div>');
+  poolCard.innerHTML=`<div class="row" style="justify-content:space-between"><h3 style="margin:0">Available players</h3><span class="pill">${PLAYERS.length-s.drafted.length} left</span></div>
+    <div class="row" style="margin:10px 0">
+      <input id="search" placeholder="Search name…" value="${esc(ui.search)}" style="flex:1;min-width:120px"/>
+      <select id="fpos">${['ALL','PG','SG','SF','PF','C'].map(p=>`<option ${ui.filterPos===p?'selected':''}>${p}</option>`).join('')}</select>
+      <select id="fera"><option value="ALL" ${ui.filterEra==='ALL'?'selected':''}>All eras</option><option value="current" ${ui.filterEra==='current'?'selected':''}>Current</option><option value="classic" ${ui.filterEra==='classic'?'selected':''}>Legends</option></select>
+    </div>
+    <div class="pool" id="pool"></div>`;
+  const pool=poolCard.querySelector('#pool');
+  const drafted=new Set(s.drafted);
+  const list=PLAYERS.filter(p=>{
+    if(ui.filterPos!=='ALL'&&!p.positions.includes(ui.filterPos))return false;
+    if(ui.filterEra!=='ALL'&&p.era!==ui.filterEra)return false;
+    if(ui.search&&!p.name.toLowerCase().includes(ui.search.toLowerCase()))return false;
+    return true;
+  });
+  list.forEach(p=>{
+    const taken=drafted.has(p.id);
+    const row=el(`<div class="prow ${taken?'taken':''}">
+      <span class="ovr ${p.era==='classic'?'c2':''}">${p.overall}</span>
+      <div><div class="pname">${esc(p.name)} <span class="era ${p.era}">${p.era==='classic'?'LEGEND':'NBA'}</span></div>
+      <div class="psub"><span class="pos">${p.positions.join('/')}</span> · ${p.height||''} · ${esc(p.team||'')}</div></div>
+      <div></div></div>`);
+    if(!taken){
+      const b=el(`<button class="btn sm ${myTurn?'':'sec'}" ${myTurn?'':'disabled'}>Draft</button>`);
+      b.onclick=()=>{ if(!myTurn)return; sendMsg({type:'pick',playerId:p.id}); };
+      row.lastElementChild.appendChild(b);
+    } else {
+      const who=s.picks.find(x=>x.playerId===p.id);
+      row.lastElementChild.innerHTML=`<span class="pill">${esc(who?teamName(who.teamId):'taken')}</span>`;
+    }
+    pool.appendChild(row);
+  });
+  poolCard.querySelector('#search').oninput=(e)=>{ui.search=e.target.value;rerenderPool(poolCard);};
+  poolCard.querySelector('#fpos').onchange=(e)=>{ui.filterPos=e.target.value;rerenderPool(poolCard);};
+  poolCard.querySelector('#fera').onchange=(e)=>{ui.filterEra=e.target.value;rerenderPool(poolCard);};
+  main.appendChild(poolCard);
+
+  // right: rosters + feed
+  const side=el('<div class="grid" style="gap:14px"></div>');
+  const feedCard=el('<div class="card"><h3 style="margin-top:0">Pick feed</h3><div class="feed" id="feed"></div></div>');
+  const feed=feedCard.querySelector('#feed');
+  s.picks.slice().reverse().forEach(pk=>{const pp=BYID[pk.playerId];feed.appendChild(el(`<div class="fitem"><b>${esc(teamName(pk.teamId))}</b> — R${pk.round} P${pk.pickNo}: ${esc(pp?pp.name:'')} <span class="ovr ${pp&&pp.era==='classic'?'c2':''}" style="font-size:11px">${pp?pp.overall:''}</span>${pk.auto?' <span class="pill">auto</span>':''}</div>`));});
+  if(!s.picks.length)feed.innerHTML='<div class="mut small">No picks yet.</div>';
+  side.appendChild(feedCard);
+
+  // rosters card with team tabs
+  const rc=el('<div class="card"><h3 style="margin-top:0">Rosters</h3><div class="tabs" id="ttabs"></div><div id="teamRoster"></div></div>');
+  const tabs=rc.querySelector('#ttabs');
+  if(!ui.teamTab||!s.players.find(p=>p.id===ui.teamTab))ui.teamTab=ME.playerId;
+  s.players.forEach(p=>{const t=el(`<div class="tab ${ui.teamTab===p.id?'active':''}">${esc(p.teamName)}${p.id===ME.playerId?' (you)':''}</div>`);t.onclick=()=>{ui.teamTab=p.id;renderTeamRoster(rc);};tabs.appendChild(t);});
+  side.appendChild(rc);
+  main.appendChild(side);
+  c.appendChild(main);
+  setTimeout(()=>renderTeamRoster(rc),0);
+  return c;
+}
+function rerenderPool(card){
+  // rebuild just the view by re-rendering whole draft (cheap enough); keep focus on search
+  const active=document.activeElement, val=active&&active.id==='search'?active.value:null, pos=active&&active.selectionStart;
+  render();
+  if(val!==null){const ni=document.getElementById('search');if(ni){ni.focus();ni.value=val;try{ni.setSelectionRange(pos,pos);}catch(e){}}}
+}
+function renderTeamRoster(rc){
+  const s=STATE, id=ui.teamTab;
+  const ids=(s.rosters[id]||[]);
+  const box=rc.querySelector('#teamRoster');
+  const total=ids.reduce((a,pid)=>a+(BYID[pid]?BYID[pid].overall:0),0);
+  const avg=ids.length?(total/ids.length).toFixed(1):'0';
+  box.innerHTML=`<div class="row" style="justify-content:space-between"><span class="mut small">${ids.length}/${s.rounds} picked</span><span class="pill">avg OVR ${avg}</span></div>`;
+  const order=['PG','SG','SF','PF','C'];
+  ids.map(pid=>BYID[pid]).filter(Boolean).sort((a,b)=>order.indexOf(a.positions[0])-order.indexOf(b.positions[0])||b.overall-a.overall).forEach(p=>{
+    box.appendChild(el(`<div class="roster-li"><span><span class="pos">${p.positions.join('/')}</span> ${esc(p.name)} <span class="era ${p.era}">${p.era==='classic'?'L':'N'}</span></span><span class="ovr ${p.era==='classic'?'c2':''}" style="font-size:11px">${p.overall}</span></div>`));
+  });
+  if(!ids.length)box.innerHTML+='<div class="mut small" style="margin-top:8px">No players yet.</div>';
+}
+
+// ---------------- voting ----------------
+function viewVoting(){
+  const s=STATE, host=ME.isHost, setup=s.phase==='voting_setup';
+  const c=el('<div class="grid" style="grid-template-columns:1fr;gap:16px;max-width:900px;margin:0 auto"></div>');
+  const head=el(`<div class="card"><div class="row" style="justify-content:space-between"><div><h2 style="margin:0">${setup?'Set up the vote':'Vote for the best team'}</h2><p class="mut small" style="margin:.3em 0">${setup?'Host adds the categories you\\'ll vote on (e.g. Best Offense, Best Starting 5, Most Fun). Run your sim on 2K, then everyone votes here.':'Pick the team you think wins each category. You can change your vote until the host reveals results.'}</p></div><div></div></div></div>`);
+  // rosters quick-reference tabs
+  const ref=el('<div class="card"><h3 style="margin-top:0">Team rosters</h3><div class="tabs" id="ttabs"></div><div id="teamRoster"></div></div>');
+  const tabs=ref.querySelector('#ttabs');
+  if(!ui.teamTab||!s.players.find(p=>p.id===ui.teamTab))ui.teamTab=ME.playerId;
+  s.players.forEach(p=>{const t=el(`<div class="tab ${ui.teamTab===p.id?'active':''}">${esc(p.teamName)}</div>`);t.onclick=()=>{ui.teamTab=p.id;renderTeamRoster(ref);};tabs.appendChild(t);});
+
+  const catCard=el('<div class="card"></div>');
+  catCard.innerHTML='<h3 style="margin-top:0">Categories</h3><div id="cats"></div>';
+  const cats=catCard.querySelector('#cats');
+  if(!s.categories.length)cats.innerHTML='<div class="mut small">No categories yet.</div>';
+  s.categories.forEach(cat=>{
+    const box=el(`<div class="catbox"><div class="row" style="justify-content:space-between"><b>${esc(cat.text)}</b>${host?'<button class="btn ghost sm" data-rm="'+cat.id+'">remove</button>':''}</div></div>`);
+    if(!setup){
+      const myVote=(s.votes[cat.id]||{})[ME.playerId];
+      const wrap=el('<div class="row" style="margin-top:8px"></div>');
+      s.players.forEach(p=>{const b=el(`<button class="votebtn ${myVote===p.id?'mine':''}">${esc(p.teamName)}</button>`);b.onclick=()=>sendMsg({type:'vote',categoryId:cat.id,teamId:p.id});wrap.appendChild(b);});
+      box.appendChild(wrap);
+      const voters=Object.keys(s.votes[cat.id]||{}).length;
+      box.appendChild(el(`<div class="mut small" style="margin-top:6px">${voters}/${s.players.length} voted${myVote?' · you voted '+esc(teamName(myVote)):''}</div>`));
+    }
+    if(host){const rm=box.querySelector('[data-rm]');if(rm)rm.onclick=()=>sendMsg({type:'removeCategory',id:cat.id});}
+    cats.appendChild(box);
+  });
+  if(host){
+    const add=el(`<div class="row" style="margin-top:10px"><input id="catIn" maxlength="60" placeholder="Add a category (e.g. Best Defense)" style="flex:1"/><button class="btn sec" id="addCat">Add</button></div>`);
+    const inp=add.querySelector('#catIn'), go=()=>{const v=inp.value.trim();if(v){sendMsg({type:'addCategory',text:v});inp.value='';}};
+    add.querySelector('#addCat').onclick=go; inp.onkeydown=(e)=>{if(e.key==='Enter')go();};
+    catCard.appendChild(add);
+    const actions=el('<div class="row" style="margin-top:14px"></div>');
+    if(setup){const b=el('<button class="btn good">Open voting →</button>');b.onclick=()=>sendMsg({type:'openVoting'});actions.appendChild(b);}
+    else{const b=el('<button class="btn good">Reveal results 🏆</button>');b.onclick=()=>sendMsg({type:'revealResults'});actions.appendChild(b);}
+    catCard.appendChild(actions);
+  } else if(setup){
+    catCard.appendChild(el('<p class="mut" style="margin-top:12px">Waiting for the host to open voting…</p>'));
+  }
+  c.appendChild(head); c.appendChild(catCard); c.appendChild(ref);
+  setTimeout(()=>renderTeamRoster(ref),0);
+  return c;
+}
+
+// ---------------- results ----------------
+function viewResults(){
+  const s=STATE, host=ME.isHost;
+  const c=el('<div class="grid" style="grid-template-columns:1fr;gap:16px;max-width:900px;margin:0 auto"></div>');
+  // crowns count
+  const crowns={}; s.players.forEach(p=>crowns[p.id]=0);
+  Object.values(s.results||{}).forEach(r=>{if(r.winner&&!r.tie)crowns[r.winner]=(crowns[r.winner]||0)+1;});
+  const ranked=s.players.slice().sort((a,b)=>crowns[b.id]-crowns[a.id]);
+  const champ=ranked[0];
+  const head=el(`<div class="card" style="text-align:center"><div style="font-size:40px">🏆</div><h2 style="margin:.2em 0">${champ&&crowns[champ.id]>0?esc(champ.teamName)+' leads with '+crowns[champ.id]+' categor'+(crowns[champ.id]!==1?'ies':'y'):'Results'}</h2><div class="row" style="justify-content:center;flex-wrap:wrap">${ranked.map(p=>`<span class="pill">${esc(p.teamName)}: ${crowns[p.id]} 🏅</span>`).join('')}</div></div>`);
+  c.appendChild(head);
+  const rc=el('<div class="card"><h3 style="margin-top:0">By category</h3><div id="cr"></div></div>');
+  const cr=rc.querySelector('#cr');
+  s.categories.forEach(cat=>{
+    const r=(s.results||{})[cat.id]||{tally:{},winner:null};
+    const maxv=Math.max(1,...Object.values(r.tally||{}));
+    const box=el(`<div class="catbox"><div class="row" style="justify-content:space-between"><b>${esc(cat.text)}</b><span class="winner">${r.winner?(r.tie?'Tie':'🏆 '+esc(teamName(r.winner))):'No votes'}</span></div></div>`);
+    s.players.forEach(p=>{const v=(r.tally||{})[p.id]||0;const pct=Math.round(v/maxv*100);box.appendChild(el(`<div style="margin-top:6px"><div class="row" style="justify-content:space-between"><span class="small ${r.winner===p.id&&!r.tie?'winner':''}">${esc(p.teamName)}</span><span class="small mut">${v}</span></div><div class="bar"><i style="width:${pct}%"></i></div></div>`));});
+    cr.appendChild(box);
+  });
+  c.appendChild(rc);
+  if(host){const a=el('<div class="row" style="justify-content:center"><button class="btn sec" id="back">← Back to voting</button><button class="btn" id="ng">New game (same room)</button></div>');a.querySelector('#back').onclick=()=>sendMsg({type:'backToVoting'});a.querySelector('#ng').onclick=()=>sendMsg({type:'newGame'});c.appendChild(a);}
+  return c;
+}
+
+// prefill room code from ?room=
+(function(){const m=location.search.match(/room=([A-Za-z0-9]{4})/);if(m){window.__prefRoom=m[1].toUpperCase();}})();
+const _origLanding=viewLanding;
+viewLanding=function(){const n=_origLanding();const ci=n.querySelector('#code');if(ci&&window.__prefRoom){ci.value=window.__prefRoom;}return n;};
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "name": "nba-draft-game",
+  "version": "1.0.0",
+  "description": "Realtime multiplayer NBA all-time draft game with 2K ratings",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "dependencies": { "ws": "^8.18.0" }
+}
