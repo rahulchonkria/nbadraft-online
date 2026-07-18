@@ -240,7 +240,7 @@ function viewDraft(){
   if(s.clockEnds){const left=Math.max(0,Math.ceil((s.clockEnds-Date.now())/1000));timer=`<span class="clock ${left<=5?'warn':''}">⏱ ${left}s</span>`;}
   const hdr=el(`<div class="card" style="margin-bottom:14px"><div class="row" style="justify-content:space-between">
     <div><b>Round ${s.round}</b> / ${s.rounds} · Pick ${Math.min(s.pickNo+1,s.totalPicks)} of ${s.totalPicks}</div>
-    <div class="row">${timer}<div>On the clock: <b style="color:${myTurn?'var(--good)':'var(--acc)'}">${esc(teamName(onClock))}${myTurn?' — that\\'s you!':''}</b></div></div>
+    <div class="row">${timer}<div>On the clock: <b style="color:${myTurn?'var(--good)':'var(--acc)'}">${esc(teamName(onClock))}${myTurn?" — that's you!":""}</b></div></div>
   </div></div>`);
   c.appendChild(hdr);
 
@@ -327,7 +327,7 @@ function renderTeamRoster(rc){
 function viewVoting(){
   const s=STATE, host=ME.isHost, setup=s.phase==='voting_setup';
   const c=el('<div class="grid" style="grid-template-columns:1fr;gap:16px;max-width:900px;margin:0 auto"></div>');
-  const head=el(`<div class="card"><div class="row" style="justify-content:space-between"><div><h2 style="margin:0">${setup?'Set up the vote':'Vote for the best team'}</h2><p class="mut small" style="margin:.3em 0">${setup?'Host adds the categories you\\'ll vote on (e.g. Best Offense, Best Starting 5, Most Fun). Run your sim on 2K, then everyone votes here.':'Pick the team you think wins each category. You can change your vote until the host reveals results.'}</p></div><div></div></div></div>`);
+  const head=el(`<div class="card"><div class="row" style="justify-content:space-between"><div><h2 style="margin:0">${setup?'Set up the vote':'Vote for the best team'}</h2><p class="mut small" style="margin:.3em 0">${setup?"Host adds the categories you'll vote on (e.g. Best Offense, Best Starting 5, Most Fun). Run your sim on 2K, then everyone votes here.":'Pick the team you think wins each category. You can change your vote until the host reveals results.'}</p></div><div></div></div></div>`);
   // rosters quick-reference tabs
   const ref=el('<div class="card"><h3 style="margin-top:0">Team rosters</h3><div class="tabs" id="ttabs"></div><div id="teamRoster"></div></div>');
   const tabs=ref.querySelector('#ttabs');
