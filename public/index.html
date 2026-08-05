@@ -1,615 +1,406 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2K Draft — NBA 2K Snake Draft</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NBA All-Time Draft</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap');
 :root{
-  --bg:#06080d; --panel:#0e1420; --panel2:#151d2c; --line:#212b3f;
-  --txt:#eef2f8; --muted:#7e8ba1; --accent:#2e6bff; --accent2:#ff4d1c;
-  --gold:#ffc136; --good:#2ee27e; --bad:#ff4d5e; --radius:8px;
+  --bg:#06080d; --panel:#0e1420; --panel2:#151d2c; --line:#212b3f; --ink:#eef2f8;
+  --mut:#7e8ba1; --acc:#ff4d1c; --acc2:#2e6bff; --good:#2ee27e; --bad:#ff4d5e;
+  --gold:#ffc136; --shadow:0 12px 34px rgba(0,0,0,.45);
   --disp:'Anton',Impact,sans-serif; --cond:'Barlow Condensed',Arial,sans-serif;
 }
 *{box-sizing:border-box}
-html,body{margin:0;height:100%}
-body{
-  background:var(--bg);color:var(--txt);
-  background-image:
-    radial-gradient(1100px 500px at 50% -160px, rgba(46,107,255,.13), transparent 65%),
-    radial-gradient(900px 500px at 100% 110%, rgba(255,77,28,.06), transparent 60%),
-    repeating-linear-gradient(115deg, rgba(255,255,255,.012) 0 2px, transparent 2px 9px);
-  background-attachment:fixed;
-  font:15px/1.5 'Barlow',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  -webkit-font-smoothing:antialiased;
-}
-h2,h3,h4{font-family:var(--cond);text-transform:uppercase;letter-spacing:.4px;font-weight:700}
-button{font-family:var(--cond);cursor:pointer;border:none;border-radius:4px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;transition:.15s}
-button:disabled{opacity:.4;cursor:not-allowed}
-input,select{font-family:'Barlow',sans-serif;background:var(--panel2);border:1px solid var(--line);color:var(--txt);border-radius:4px;padding:10px 12px;font-size:15px;outline:none;transition:border-color .15s}
-input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(46,107,255,.18)}
-a{color:var(--accent)}
-.btn{background:linear-gradient(180deg,#3d78ff,#2257e0);color:#fff;padding:12px 20px;font-size:14px;box-shadow:0 2px 10px rgba(46,107,255,.35),inset 0 1px 0 rgba(255,255,255,.22)}
-.btn:hover:not(:disabled){filter:brightness(1.12);transform:translateY(-1px)}
-.btn.alt{background:var(--panel2);border:1px solid var(--line);color:var(--txt);box-shadow:none}
-.btn.orange{background:linear-gradient(180deg,#ff5f2e,#e03a0c);box-shadow:0 2px 10px rgba(255,77,28,.35),inset 0 1px 0 rgba(255,255,255,.22)}
-.btn.gold{background:linear-gradient(180deg,#ffd257,#f0a91c);color:#241800;box-shadow:0 2px 12px rgba(255,193,54,.35),inset 0 1px 0 rgba(255,255,255,.4)}
-.btn.sm{padding:7px 13px;font-size:12px;border-radius:3px}
-.wrap{max-width:1280px;margin:0 auto;padding:18px}
-.center{max-width:560px;margin:6vh auto;padding:18px}
-.card{background:linear-gradient(180deg,var(--panel),#0b101a);border:1px solid var(--line);border-top:2px solid var(--accent);border-radius:var(--radius);padding:22px;box-shadow:0 12px 34px rgba(0,0,0,.45)}
-.logo{font-family:var(--disp);font-weight:400;font-size:34px;letter-spacing:1px;text-transform:uppercase;font-style:italic;text-shadow:0 2px 0 rgba(0,0,0,.5)}
-.logo span{color:var(--accent2)}
-.sub{color:var(--muted)}
-.row{display:flex;gap:10px}
-.row.wrap{flex-wrap:wrap}
-.col{display:flex;flex-direction:column;gap:6px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-label{font-family:var(--cond);font-size:13px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:1px}
-.hide{display:none!important}
-.pill{display:inline-flex;align-items:center;gap:6px;background:var(--panel2);border:1px solid var(--line);border-radius:3px;padding:5px 12px;font-size:12px;font-family:var(--cond);font-weight:600;text-transform:uppercase;letter-spacing:.8px}
-.tag{font-family:var(--cond);font-size:11px;font-weight:700;padding:2px 8px;border-radius:2px;text-transform:uppercase;letter-spacing:1px;transform:skewX(-8deg)}
-.tag.cur{background:rgba(46,107,255,.18);color:#7ba4ff;border-left:2px solid var(--accent)}
-.tag.leg{background:rgba(255,193,54,.16);color:var(--gold);border-left:2px solid var(--gold)}
-.ovr{font-family:var(--disp);font-weight:400;font-size:16px;min-width:40px;text-align:center;border-radius:3px;padding:4px 0;transform:skewX(-6deg);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 2px 6px rgba(0,0,0,.4)}
-.ovr.t99{background:linear-gradient(160deg,#ffd257,#e08f00);color:#241800}
-.ovr.t90{background:linear-gradient(160deg,#c9d6e8,#8fa3bd);color:#101828}
-.ovr.t80{background:linear-gradient(160deg,#d98a4f,#a2561f);color:#fff}
-.ovr.t0{background:#333d52;color:#c3cbdb}
-.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#04060a;border:1px solid var(--line);border-left:3px solid var(--accent);padding:12px 18px;border-radius:6px;z-index:99;opacity:0;transition:.25s;pointer-events:none;max-width:90vw;box-shadow:0 10px 30px rgba(0,0,0,.6)}
-.toast.show{opacity:1}
-/* draft layout */
-.top{position:relative;display:flex;align-items:center;gap:18px;background:linear-gradient(90deg,#101a2e,var(--panel) 55%);border:1px solid var(--line);border-left:4px solid var(--accent2);border-radius:var(--radius);padding:12px 18px;flex-wrap:wrap;box-shadow:0 10px 28px rgba(0,0,0,.4)}
-.clock{font-family:var(--disp);font-weight:400;font-size:32px;min-width:76px;text-align:center;color:var(--gold);background:#04060a;border:1px solid var(--line);border-radius:6px;padding:4px 10px;letter-spacing:2px;font-variant-numeric:tabular-nums;box-shadow:inset 0 2px 10px rgba(0,0,0,.8),0 0 18px rgba(255,193,54,.12);text-shadow:0 0 12px rgba(255,193,54,.5)}
-.clock.warn{color:var(--bad);text-shadow:0 0 12px rgba(255,77,94,.6);box-shadow:inset 0 2px 10px rgba(0,0,0,.8),0 0 18px rgba(255,77,94,.25);animation:blink 1s steps(2) infinite}
+body{margin:0;font-family:'Barlow',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:
+  radial-gradient(1100px 500px at 50% -160px, rgba(46,107,255,.13), transparent 65%),
+  radial-gradient(900px 500px at 100% 110%, rgba(255,77,28,.06), transparent 60%),
+  repeating-linear-gradient(115deg, rgba(255,255,255,.012) 0 2px, transparent 2px 9px), var(--bg);
+  background-attachment:fixed;color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
+a{color:var(--acc2)}
+.wrap{max-width:1200px;margin:0 auto;padding:16px}
+h1,h2,h3{margin:.2em 0;font-family:var(--cond);text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:400;letter-spacing:1px;font-size:24px;text-transform:uppercase;font-style:italic;text-shadow:0 2px 0 rgba(0,0,0,.5)}
+.brand .ball{font-size:24px;font-style:normal}
+.tag{color:var(--mut);font-size:13px;font-family:var(--cond);text-transform:uppercase;letter-spacing:1px}
+.card{background:linear-gradient(180deg,var(--panel),#0b101a);border:1px solid var(--line);border-top:2px solid var(--acc2);border-radius:8px;padding:18px;box-shadow:var(--shadow)}
+.btn{font-family:var(--cond);text-transform:uppercase;letter-spacing:.8px;background:linear-gradient(180deg,#ff5f2e,#e03a0c);color:#fff;border:none;border-radius:4px;padding:10px 18px;font-weight:700;cursor:pointer;font-size:14px;box-shadow:0 2px 10px rgba(255,77,28,.35),inset 0 1px 0 rgba(255,255,255,.22);transition:.15s}
+.btn:hover{filter:brightness(1.12);transform:translateY(-1px)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn.sec{background:var(--panel2);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.btn.ghost{background:transparent;color:var(--mut);border:1px solid var(--line);box-shadow:none}
+.btn.sm{padding:6px 11px;font-size:12px;border-radius:3px}
+.btn.good{background:linear-gradient(180deg,#3aeb8c,#1bb35d);color:#04220f;box-shadow:0 2px 10px rgba(46,226,126,.3),inset 0 1px 0 rgba(255,255,255,.3)}
+input,select{font-family:'Barlow',sans-serif;background:#0a0f1a;border:1px solid var(--line);color:var(--ink);border-radius:4px;padding:9px 11px;font-size:14px;outline:none;transition:border-color .15s}
+input:focus,select:focus{border-color:var(--acc2);box-shadow:0 0 0 3px rgba(46,107,255,.18)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.grid{display:grid;gap:14px}
+.mut{color:var(--mut)}
+.pill{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:3px;padding:3px 10px;font-size:11px;color:var(--mut);font-family:var(--cond);font-weight:600;text-transform:uppercase;letter-spacing:.8px}
+.center{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:78vh;gap:16px}
+.hidden{display:none!important}
+.badge-host{background:linear-gradient(160deg,#ffd257,#f0a91c);color:#241800;border-radius:2px;font-size:10px;padding:1px 7px;font-weight:700;margin-left:6px;font-family:var(--cond);text-transform:uppercase;letter-spacing:1px;transform:skewX(-8deg);display:inline-block}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}
+.dot.on{background:var(--good);box-shadow:0 0 8px rgba(46,226,126,.6)} .dot.off{background:#64748b}
+table{border-collapse:collapse;width:100%}
+.ovr{font-family:var(--disp);font-weight:400;font-size:15px;background:linear-gradient(160deg,#ff5f2e,#d63400);color:#fff;border-radius:3px;padding:3px 8px;min-width:36px;text-align:center;display:inline-block;transform:skewX(-6deg);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 2px 6px rgba(0,0,0,.4)}
+.ovr.c2{background:linear-gradient(160deg,#ffd257,#e08f00);color:#241800}
+.era{font-family:var(--cond);font-size:10px;font-weight:700;padding:1px 7px;border-radius:2px;text-transform:uppercase;letter-spacing:1px;transform:skewX(-8deg);display:inline-block}
+.era.current{background:rgba(46,107,255,.18);color:#7ba4ff;border-left:2px solid var(--acc2)} .era.classic{background:rgba(255,193,54,.16);color:var(--gold);border-left:2px solid var(--gold)}
+.pos{font-size:11px;color:var(--mut);font-family:var(--cond);font-weight:700;letter-spacing:.5px}
+.pool{max-height:62vh;overflow:auto;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+.prow{display:grid;grid-template-columns:46px 1fr auto;gap:10px;align-items:center;padding:8px 12px;border-bottom:1px solid rgba(33,43,63,.6)}
+.prow:hover{background:var(--panel2);box-shadow:inset 3px 0 0 var(--acc2)}
+.prow.taken{opacity:.32}
+.pname{font-family:var(--cond);font-weight:600;font-size:16px;letter-spacing:.3px}
+.psub{font-size:11px;color:var(--mut)}
+.clock{font-family:var(--disp);font-weight:400;font-variant-numeric:tabular-nums;letter-spacing:2px;color:var(--gold);text-shadow:0 0 12px rgba(255,193,54,.5)}
+.clock.warn{color:var(--bad);text-shadow:0 0 12px rgba(255,77,94,.6);animation:blink 1s steps(2) infinite}
 @keyframes blink{50%{opacity:.55}}
-.onclock{font-family:var(--cond);font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
-.onclock b{color:var(--txt);font-size:19px;letter-spacing:.5px}
-.onclock.mine b{color:var(--good);text-shadow:0 0 10px rgba(46,226,126,.4)}
-.dlayout{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;margin-top:16px;align-items:start}
-.poolhead{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
-.chip{font-family:var(--cond);background:var(--panel2);border:1px solid var(--line);color:var(--muted);padding:6px 14px;border-radius:3px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;transition:.15s}
-.chip.on{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 2px 10px rgba(46,107,255,.4)}
-.plist{max-height:64vh;overflow:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel)}
-.prow{display:flex;align-items:center;gap:12px;padding:9px 12px;border-bottom:1px solid rgba(33,43,63,.6)}
-.prow:last-child{border-bottom:none}
-.prow:hover{background:var(--panel2);box-shadow:inset 3px 0 0 var(--accent)}
-.prow .nm{font-family:var(--cond);font-weight:600;font-size:17px;letter-spacing:.3px}
-.prow .meta{font-size:12px;color:var(--muted)}
-.prow.bpa{background:linear-gradient(90deg,rgba(255,193,54,.12),transparent);box-shadow:inset 3px 0 0 var(--gold)}
-.grow{flex:1;min-width:0}
-.nowrap{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tabs{display:flex;gap:6px;margin-bottom:10px}
-.tab{font-family:var(--cond);background:transparent;border:none;border-bottom:3px solid var(--line);color:var(--muted);padding:8px 16px;border-radius:0;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:.15s}
-.tab.on{color:var(--txt);border-bottom-color:var(--accent2)}
-.side{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px;max-height:72vh;overflow:auto}
-.teamcard{border:1px solid var(--line);border-left:3px solid var(--line);border-radius:6px;padding:10px 12px;margin-bottom:10px;background:linear-gradient(180deg,rgba(255,255,255,.015),transparent)}
-.teamcard.me{border-left-color:var(--good)}
-.teamcard.turn{border-color:var(--gold);border-left-color:var(--gold);box-shadow:0 0 0 1px rgba(255,193,54,.35),0 0 22px rgba(255,193,54,.12)}
-.teamcard h4{margin:0 0 2px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:15px}
-.slot{display:flex;justify-content:space-between;gap:8px;font-size:13px;padding:3px 0;border-bottom:1px dashed rgba(33,43,63,.7)}
-.slot:last-child{border-bottom:none}
-.slot .pos{color:var(--accent2);width:30px;font-family:var(--cond);font-weight:700}
-.bar{height:6px;background:var(--panel2);border-radius:2px;overflow:hidden}
-.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--good))}
-.logfeed{font-size:13px}
-.logfeed .li{padding:6px 0;border-bottom:1px solid rgba(33,43,63,.6);color:var(--muted)}
-.logfeed .li b{color:var(--txt)}
-.mem{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--panel2);border-left:2px solid var(--accent);border-radius:4px;margin-bottom:6px}
-.mem .dot{width:9px;height:9px;border-radius:50%;background:var(--good);box-shadow:0 0 8px rgba(46,226,126,.6)}
-.num{width:26px;height:26px;border-radius:3px;background:var(--panel2);border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;font-family:var(--cond);font-size:13px;font-weight:700;transform:skewX(-6deg)}
-small.k{color:var(--muted)}
-.banner{background:rgba(255,77,28,.1);border:1px solid rgba(255,77,28,.5);border-left:3px solid var(--accent2);color:#ffb499;padding:10px 14px;border-radius:4px;font-size:13px}
-.confetti{position:fixed;width:10px;height:14px;top:-20px;z-index:80;will-change:transform}
-@media(max-width:880px){.dlayout{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}.plist{max-height:48vh}.logo{font-size:26px}.clock{font-size:26px;min-width:64px}}
+.feed{max-height:20vh;overflow:auto;font-size:13px}
+.feed .fitem{padding:4px 0;border-bottom:1px solid rgba(33,43,63,.6)}
+.teamcol{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--line);border-radius:6px;padding:10px}
+.teamcol.clock{outline:none;border-color:var(--gold);border-left-color:var(--gold);box-shadow:0 0 0 1px rgba(255,193,54,.35),0 0 22px rgba(255,193,54,.12)}
+.roster-li{display:flex;justify-content:space-between;gap:8px;padding:3px 0;font-size:13px;border-bottom:1px dashed rgba(33,43,63,.7)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.tab{font-family:var(--cond);padding:7px 14px;border-radius:0;border:none;border-bottom:3px solid var(--line);cursor:pointer;font-size:13px;font-weight:700;background:transparent;color:var(--mut);text-transform:uppercase;letter-spacing:1px;transition:.15s}
+.tab.active{background:transparent;color:var(--ink);border-bottom-color:var(--acc);font-weight:700}
+.catbox{border:1px solid var(--line);border-left:3px solid var(--acc2);border-radius:6px;padding:14px;margin-bottom:12px;background:linear-gradient(180deg,rgba(255,255,255,.015),transparent),var(--panel2)}
+.votebtn{font-family:var(--cond);padding:8px 13px;border-radius:3px;border:1px solid var(--line);background:#0a0f1a;color:var(--ink);cursor:pointer;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;transition:.15s}
+.votebtn.mine{background:var(--acc2);color:#fff;border-color:var(--acc2);font-weight:700;box-shadow:0 2px 10px rgba(46,107,255,.4)}
+.winner{color:var(--gold);font-weight:700;text-shadow:0 0 10px rgba(255,193,54,.4)}
+.bar{height:8px;background:#0a0f1a;border-radius:2px;overflow:hidden}
+.bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--acc2),var(--good))}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#04060a;border:1px solid var(--line);border-left:3px solid var(--bad);color:var(--ink);padding:11px 16px;border-radius:6px;box-shadow:0 10px 30px rgba(0,0,0,.6);z-index:50}
+.small{font-size:12px}
+.kv{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(33,43,63,.6)}
+@media(max-width:820px){.prow{grid-template-columns:40px 1fr auto}.brand{font-size:20px}}
 </style>
 </head>
 <body>
-<div id="app"></div>
-<div id="toast" class="toast"></div>
-
-<!-- Firebase (only loaded/used in Online mode) -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<div class="wrap">
+  <div class="row" style="justify-content:space-between;margin-bottom:12px">
+    <div class="brand"><span class="ball">🏀</span> NBA All-Time Draft</div>
+    <div class="tag" id="roomTag"></div>
+  </div>
+  <div id="app"></div>
+</div>
+<div id="toast" class="toast hidden"></div>
 
 <script>
-/* ============================================================
-   FIREBASE CONFIG  —  paste your own project's config here to
-   enable ONLINE multi-device drafts. Leave as-is to use only
-   the offline "Pass & Play" mode. See SETUP.md for steps.
-   ============================================================ */
-const firebaseConfig = {
-  apiKey: "PASTE_API_KEY",
-  authDomain: "PASTE.firebaseapp.com",
-  databaseURL: "https://PASTE-default-rtdb.firebaseio.com",
-  projectId: "PASTE",
-  appId: "PASTE_APP_ID"
-};
-const FIREBASE_READY = !String(firebaseConfig.databaseURL).includes("PASTE");
+// ---------------- client state ----------------
+let ws, WS_READY=false;
+let ME={playerId:null, token:null, isHost:false, roomCode:null};
+let STATE=null;
+let PLAYERS=[], BYID={};
+let ui={ tab:'pool', filterPos:'ALL', filterEra:'ALL', minOvr:0, search:'', teamTab:null, catInput:'' };
+let toastTimer=null;
 
-/* ===== Player data (embedded) ===== */
-const PLAYERS_RAW = [{"name":"Michael Jordan","ovr":99,"pos":"SG/SF","team":"All-Time Bulls","era":"legend"},{"name":"Wilt Chamberlain","ovr":99,"pos":"C/PF","team":"All-Time Warriors","era":"legend"},{"name":"Kobe Bryant","ovr":99,"pos":"SG/SF","team":"All-Time Lakers","era":"legend"},{"name":"Magic Johnson","ovr":99,"pos":"PG/SG","team":"All-Time Lakers","era":"legend"},{"name":"LeBron James","ovr":99,"pos":"SF/PF","team":"All-Time Heat","era":"legend"},{"name":"Larry Bird","ovr":99,"pos":"SF/PF","team":"All-Time Celtics","era":"legend"},{"name":"Hakeem Olajuwon","ovr":99,"pos":"C/PF","team":"All-Time Rockets","era":"legend"},{"name":"Shai Gilgeous-Alexander","ovr":98,"pos":"PG/SG","team":"Oklahoma City Thunder","era":"current"},{"name":"Nikola Jokic","ovr":98,"pos":"C","team":"Denver Nuggets","era":"current"},{"name":"Stephen Curry","ovr":98,"pos":"PG","team":"All-Time Warriors","era":"legend"},{"name":"Shaquille O\u2019Neal","ovr":98,"pos":"C/PF","team":"All-Time Lakers","era":"legend"},{"name":"Tim Duncan","ovr":98,"pos":"PF/C","team":"All-Time Spurs","era":"legend"},{"name":"Dirk Nowitzki","ovr":98,"pos":"PF/C","team":"All-Time Mavericks","era":"legend"},{"name":"Giannis Antetokounmpo","ovr":97,"pos":"PF/C","team":"Milwaukee Bucks","era":"current"},{"name":"Luka Doncic","ovr":97,"pos":"PG/SG","team":"Los Angeles Lakers","era":"current"},{"name":"Victor Wembanyama","ovr":97,"pos":"C/PF","team":"San Antonio Spurs","era":"current"},{"name":"Kevin Durant","ovr":97,"pos":"SF/PF","team":"All-Time Warriors","era":"legend"},{"name":"Moses Malone","ovr":97,"pos":"C/PF","team":"All-Time 76ers","era":"legend"},{"name":"Scottie Pippen","ovr":97,"pos":"SF/SG","team":"All-Time Bulls","era":"legend"},{"name":"Jerry West","ovr":97,"pos":"PG/SG","team":"All-Time Lakers","era":"legend"},{"name":"Dwyane Wade","ovr":97,"pos":"SG","team":"All-Time Heat","era":"legend"},{"name":"Walt Frazier","ovr":97,"pos":"PG/SG","team":"All-Time Knicks","era":"legend"},{"name":"Jalen Brunson","ovr":96,"pos":"PG","team":"New York Knicks","era":"current"},{"name":"Anthony Edwards","ovr":96,"pos":"SG/SF","team":"Minnesota Timberwolves","era":"current"},{"name":"Allen Iverson","ovr":96,"pos":"SG/PG","team":"All-Time 76ers","era":"legend"},{"name":"Kareem Abdul-Jabbar","ovr":96,"pos":"C/PF","team":"All-Time Lakers","era":"legend"},{"name":"Elgin Baylor","ovr":96,"pos":"SF/PF","team":"All-Time Lakers","era":"legend"},{"name":"Bob Cousy","ovr":96,"pos":"PG","team":"All-Time Celtics","era":"legend"},{"name":"John Havlicek","ovr":96,"pos":"SF/SG","team":"All-Time Celtics","era":"legend"},{"name":"David Robinson","ovr":96,"pos":"C/PF","team":"All-Time Spurs","era":"legend"},{"name":"Steve Nash","ovr":96,"pos":"PG","team":"All-Time Suns","era":"legend"},{"name":"Cade Cunningham","ovr":95,"pos":"PG/SG","team":"Detroit Pistons","era":"current"},{"name":"Jaylen Brown","ovr":95,"pos":"SG/SF","team":"Boston Celtics","era":"current"},{"name":"Kawhi Leonard","ovr":95,"pos":"SF/SG","team":"Los Angeles Clippers","era":"current"},{"name":"Stephen Curry","ovr":95,"pos":"PG/SG","team":"Golden State Warriors","era":"current"},{"name":"Derrick Rose","ovr":95,"pos":"PG","team":"All-Time Bulls","era":"legend"},{"name":"Joel Embiid","ovr":95,"pos":"C","team":"All-Time 76ers","era":"legend"},{"name":"Rick Barry","ovr":95,"pos":"SF/PF","team":"All-Time Warriors","era":"legend"},{"name":"James Worthy","ovr":95,"pos":"SF/PF","team":"All-Time Lakers","era":"legend"},{"name":"Kevin McHale","ovr":95,"pos":"PF/C","team":"All-Time Celtics","era":"legend"},{"name":"Dave Cowens","ovr":95,"pos":"C/PF","team":"All-Time Celtics","era":"legend"},{"name":"James Harden","ovr":95,"pos":"SG/PG","team":"All-Time Rockets","era":"legend"},{"name":"Tony Parker","ovr":95,"pos":"PG","team":"All-Time Spurs","era":"legend"},{"name":"Kawhi Leonard","ovr":95,"pos":"SF/PF","team":"All-Time Spurs","era":"legend"},{"name":"Patrick Ewing","ovr":95,"pos":"C/PF","team":"All-Time Knicks","era":"legend"},{"name":"Chris Mullin","ovr":94,"pos":"SF/SG","team":"All-Time Warriors","era":"legend"},{"name":"Dolph Schayes","ovr":94,"pos":"PF/C","team":"All-Time 76ers","era":"legend"},{"name":"Julius Erving","ovr":94,"pos":"SF/SG","team":"All-Time 76ers","era":"legend"},{"name":"George Mikan","ovr":94,"pos":"C","team":"All-Time Lakers","era":"legend"},{"name":"Anthony Davis","ovr":94,"pos":"PF/C","team":"All-Time Lakers","era":"legend"},{"name":"Jo Jo White","ovr":94,"pos":"PG","team":"All-Time Celtics","era":"legend"},{"name":"Paul Pierce","ovr":94,"pos":"SF/PF","team":"All-Time Celtics","era":"legend"},{"name":"Jayson Tatum","ovr":94,"pos":"SF/PF","team":"All-Time Celtics","era":"legend"},{"name":"Alonzo Mourning","ovr":94,"pos":"C/PF","team":"All-Time Heat","era":"legend"},{"name":"George Gervin","ovr":94,"pos":"SF/SG","team":"All-Time Spurs","era":"legend"},{"name":"Dennis Johnson","ovr":94,"pos":"PG/SG","team":"All-Time Suns","era":"legend"},{"name":"Willis Reed","ovr":94,"pos":"C/PF","team":"All-Time Knicks","era":"legend"},{"name":"Devin Booker","ovr":93,"pos":"SG/PG","team":"Phoenix Suns","era":"current"},{"name":"Jayson Tatum","ovr":93,"pos":"PF/SF","team":"Boston Celtics","era":"current"},{"name":"Kevin Durant","ovr":93,"pos":"SF/SG","team":"Houston Rockets","era":"current"},{"name":"Donovan Mitchell","ovr":93,"pos":"SG/PG","team":"Cleveland Cavaliers","era":"current"},{"name":"Tyrese Haliburton","ovr":93,"pos":"PG/SG","team":"Indiana Pacers","era":"current"},{"name":"Tyrese Maxey","ovr":93,"pos":"PG/SG","team":"Philadelphia 76ers","era":"current"},{"name":"Artis Gilmore","ovr":93,"pos":"C","team":"All-Time Bulls","era":"legend"},{"name":"Billy Cunningham","ovr":93,"pos":"SF/PF","team":"All-Time 76ers","era":"legend"},{"name":"Dennis Rodman","ovr":93,"pos":"PF/SF","team":"All-Time Bulls","era":"legend"},{"name":"Jimmy Butler","ovr":93,"pos":"SF/SG","team":"All-Time Heat","era":"legend"},{"name":"Robert Parish","ovr":93,"pos":"C/PF","team":"All-Time Celtics","era":"legend"},{"name":"Clyde Drexler","ovr":93,"pos":"SG/SF","team":"All-Time Rockets","era":"legend"},{"name":"Luka Doncic","ovr":93,"pos":"SG/PG","team":"All-Time Mavericks","era":"legend"},{"name":"Jalen Brunson","ovr":93,"pos":"PG","team":"All-Time Knicks","era":"legend"},{"name":"Anthony Davis","ovr":92,"pos":"PF/C","team":"Washington Wizards","era":"current"},{"name":"LeBron James","ovr":92,"pos":"PF/SF","team":"Los Angeles Lakers","era":"current"},{"name":"Joel Embiid","ovr":92,"pos":"C","team":"Philadelphia 76ers","era":"current"},{"name":"Nate Thurmond","ovr":92,"pos":"C","team":"All-Time Warriors","era":"legend"},{"name":"Kevin Garnett","ovr":92,"pos":"PF/C","team":"All-Time Celtics","era":"legend"},{"name":"Bill Sharman","ovr":92,"pos":"SG/PG","team":"All-Time Celtics","era":"legend"},{"name":"Tracy McGrady","ovr":92,"pos":"SG/PG","team":"All-Time Rockets","era":"legend"},{"name":"Devin Booker","ovr":92,"pos":"SG/PG","team":"All-Time Suns","era":"legend"},{"name":"Amar\u2019e Stoudemire","ovr":92,"pos":"PF/C","team":"All-Time Suns","era":"legend"},{"name":"Richie Guerin","ovr":92,"pos":"SG/PG","team":"All-Time Knicks","era":"legend"},{"name":"Carmelo Anthony","ovr":92,"pos":"SF/PF","team":"All-Time Knicks","era":"legend"},{"name":"Dave Debusschere","ovr":92,"pos":"PF/SF","team":"All-Time Knicks","era":"legend"},{"name":"Karl-Anthony Towns","ovr":91,"pos":"C/PF","team":"New York Knicks","era":"current"},{"name":"Baron Davis","ovr":91,"pos":"PG","team":"All-Time Warriors","era":"legend"},{"name":"Klay Thompson","ovr":91,"pos":"SG/SF","team":"All-Time Warriors","era":"legend"},{"name":"Paul Arizin","ovr":91,"pos":"SF/SG","team":"All-Time Warriors","era":"legend"},{"name":"Pau Gasol","ovr":91,"pos":"C/PF","team":"All-Time Lakers","era":"legend"},{"name":"Jaylen Brown","ovr":91,"pos":"SF/SG","team":"All-Time Celtics","era":"legend"},{"name":"Yao Ming","ovr":91,"pos":"C","team":"All-Time Rockets","era":"legend"},{"name":"Calvin Murphy","ovr":91,"pos":"PG/SG","team":"All-Time Rockets","era":"legend"},{"name":"Shawn Marion","ovr":91,"pos":"SF/PF","team":"All-Time Suns","era":"legend"},{"name":"Kyrie Irving","ovr":90,"pos":"PG/SG","team":"Dallas Mavericks","era":"current"},{"name":"Bobby Jones","ovr":90,"pos":"SF/PF","team":"All-Time 76ers","era":"legend"},{"name":"Tim Hardaway","ovr":90,"pos":"PG/SG","team":"All-Time Warriors","era":"legend"},{"name":"Rajon Rondo","ovr":90,"pos":"PG","team":"All-Time Celtics","era":"legend"},{"name":"Chris Paul","ovr":90,"pos":"PG","team":"All-Time Rockets","era":"legend"},{"name":"Manu Ginobili","ovr":90,"pos":"SG","team":"All-Time Spurs","era":"legend"},{"name":"Walter Davis","ovr":90,"pos":"SG/SF","team":"All-Time Suns","era":"legend"},{"name":"Jason Kidd","ovr":90,"pos":"PG/SG","team":"All-Time Suns","era":"legend"},{"name":"Bam Adebayo","ovr":89,"pos":"C/PF","team":"Miami Heat","era":"current"},{"name":"Jalen Johnson","ovr":89,"pos":"PF/SF","team":"Atlanta Hawks","era":"current"},{"name":"Scottie Barnes","ovr":89,"pos":"PF/PG","team":"Toronto Raptors","era":"current"},{"name":"Trae Young","ovr":89,"pos":"PG","team":"Washington Wizards","era":"current"},{"name":"James Harden","ovr":89,"pos":"PG/SG","team":"Cleveland Cavaliers","era":"current"},{"name":"Jamal Murray","ovr":89,"pos":"PG/SG","team":"Denver Nuggets","era":"current"},{"name":"Bob Love","ovr":89,"pos":"PF/SF","team":"All-Time Bulls","era":"legend"},{"name":"Draymond Green","ovr":89,"pos":"PF/C","team":"All-Time Warriors","era":"legend"},{"name":"Jerry Sloan","ovr":89,"pos":"SG/SF","team":"All-Time Bulls","era":"legend"},{"name":"Tyrese Maxey","ovr":89,"pos":"SG/PG","team":"All-Time 76ers","era":"legend"},{"name":"Gail Goodrich","ovr":89,"pos":"SG/PG","team":"All-Time Lakers","era":"legend"},{"name":"Tom Heinsohn","ovr":89,"pos":"PF/C","team":"All-Time Celtics","era":"legend"},{"name":"Ralph Sampson","ovr":89,"pos":"C/PF","team":"All-Time Rockets","era":"legend"},{"name":"Elvin Hayes","ovr":89,"pos":"PF/C","team":"All-Time Rockets","era":"legend"},{"name":"Louie Dampier","ovr":89,"pos":"PG/SG","team":"All-Time Spurs","era":"legend"},{"name":"Charlie Scott","ovr":89,"pos":"PG/SG","team":"All-Time Suns","era":"legend"},{"name":"Tom Chambers","ovr":89,"pos":"PF/SF","team":"All-Time Suns","era":"legend"},{"name":"Kevin Johnson","ovr":89,"pos":"PG","team":"All-Time Suns","era":"legend"},{"name":"Derek Harper","ovr":89,"pos":"PG/SG","team":"All-Time Mavericks","era":"legend"},{"name":"Allan Houston","ovr":89,"pos":"SG/SF","team":"All-Time Knicks","era":"legend"},{"name":"Bernard King","ovr":89,"pos":"SF","team":"All-Time Knicks","era":"legend"},{"name":"Micheal Ray Richardson","ovr":89,"pos":"PG/SG","team":"All-Time Knicks","era":"legend"},{"name":"Alperen Sengun","ovr":88,"pos":"C/PF","team":"Houston Rockets","era":"current"},{"name":"Cooper Flagg","ovr":88,"pos":"SF/PG","team":"Dallas Mavericks","era":"current"},{"name":"Damian Lillard","ovr":88,"pos":"PG","team":"Portland Trail Blazers","era":"current"},{"name":"Deni Avdija","ovr":88,"pos":"SF/SG","team":"Portland Trail Blazers","era":"current"},{"name":"Jimmy Butler","ovr":88,"pos":"SF/PF","team":"Golden State Warriors","era":"current"},{"name":"LaMelo Ball","ovr":88,"pos":"PG/SG","team":"Charlotte Hornets","era":"current"},{"name":"OG Anunoby","ovr":88,"pos":"SF/PF","team":"New York Knicks","era":"current"},{"name":"Stephon Castle","ovr":88,"pos":"SG/PG","team":"San Antonio Spurs","era":"current"},{"name":"Paolo Banchero","ovr":88,"pos":"PF/SF","team":"Orlando Magic","era":"current"},{"name":"Hal Greer","ovr":88,"pos":"PG/SG","team":"All-Time 76ers","era":"legend"},{"name":"Mitch Richmond","ovr":88,"pos":"SG/SF","team":"All-Time Warriors","era":"legend"},{"name":"Sleepy Floyd","ovr":88,"pos":"PG/SG","team":"All-Time Warriors","era":"legend"},{"name":"Ray Allen","ovr":88,"pos":"SG/SF","team":"All-Time Celtics","era":"legend"},{"name":"Chris Bosh","ovr":88,"pos":"PF/C","team":"All-Time Heat","era":"legend"},{"name":"Glen Rice","ovr":88,"pos":"SF","team":"All-Time Heat","era":"legend"},{"name":"Rudy Tomjanovich","ovr":88,"pos":"SF/PF","team":"All-Time Rockets","era":"legend"},{"name":"Steve Francis","ovr":88,"pos":"PG/SG","team":"All-Time Rockets","era":"legend"},{"name":"Larry Kenon","ovr":88,"pos":"SF","team":"All-Time Spurs","era":"legend"},{"name":"Dick Van Arsdale","ovr":88,"pos":"SG/SF","team":"All-Time Suns","era":"legend"},{"name":"Paul Westphal","ovr":88,"pos":"SG/PG","team":"All-Time Suns","era":"legend"},{"name":"Dan Majerle","ovr":88,"pos":"SG/SF","team":"All-Time Suns","era":"legend"},{"name":"Larry Nance","ovr":88,"pos":"SF/PF","team":"All-Time Suns","era":"legend"},{"name":"Rolando Blackman","ovr":88,"pos":"SG","team":"All-Time Mavericks","era":"legend"},{"name":"Mark Aguirre","ovr":88,"pos":"SF/PF","team":"All-Time Mavericks","era":"legend"},{"name":"Jim Jackson","ovr":88,"pos":"SG","team":"All-Time Mavericks","era":"legend"},{"name":"Michael Finley","ovr":88,"pos":"SF/SG","team":"All-Time Mavericks","era":"legend"},{"name":"Jamal Mashburn","ovr":88,"pos":"SF","team":"All-Time Mavericks","era":"legend"},{"name":"John Starks","ovr":88,"pos":"SG/PG","team":"All-Time Knicks","era":"legend"},{"name":"Earl Monroe","ovr":88,"pos":"PG/SG","team":"All-Time Knicks","era":"legend"},{"name":"Amen Thompson","ovr":87,"pos":"SG/PG","team":"Houston Rockets","era":"current"},{"name":"Austin Reaves","ovr":87,"pos":"SG/SF","team":"Los Angeles Lakers","era":"current"},{"name":"Brandon Miller","ovr":87,"pos":"SG/SF","team":"Charlotte Hornets","era":"current"},{"name":"Chet Holmgren","ovr":87,"pos":"PF/C","team":"Oklahoma City Thunder","era":"current"},{"name":"Jalen Williams","ovr":87,"pos":"SF/PF","team":"Oklahoma City Thunder","era":"current"},{"name":"Keyonte George","ovr":87,"pos":"PG/SG","team":"Utah Jazz","era":"current"},{"name":"Lauri Markkanen","ovr":87,"pos":"SF/PF","team":"Utah Jazz","era":"current"},{"name":"Tyler Herro","ovr":87,"pos":"SG/PG","team":"Miami Heat","era":"current"},{"name":"Evan Mobley","ovr":87,"pos":"PF/C","team":"Cleveland Cavaliers","era":"current"},{"name":"Pascal Siakam","ovr":87,"pos":"PF/C","team":"Indiana Pacers","era":"current"},{"name":"Ja Morant","ovr":87,"pos":"PG/SG","team":"Memphis Grizzlies","era":"current"},{"name":"Franz Wagner","ovr":87,"pos":"SF/PF","team":"Orlando Magic","era":"current"},{"name":"B.J. Armstrong","ovr":87,"pos":"PG/SG","team":"All-Time Bulls","era":"legend"},{"name":"Doug Collins","ovr":87,"pos":"SG/SF","team":"All-Time 76ers","era":"legend"},{"name":"George McGinnis","ovr":87,"pos":"PF/C","team":"All-Time 76ers","era":"legend"},{"name":"Hersey Hawkins","ovr":87,"pos":"SG/PG","team":"All-Time 76ers","era":"legend"},{"name":"Jason Richardson","ovr":87,"pos":"SG/SF","team":"All-Time Warriors","era":"legend"},{"name":"Joakim Noah","ovr":87,"pos":"C","team":"All-Time Bulls","era":"legend"},{"name":"Jamaal Wilkes","ovr":87,"pos":"SF/SG","team":"All-Time Lakers","era":"legend"},{"name":"Kenny Smith","ovr":87,"pos":"PG/SG","team":"All-Time Rockets","era":"legend"},{"name":"Sean Elliott","ovr":87,"pos":"SF/SG","team":"All-Time Spurs","era":"legend"},{"name":"Ausar Thompson","ovr":86,"pos":"SF/PF","team":"Detroit Pistons","era":"current"},{"name":"Brandon Ingram","ovr":86,"pos":"SF/PF","team":"Toronto Raptors","era":"current"},{"name":"De'Aaron Fox","ovr":86,"pos":"PG/SG","team":"San Antonio Spurs","era":"current"},{"name":"Jaren Jackson Jr.","ovr":86,"pos":"PF/C","team":"Utah Jazz","era":"current"},{"name":"Kon Knueppel","ovr":86,"pos":"SF/SG","team":"Charlotte Hornets","era":"current"},{"name":"Michael Porter Jr.","ovr":86,"pos":"SF/PF","team":"Brooklyn Nets","era":"current"},{"name":"Jarrett Allen","ovr":86,"pos":"C","team":"Cleveland Cavaliers","era":"current"},{"name":"Zion Williamson","ovr":86,"pos":"PF/PG","team":"New Orleans Pelicans","era":"current"},{"name":"Desmond Bane","ovr":86,"pos":"SG/SF","team":"Orlando Magic","era":"current"},{"name":"Domantas Sabonis","ovr":86,"pos":"C","team":"Sacramento Kings","era":"current"},{"name":"Ben Simmons","ovr":86,"pos":"PG/PF","team":"All-Time 76ers","era":"legend"},{"name":"Maurice Cheeks","ovr":86,"pos":"PG/SG","team":"All-Time 76ers","era":"legend"},{"name":"Purvis Short","ovr":86,"pos":"SF/SG","team":"All-Time Warriors","era":"legend"},{"name":"Reggie Theus","ovr":86,"pos":"PG/SG","team":"All-Time Bulls","era":"legend"},{"name":"Zach LaVine","ovr":86,"pos":"SG/SF","team":"All-Time Bulls","era":"legend"},{"name":"Michael Cooper","ovr":86,"pos":"SG/PG","team":"All-Time Lakers","era":"legend"},{"name":"Rony Seikaly","ovr":86,"pos":"C","team":"All-Time Heat","era":"legend"},{"name":"Bam Adebayo","ovr":86,"pos":"C","team":"All-Time Heat","era":"legend"},{"name":"Otis Thorpe","ovr":86,"pos":"PF/C","team":"All-Time Rockets","era":"legend"},{"name":"James Silas","ovr":86,"pos":"SG","team":"All-Time Spurs","era":"legend"},{"name":"LaMarcus Aldridge","ovr":86,"pos":"PF/C","team":"All-Time Spurs","era":"legend"},{"name":"Bruce Bowen","ovr":86,"pos":"SF/SG","team":"All-Time Spurs","era":"legend"},{"name":"Victor Wembanyama","ovr":86,"pos":"C/PF","team":"All-Time Spurs","era":"legend"},{"name":"Jason Terry","ovr":86,"pos":"PG/SG","team":"All-Time Mavericks","era":"legend"},{"name":"Charles Oakley","ovr":86,"pos":"PF/C","team":"All-Time Knicks","era":"legend"},{"name":"Julius Randle","ovr":86,"pos":"PF/C","team":"All-Time Knicks","era":"legend"},{"name":"Darius Garland","ovr":85,"pos":"PG/SG","team":"Los Angeles Clippers","era":"current"},{"name":"Derrick White","ovr":85,"pos":"PG/SG","team":"Boston Celtics","era":"current"},{"name":"Dylan Harper","ovr":85,"pos":"PG/SG","team":"San Antonio Spurs","era":"current"},{"name":"Jalen Duren","ovr":85,"pos":"C","team":"Detroit Pistons","era":"current"},{"name":"Norman Powell","ovr":85,"pos":"SG/SF","team":"Miami Heat","era":"current"},{"name":"Ivica Zubac","ovr":85,"pos":"C","team":"Indiana Pacers","era":"current"},{"name":"Julius Randle","ovr":85,"pos":"PF/C","team":"Minnesota Timberwolves","era":"current"},{"name":"Jaden McDaniels","ovr":85,"pos":"SF/PF","team":"Minnesota Timberwolves","era":"current"},{"name":"Rudy Gobert","ovr":85,"pos":"C","team":"Minnesota Timberwolves","era":"current"},{"name":"Trey Murphy III","ovr":85,"pos":"SG/SF","team":"New Orleans Pelicans","era":"current"},{"name":"Horace Grant","ovr":85,"pos":"PF/C","team":"All-Time Bulls","era":"legend"},{"name":"Toni Kukoc","ovr":85,"pos":"SF/PF","team":"All-Time Bulls","era":"legend"},{"name":"Eddie Jones","ovr":85,"pos":"SG/SF","team":"All-Time Heat","era":"legend"},{"name":"Steve Smith","ovr":85,"pos":"SG/SF","team":"All-Time Heat","era":"legend"},{"name":"Alvan Adams","ovr":85,"pos":"C/PF","team":"All-Time Suns","era":"legend"},{"name":"James Donaldson","ovr":85,"pos":"C","team":"All-Time Mavericks","era":"legend"},{"name":"Ajay Mitchell","ovr":84,"pos":"PG/SG","team":"Oklahoma City Thunder","era":"current"},{"name":"Alexandre Sarr","ovr":84,"pos":"C/PF","team":"Washington Wizards","era":"current"},{"name":"Dillon Brooks","ovr":84,"pos":"SF/PF","team":"Phoenix Suns","era":"current"},{"name":"Immanuel Quickley","ovr":84,"pos":"PG/SG","team":"Toronto Raptors","era":"current"},{"name":"Isaiah Hartenstein","ovr":84,"pos":"C","team":"Oklahoma City Thunder","era":"current"},{"name":"Mikal Bridges","ovr":84,"pos":"SG/SF","team":"New York Knicks","era":"current"},{"name":"Dejounte Murray","ovr":84,"pos":"PG/SG","team":"New Orleans Pelicans","era":"current"},{"name":"Saddiq Bey","ovr":84,"pos":"SF/PF","team":"New Orleans Pelicans","era":"current"},{"name":"DeMar DeRozan","ovr":84,"pos":"SF/SG","team":"Sacramento Kings","era":"current"},{"name":"Hassan Whiteside","ovr":84,"pos":"C","team":"All-Time Heat","era":"legend"},{"name":"Udonis Haslem","ovr":84,"pos":"PF/C","team":"All-Time Heat","era":"legend"},{"name":"Johnny Moore","ovr":84,"pos":"PG","team":"All-Time Spurs","era":"legend"},{"name":"Brad Davis","ovr":84,"pos":"PG","team":"All-Time Mavericks","era":"legend"},{"name":"C.J. McCollum","ovr":83,"pos":"PG/SG","team":"Atlanta Hawks","era":"current"},{"name":"Cason Wallace","ovr":83,"pos":"SG/PG","team":"Oklahoma City Thunder","era":"current"},{"name":"Donovan Clingan","ovr":83,"pos":"C","team":"Portland Trail Blazers","era":"current"},{"name":"Dyson Daniels","ovr":83,"pos":"SF/SG","team":"Atlanta Hawks","era":"current"},{"name":"Kristaps Porzingis","ovr":83,"pos":"C/PF","team":"Golden State Warriors","era":"current"},{"name":"Nickeil Alexander-Walker","ovr":83,"pos":"SG/PG","team":"Atlanta Hawks","era":"current"},{"name":"R.J. Barrett","ovr":83,"pos":"SG/SF","team":"Toronto Raptors","era":"current"},{"name":"Shaedon Sharpe","ovr":83,"pos":"SG/PG","team":"Portland Trail Blazers","era":"current"},{"name":"Tobias Harris","ovr":83,"pos":"PF/SF","team":"Detroit Pistons","era":"current"},{"name":"Walker Kessler","ovr":83,"pos":"C","team":"Utah Jazz","era":"current"},{"name":"Josh Giddey","ovr":83,"pos":"PG/SG","team":"Chicago Bulls","era":"current"},{"name":"Aaron Gordon","ovr":83,"pos":"PF/C","team":"Denver Nuggets","era":"current"},{"name":"Ty Jerome","ovr":83,"pos":"PG/SG","team":"Memphis Grizzlies","era":"current"},{"name":"Ayo Dosunmu","ovr":83,"pos":"SG/PG","team":"Minnesota Timberwolves","era":"current"},{"name":"Paul George","ovr":83,"pos":"PF/SF","team":"Philadelphia 76ers","era":"current"},{"name":"VJ Edgecombe","ovr":83,"pos":"SG/PG","team":"Philadelphia 76ers","era":"current"},{"name":"Zach LaVine","ovr":83,"pos":"SG/SF","team":"Sacramento Kings","era":"current"},{"name":"Tyler Herro","ovr":83,"pos":"SG/PG","team":"All-Time Heat","era":"legend"},{"name":"Vernon Maxwell","ovr":83,"pos":"SG/SF","team":"All-Time Rockets","era":"legend"},{"name":"Bennedict Mathurin","ovr":82,"pos":"SG/SF","team":"Los Angeles Clippers","era":"current"},{"name":"Devin Vassell","ovr":82,"pos":"SF/SG","team":"San Antonio Spurs","era":"current"},{"name":"Isaiah Collier","ovr":82,"pos":"PG/SG","team":"Utah Jazz","era":"current"},{"name":"Jabari Smith Jr.","ovr":82,"pos":"PF/SF","team":"Houston Rockets","era":"current"},{"name":"Jalen Green","ovr":82,"pos":"SG/SF","team":"Phoenix Suns","era":"current"},{"name":"Josh Hart","ovr":82,"pos":"PF/SF","team":"New York Knicks","era":"current"},{"name":"Jrue Holiday","ovr":82,"pos":"PG/SG","team":"Portland Trail Blazers","era":"current"},{"name":"Julian Champagnie","ovr":82,"pos":"PF/SF","team":"San Antonio Spurs","era":"current"},{"name":"Jusuf Nurkic","ovr":82,"pos":"C","team":"Utah Jazz","era":"current"},{"name":"Kevin Porter Jr.","ovr":82,"pos":"PG/SG","team":"Milwaukee Bucks","era":"current"},{"name":"KyShawn George","ovr":82,"pos":"PF/SF","team":"Washington Wizards","era":"current"},{"name":"Mark Williams","ovr":82,"pos":"C","team":"Phoenix Suns","era":"current"},{"name":"Onyeka Okongwu","ovr":82,"pos":"C","team":"Atlanta Hawks","era":"current"},{"name":"Payton Pritchard","ovr":82,"pos":"PG","team":"Boston Celtics","era":"current"},{"name":"Ryan Rollins","ovr":82,"pos":"PG/SG","team":"Milwaukee Bucks","era":"current"},{"name":"Matas Buzelis","ovr":82,"pos":"PF/SF","team":"Chicago Bulls","era":"current"},{"name":"Peyton Watson","ovr":82,"pos":"SF/PF","team":"Denver Nuggets","era":"current"},{"name":"Andrew Nembhard","ovr":82,"pos":"PG/SG","team":"Indiana Pacers","era":"current"},{"name":"Zach Edey","ovr":82,"pos":"C","team":"Memphis Grizzlies","era":"current"},{"name":"Naz Reid","ovr":82,"pos":"C/PF","team":"Minnesota Timberwolves","era":"current"},{"name":"Anthony Black","ovr":82,"pos":"PG/SG","team":"Orlando Magic","era":"current"},{"name":"Shawn Bradley","ovr":82,"pos":"C","team":"All-Time Mavericks","era":"legend"},{"name":"Tyson Chandler","ovr":82,"pos":"C","team":"All-Time Mavericks","era":"legend"},{"name":"Ace Bailey","ovr":81,"pos":"SG/SF","team":"Utah Jazz","era":"current"},{"name":"Andrew Wiggins","ovr":81,"pos":"PF/SF","team":"Miami Heat","era":"current"},{"name":"Brandin Podziemski","ovr":81,"pos":"PG/SG","team":"Golden State Warriors","era":"current"},{"name":"Brice Sensabaugh","ovr":81,"pos":"SF/SG","team":"Utah Jazz","era":"current"},{"name":"Coby White","ovr":81,"pos":"PG/SG","team":"Charlotte Hornets","era":"current"},{"name":"Collin Gillespie","ovr":81,"pos":"PG","team":"Phoenix Suns","era":"current"},{"name":"Collin Murray-Boyles","ovr":81,"pos":"C/PF","team":"Toronto Raptors","era":"current"},{"name":"Grayson Allen","ovr":81,"pos":"SG/SF","team":"Phoenix Suns","era":"current"},{"name":"Jerami Grant","ovr":81,"pos":"SF/PF","team":"Portland Trail Blazers","era":"current"},{"name":"John Collins","ovr":81,"pos":"PF/C","team":"Los Angeles Clippers","era":"current"},{"name":"Keldon Johnson","ovr":81,"pos":"SG/SF","team":"San Antonio Spurs","era":"current"},{"name":"Miles Bridges","ovr":81,"pos":"PF/SF","team":"Charlotte Hornets","era":"current"},{"name":"Naji Marshall","ovr":81,"pos":"SF/PG","team":"Dallas Mavericks","era":"current"},{"name":"Neemias Queta","ovr":81,"pos":"C","team":"Boston Celtics","era":"current"},{"name":"Rui Hachimura","ovr":81,"pos":"PF/SF","team":"Los Angeles Lakers","era":"current"},{"name":"Scoot Henderson","ovr":81,"pos":"PG/SG","team":"Portland Trail Blazers","era":"current"},{"name":"Toumani Camara","ovr":81,"pos":"PF/SF","team":"Portland Trail Blazers","era":"current"},{"name":"Will Riley","ovr":81,"pos":"PF/SF","team":"Washington Wizards","era":"current"},{"name":"Nic Claxton","ovr":81,"pos":"C","team":"Brooklyn Nets","era":"current"},{"name":"Tre Jones","ovr":81,"pos":"PG","team":"Chicago Bulls","era":"current"},{"name":"Collin Sexton","ovr":81,"pos":"SG/PG","team":"Chicago Bulls","era":"current"},{"name":"T.J. McConnell","ovr":81,"pos":"PG","team":"Indiana Pacers","era":"current"},{"name":"Jarace Walker","ovr":81,"pos":"SF/PF","team":"Indiana Pacers","era":"current"},{"name":"Santi Aldama","ovr":81,"pos":"PF/C","team":"Memphis Grizzlies","era":"current"},{"name":"Jalen Suggs","ovr":81,"pos":"PG/SG","team":"Orlando Magic","era":"current"},{"name":"Russell Westbrook","ovr":81,"pos":"PG/SG","team":"Sacramento Kings","era":"current"},{"name":"Maxime Raynaud","ovr":81,"pos":"C","team":"Sacramento Kings","era":"current"},{"name":"Bobby Portis Jr.","ovr":80,"pos":"C/PF","team":"Milwaukee Bucks","era":"current"},{"name":"Brandon Williams","ovr":80,"pos":"PG/SG","team":"Dallas Mavericks","era":"current"},{"name":"Daniel Gafford","ovr":80,"pos":"C","team":"Dallas Mavericks","era":"current"},{"name":"Daniss Jenkins","ovr":80,"pos":"PG/SG","team":"Detroit Pistons","era":"current"},{"name":"Duncan Robinson","ovr":80,"pos":"SG/SF","team":"Detroit Pistons","era":"current"},{"name":"Fred VanVleet","ovr":80,"pos":"PG","team":"Houston Rockets","era":"current"},{"name":"Gui Santos","ovr":80,"pos":"SF/PF","team":"Golden State Warriors","era":"current"},{"name":"Jaime Jaquez Jr.","ovr":80,"pos":"PF/SF","team":"Miami Heat","era":"current"},{"name":"Jakob Poeltl","ovr":80,"pos":"C","team":"Toronto Raptors","era":"current"},{"name":"Jared McCain","ovr":80,"pos":"PG/SG","team":"Oklahoma City Thunder","era":"current"},{"name":"Kel'el Ware","ovr":80,"pos":"C/PF","team":"Miami Heat","era":"current"},{"name":"Kyle Kuzma","ovr":80,"pos":"SF/PF","team":"Milwaukee Bucks","era":"current"},{"name":"Luguentz Dort","ovr":80,"pos":"SG/SF","team":"Oklahoma City Thunder","era":"current"},{"name":"Marcus Smart","ovr":80,"pos":"SF/SG","team":"Los Angeles Lakers","era":"current"},{"name":"Mitchell Robinson","ovr":80,"pos":"C","team":"New York Knicks","era":"current"},{"name":"Moussa Diabate","ovr":80,"pos":"C/PF","team":"Charlotte Hornets","era":"current"},{"name":"P.J. Washington","ovr":80,"pos":"PF/SF","team":"Dallas Mavericks","era":"current"},{"name":"Pelle Larsson","ovr":80,"pos":"SF/SG","team":"Miami Heat","era":"current"},{"name":"Reed Sheppard","ovr":80,"pos":"PG/SG","team":"Houston Rockets","era":"current"},{"name":"Robert Williams III","ovr":80,"pos":"C/PF","team":"Portland Trail Blazers","era":"current"},{"name":"Ryan Kalkbrenner","ovr":80,"pos":"C","team":"Charlotte Hornets","era":"current"},{"name":"Anfernee Simons","ovr":80,"pos":"SG/PG","team":"Chicago Bulls","era":"current"},{"name":"Christian Braun","ovr":80,"pos":"SG/SF","team":"Denver Nuggets","era":"current"},{"name":"Cameron Johnson","ovr":80,"pos":"SF/SG","team":"Denver Nuggets","era":"current"},{"name":"Tim Hardaway Jr.","ovr":80,"pos":"SG/SF","team":"Denver Nuggets","era":"current"},{"name":"Obi Toppin","ovr":80,"pos":"PF/C","team":"Indiana Pacers","era":"current"},{"name":"Aaron Nesmith","ovr":80,"pos":"SF/SG","team":"Indiana Pacers","era":"current"},{"name":"Cedric Coward","ovr":80,"pos":"SG/SF","team":"Memphis Grizzlies","era":"current"},{"name":"GG Jackson","ovr":80,"pos":"PF/SF","team":"Memphis Grizzlies","era":"current"},{"name":"Donte DiVincenzo","ovr":80,"pos":"PG/SG","team":"Minnesota Timberwolves","era":"current"},{"name":"Derik Queen","ovr":80,"pos":"PF/C","team":"New Orleans Pelicans","era":"current"},{"name":"Jeremiah Fears","ovr":80,"pos":"PG/SG","team":"New Orleans Pelicans","era":"current"},{"name":"Wendell Carter Jr.","ovr":80,"pos":"C/PF","team":"Orlando Magic","era":"current"},{"name":"Kelly Oubre Jr.","ovr":80,"pos":"SF/PF","team":"Philadelphia 76ers","era":"current"},{"name":"Malik Monk","ovr":80,"pos":"SG/PG","team":"Sacramento Kings","era":"current"},{"name":"Al Horford","ovr":79,"pos":"C/PF","team":"Golden State Warriors","era":"current"},{"name":"Bilal Coulibaly","ovr":79,"pos":"SF/SG","team":"Washington Wizards","era":"current"},{"name":"Caris LeVert","ovr":79,"pos":"SF/SG","team":"Detroit Pistons","era":"current"},{"name":"Davion Mitchell","ovr":79,"pos":"PG/SG","team":"Miami Heat","era":"current"},{"name":"De'Anthony Melton","ovr":79,"pos":"SG/PG","team":"Golden State Warriors","era":"current"},{"name":"Deandre Ayton","ovr":79,"pos":"C","team":"Los Angeles Lakers","era":"current"},{"name":"Dereck Lively II","ovr":79,"pos":"C","team":"Dallas Mavericks","era":"current"},{"name":"Derrick Jones Jr.","ovr":79,"pos":"PF/SF","team":"Los Angeles Clippers","era":"current"},{"name":"Draymond Green","ovr":79,"pos":"PF/C","team":"Golden State Warriors","era":"current"},{"name":"Gary Payton II","ovr":79,"pos":"SF/PF","team":"Golden State Warriors","era":"current"},{"name":"Isaiah Joe","ovr":79,"pos":"SG/PG","team":"Oklahoma City Thunder","era":"current"},{"name":"Jaxson Hayes","ovr":79,"pos":"C/PF","team":"Los Angeles Lakers","era":"current"},{"name":"Jaylin Williams","ovr":79,"pos":"C","team":"Oklahoma City Thunder","era":"current"},{"name":"Jonathan Kuminga","ovr":79,"pos":"PF/SF","team":"Atlanta Hawks","era":"current"},{"name":"Kyle Filipowski","ovr":79,"pos":"C/PF","team":"Utah Jazz","era":"current"},{"name":"Marvin Bagley III","ovr":79,"pos":"C/PF","team":"Dallas Mavericks","era":"current"},{"name":"Miles McBride","ovr":79,"pos":"SG/PG","team":"New York Knicks","era":"current"},{"name":"Moses Moody","ovr":79,"pos":"SF/SG","team":"Golden State Warriors","era":"current"},{"name":"Nikola Vucevic","ovr":79,"pos":"C","team":"Boston Celtics","era":"current"},{"name":"Paul Reed","ovr":79,"pos":"C/PF","team":"Detroit Pistons","era":"current"},{"name":"Sandro Mamukelashvili","ovr":79,"pos":"PF/C","team":"Toronto Raptors","era":"current"},{"name":"Tari Eason","ovr":79,"pos":"SF/SG","team":"Houston Rockets","era":"current"},{"name":"Jalen Smith","ovr":79,"pos":"C/PF","team":"Chicago Bulls","era":"current"},{"name":"Max Strus","ovr":79,"pos":"SF/SG","team":"Cleveland Cavaliers","era":"current"},{"name":"Jonas Valanciunas","ovr":79,"pos":"C","team":"Denver Nuggets","era":"current"},{"name":"Jay Huff","ovr":79,"pos":"C","team":"Indiana Pacers","era":"current"},{"name":"Cam Spencer","ovr":79,"pos":"SG/PG","team":"Memphis Grizzlies","era":"current"},{"name":"Jaylen Wells","ovr":79,"pos":"SF/SG","team":"Memphis Grizzlies","era":"current"},{"name":"Herbert Jones","ovr":79,"pos":"SF/SG","team":"New Orleans Pelicans","era":"current"},{"name":"Quentin Grimes","ovr":79,"pos":"SG/SF","team":"Philadelphia 76ers","era":"current"},{"name":"Precious Achiuwa","ovr":79,"pos":"PF/C","team":"Sacramento Kings","era":"current"},{"name":"Keegan Murray","ovr":79,"pos":"PF/SF","team":"Sacramento Kings","era":"current"},{"name":"De'Andre Hunter","ovr":79,"pos":"SF/PF","team":"Sacramento Kings","era":"current"},{"name":"Aaron Wiggins","ovr":78,"pos":"SF/PF","team":"Oklahoma City Thunder","era":"current"},{"name":"Brook Lopez","ovr":78,"pos":"C","team":"Los Angeles Clippers","era":"current"},{"name":"Bub Carrington","ovr":78,"pos":"PG/SG","team":"Washington Wizards","era":"current"},{"name":"Isaiah Stewart","ovr":78,"pos":"C/PF","team":"Detroit Pistons","era":"current"},{"name":"Ja'Kobe Walter","ovr":78,"pos":"SG/SF","team":"Toronto Raptors","era":"current"},{"name":"Jamal Shead","ovr":78,"pos":"PG/SG","team":"Toronto Raptors","era":"current"},{"name":"Javonte Green","ovr":78,"pos":"SF/SG","team":"Detroit Pistons","era":"current"},{"name":"Jock Landale","ovr":78,"pos":"C","team":"Atlanta Hawks","era":"current"},{"name":"Jose Alvarado","ovr":78,"pos":"PG/SG","team":"New York Knicks","era":"current"},{"name":"Justin Champagnie","ovr":78,"pos":"PF/SF","team":"Washington Wizards","era":"current"},{"name":"Kenrich Williams","ovr":78,"pos":"PF/C","team":"Oklahoma City Thunder","era":"current"},{"name":"Klay Thompson","ovr":78,"pos":"SG/SF","team":"Dallas Mavericks","era":"current"},{"name":"Luka Garza","ovr":78,"pos":"C/PF","team":"Boston Celtics","era":"current"},{"name":"Luke Kennard","ovr":78,"pos":"SG/PG","team":"Los Angeles Lakers","era":"current"},{"name":"Luke Kornet","ovr":78,"pos":"C","team":"San Antonio Spurs","era":"current"},{"name":"Myles Turner","ovr":78,"pos":"C","team":"Milwaukee Bucks","era":"current"},{"name":"Ron Holland","ovr":78,"pos":"PF/SF","team":"Detroit Pistons","era":"current"},{"name":"Sam Hauser","ovr":78,"pos":"SF/PF","team":"Boston Celtics","era":"current"},{"name":"Tre Johnson","ovr":78,"pos":"SG/PG","team":"Washington Wizards","era":"current"},{"name":"Egor Demin","ovr":78,"pos":"SG/PG","team":"Brooklyn Nets","era":"current"},{"name":"Ziaire Williams","ovr":78,"pos":"SF/SG","team":"Brooklyn Nets","era":"current"},{"name":"Day'Ron Sharpe","ovr":78,"pos":"C","team":"Brooklyn Nets","era":"current"},{"name":"Josh Minott","ovr":78,"pos":"PF/C","team":"Brooklyn Nets","era":"current"},{"name":"Dean Wade","ovr":78,"pos":"PF/SF","team":"Cleveland Cavaliers","era":"current"},{"name":"Sam Merrill","ovr":78,"pos":"SG/SF","team":"Cleveland Cavaliers","era":"current"},{"name":"Brandon Clarke","ovr":78,"pos":"C/PF","team":"Memphis Grizzlies","era":"current"},{"name":"Olivier-Maxence Prosper","ovr":78,"pos":"C/PF","team":"Memphis Grizzlies","era":"current"},{"name":"Yves Missi","ovr":78,"pos":"C/PF","team":"New Orleans Pelicans","era":"current"},{"name":"Tristan da Silva","ovr":78,"pos":"SF/PF","team":"Orlando Magic","era":"current"},{"name":"Bradley Beal","ovr":77,"pos":"SG/SF","team":"Los Angeles Clippers","era":"current"},{"name":"Carter Bryant","ovr":77,"pos":"SF/PF","team":"San Antonio Spurs","era":"current"},{"name":"Clint Capela","ovr":77,"pos":"C","team":"Houston Rockets","era":"current"},{"name":"Harrison Barnes","ovr":77,"pos":"PF/SF","team":"San Antonio Spurs","era":"current"},{"name":"Isaiah Jackson","ovr":77,"pos":"C/PF","team":"Los Angeles Clippers","era":"current"},{"name":"Jordan Clarkson","ovr":77,"pos":"SG/SF","team":"New York Knicks","era":"current"},{"name":"Jordan Goodwin","ovr":77,"pos":"PG/SG","team":"Phoenix Suns","era":"current"},{"name":"Jordan Miller","ovr":77,"pos":"SF/SG","team":"Los Angeles Clippers","era":"current"},{"name":"Kevin Huerter","ovr":77,"pos":"SG/SF","team":"Detroit Pistons","era":"current"},{"name":"Kris Dunn","ovr":77,"pos":"PG/SG","team":"Los Angeles Clippers","era":"current"},{"name":"Landry Shamet","ovr":77,"pos":"SG/SF","team":"New York Knicks","era":"current"},{"name":"Max Christie","ovr":77,"pos":"SG/SF","team":"Dallas Mavericks","era":"current"},{"name":"Oso Ighodaro","ovr":77,"pos":"C/PF","team":"Phoenix Suns","era":"current"},{"name":"Ousmane Dieng","ovr":77,"pos":"SF/PF","team":"Milwaukee Bucks","era":"current"},{"name":"Royce O'Neale","ovr":77,"pos":"PF/SF","team":"Phoenix Suns","era":"current"},{"name":"Simone Fontecchio","ovr":77,"pos":"SF/PF","team":"Miami Heat","era":"current"},{"name":"Steven Adams","ovr":77,"pos":"C","team":"Houston Rockets","era":"current"},{"name":"Tristan Vukcevic","ovr":77,"pos":"C/PF","team":"Washington Wizards","era":"current"},{"name":"Zaccharie Risacher","ovr":77,"pos":"SF/SG","team":"Atlanta Hawks","era":"current"},{"name":"Noah Clowney","ovr":77,"pos":"PF/C","team":"Brooklyn Nets","era":"current"},{"name":"Danny Wolf","ovr":77,"pos":"PF/SF","team":"Brooklyn Nets","era":"current"},{"name":"Nolan Traore","ovr":77,"pos":"PG/SG","team":"Brooklyn Nets","era":"current"},{"name":"Zach Collins","ovr":77,"pos":"C","team":"Chicago Bulls","era":"current"},{"name":"Isaac Okoro","ovr":77,"pos":"SF/SG","team":"Chicago Bulls","era":"current"},{"name":"Dennis Schroder","ovr":77,"pos":"PG/SG","team":"Cleveland Cavaliers","era":"current"},{"name":"Keon Ellis","ovr":77,"pos":"SF/SG","team":"Cleveland Cavaliers","era":"current"},{"name":"Jaylon Tyson","ovr":77,"pos":"SF/PF","team":"Cleveland Cavaliers","era":"current"},{"name":"Julian Strawther","ovr":77,"pos":"SF/SG","team":"Denver Nuggets","era":"current"},{"name":"Javon Small","ovr":77,"pos":"PG/SG","team":"Memphis Grizzlies","era":"current"},{"name":"Scotty Pippen Jr.","ovr":77,"pos":"PG/SG","team":"Memphis Grizzlies","era":"current"},{"name":"Mike Conley","ovr":77,"pos":"PG","team":"Minnesota Timberwolves","era":"current"},{"name":"Terrence Shannon Jr.","ovr":77,"pos":"SF/PF","team":"Minnesota Timberwolves","era":"current"},{"name":"Goga Bitadze","ovr":77,"pos":"C","team":"Orlando Magic","era":"current"},{"name":"Moritz Wagner","ovr":77,"pos":"C/PF","team":"Orlando Magic","era":"current"},{"name":"Devin Carter","ovr":77,"pos":"PG/SG","team":"Sacramento Kings","era":"current"},{"name":"Nique Clifford","ovr":77,"pos":"SF/SG","team":"Sacramento Kings","era":"current"},{"name":"Dylan Cardwell","ovr":77,"pos":"C/PF","team":"Sacramento Kings","era":"current"},{"name":"AJ Green","ovr":76,"pos":"SG/SF","team":"Milwaukee Bucks","era":"current"},{"name":"Baylor Scheierman","ovr":76,"pos":"SG/SF","team":"Boston Celtics","era":"current"},{"name":"Cody Williams","ovr":76,"pos":"PF/SF","team":"Utah Jazz","era":"current"},{"name":"Corey Kispert","ovr":76,"pos":"SG/SF","team":"Atlanta Hawks","era":"current"},{"name":"D'Angelo Russell","ovr":76,"pos":"PG/SG","team":"Washington Wizards","era":"current"},{"name":"Gradey Dick","ovr":76,"pos":"SF/SG","team":"Toronto Raptors","era":"current"},{"name":"Grant Williams","ovr":76,"pos":"PF/C","team":"Charlotte Hornets","era":"current"},{"name":"Jaden Hardy","ovr":76,"pos":"SG/PG","team":"Washington Wizards","era":"current"},{"name":"Jake LaRavia","ovr":76,"pos":"SF/SG","team":"Los Angeles Lakers","era":"current"},{"name":"Jamir Watkins","ovr":76,"pos":"SF/PF","team":"Washington Wizards","era":"current"},{"name":"Jamison Battle","ovr":76,"pos":"SF/PF","team":"Toronto Raptors","era":"current"},{"name":"Jarred Vanderbilt","ovr":76,"pos":"PF/C","team":"Los Angeles Lakers","era":"current"},{"name":"John Konchar","ovr":76,"pos":"SF/PF","team":"Utah Jazz","era":"current"},{"name":"Jordan Walsh","ovr":76,"pos":"PF/SF","team":"Boston Celtics","era":"current"},{"name":"Julian Reese","ovr":76,"pos":"C/PF","team":"Washington Wizards","era":"current"},{"name":"Kasparas Jakucionis","ovr":76,"pos":"PG/SG","team":"Miami Heat","era":"current"},{"name":"Kevin Love","ovr":76,"pos":"C/PF","team":"Utah Jazz","era":"current"},{"name":"Khris Middleton","ovr":76,"pos":"SF/PF","team":"Dallas Mavericks","era":"current"},{"name":"Kobe Sanders","ovr":76,"pos":"PG/SF","team":"Los Angeles Clippers","era":"current"},{"name":"Marcus Sasser","ovr":76,"pos":"PG/SG","team":"Detroit Pistons","era":"current"},{"name":"Mason Plumlee","ovr":76,"pos":"C","team":"San Antonio Spurs","era":"current"},{"name":"Pat Spencer","ovr":76,"pos":"PG/SG","team":"Golden State Warriors","era":"current"},{"name":"Quinten Post","ovr":76,"pos":"C","team":"Golden State Warriors","era":"current"},{"name":"Rasheer Fleming","ovr":76,"pos":"PF/C","team":"Phoenix Suns","era":"current"},{"name":"Svi Mykhailiuk","ovr":76,"pos":"SG/SF","team":"Utah Jazz","era":"current"},{"name":"Taurean Prince","ovr":76,"pos":"SF/SG","team":"Milwaukee Bucks","era":"current"},{"name":"Terance Mann","ovr":76,"pos":"SG/SF","team":"Brooklyn Nets","era":"current"},{"name":"Leonard Miller","ovr":76,"pos":"PF/SF","team":"Chicago Bulls","era":"current"},{"name":"Guerschon Yabusele","ovr":76,"pos":"C/PF","team":"Chicago Bulls","era":"current"},{"name":"Thomas Bryant","ovr":76,"pos":"C","team":"Cleveland Cavaliers","era":"current"},{"name":"Quenton Jackson","ovr":76,"pos":"SG/PG","team":"Indiana Pacers","era":"current"},{"name":"Kobe Brown","ovr":76,"pos":"PF/SF","team":"Indiana Pacers","era":"current"},{"name":"Micah Potter","ovr":76,"pos":"C/PF","team":"Indiana Pacers","era":"current"},{"name":"Bones Hyland","ovr":76,"pos":"PG/SG","team":"Minnesota Timberwolves","era":"current"},{"name":"DeAndre Jordan","ovr":76,"pos":"C","team":"New Orleans Pelicans","era":"current"},{"name":"Jordan Poole","ovr":76,"pos":"SG/PG","team":"New Orleans Pelicans","era":"current"},{"name":"Karlo Matkovic","ovr":76,"pos":"PF/C","team":"New Orleans Pelicans","era":"current"},{"name":"Trendon Watford","ovr":76,"pos":"PF/PG","team":"Philadelphia 76ers","era":"current"},{"name":"Andre Drummond","ovr":76,"pos":"C","team":"Philadelphia 76ers","era":"current"},{"name":"Dominick Barlow","ovr":76,"pos":"PF/C","team":"Philadelphia 76ers","era":"current"},{"name":"Justin Edwards","ovr":76,"pos":"SF/PF","team":"Philadelphia 76ers","era":"current"},{"name":"Asa Newell","ovr":75,"pos":"PF/C","team":"Atlanta Hawks","era":"current"},{"name":"Buddy Hield","ovr":75,"pos":"SG/SF","team":"Atlanta Hawks","era":"current"},{"name":"Caleb Love","ovr":75,"pos":"PG/SG","team":"Portland Trail Blazers","era":"current"},{"name":"Cam Whitmore","ovr":75,"pos":"SF/PF","team":"Washington Wizards","era":"current"},{"name":"Dorian Finney-Smith","ovr":75,"pos":"PF/SF","team":"Houston Rockets","era":"current"},{"name":"Dru Smith","ovr":75,"pos":"PG/SG","team":"Miami Heat","era":"current"},{"name":"Gary Trent Jr.","ovr":75,"pos":"SG/SF","team":"Milwaukee Bucks","era":"current"},{"name":"Hugo Gonzalez","ovr":75,"pos":"SF/PG","team":"Boston Celtics","era":"current"},{"name":"Josh Green","ovr":75,"pos":"SF/SG","team":"Charlotte Hornets","era":"current"},{"name":"Josh Okogie","ovr":75,"pos":"SG/SF","team":"Houston Rockets","era":"current"},{"name":"Kelly Olynyk","ovr":75,"pos":"C/PF","team":"San Antonio Spurs","era":"current"},{"name":"Khaman Maluach","ovr":75,"pos":"C","team":"Phoenix Suns","era":"current"},{"name":"Myron Gardner","ovr":75,"pos":"SF/SG","team":"Miami Heat","era":"current"},{"name":"Ryan Dunn","ovr":75,"pos":"PF/SF","team":"Phoenix Suns","era":"current"},{"name":"Ryan Nembhard","ovr":75,"pos":"PG","team":"Dallas Mavericks","era":"current"},{"name":"Sion James","ovr":75,"pos":"SG/SF","team":"Charlotte Hornets","era":"current"},{"name":"Tidjane Salaun","ovr":75,"pos":"PF/SF","team":"Charlotte Hornets","era":"current"},{"name":"Vit Krejci","ovr":75,"pos":"SF/PG","team":"Portland Trail Blazers","era":"current"},{"name":"Will Richard","ovr":75,"pos":"SG/SF","team":"Golden State Warriors","era":"current"},{"name":"Yanic Konan Niederhauser","ovr":75,"pos":"C/PF","team":"Los Angeles Clippers","era":"current"},{"name":"Ochai Agbaji","ovr":75,"pos":"SF/PF","team":"Brooklyn Nets","era":"current"},{"name":"Ben Saraf","ovr":75,"pos":"PG/SG","team":"Brooklyn Nets","era":"current"},{"name":"Patrick Williams","ovr":75,"pos":"PF/SF","team":"Chicago Bulls","era":"current"},{"name":"Nick Richards","ovr":75,"pos":"C","team":"Chicago Bulls","era":"current"},{"name":"Bruce Brown","ovr":75,"pos":"SF/PG","team":"Denver Nuggets","era":"current"},{"name":"Ben Sheppard","ovr":75,"pos":"SG/SF","team":"Indiana Pacers","era":"current"},{"name":"Taylor Hendricks","ovr":75,"pos":"PF/SF","team":"Memphis Grizzlies","era":"current"},{"name":"Kentavious Caldwell-Pope","ovr":75,"pos":"SG/SF","team":"Memphis Grizzlies","era":"current"},{"name":"Walter Clayton Jr.","ovr":75,"pos":"PG/SG","team":"Memphis Grizzlies","era":"current"},{"name":"Kyle Anderson","ovr":75,"pos":"PF/C","team":"Minnesota Timberwolves","era":"current"},{"name":"Bryce McGowens","ovr":75,"pos":"SF/SG","team":"New Orleans Pelicans","era":"current"},{"name":"Jevon Carter","ovr":75,"pos":"PG/SG","team":"Orlando Magic","era":"current"},{"name":"Noah Penda","ovr":75,"pos":"PF/SF","team":"Orlando Magic","era":"current"},{"name":"Adem Bona","ovr":75,"pos":"C","team":"Philadelphia 76ers","era":"current"},{"name":"Drew Eubanks","ovr":75,"pos":"C","team":"Sacramento Kings","era":"current"},{"name":"A.J. Lawson","ovr":74,"pos":"SF/SG","team":"Toronto Raptors","era":"current"},{"name":"Aaron Holiday","ovr":74,"pos":"SG/PG","team":"Houston Rockets","era":"current"},{"name":"Amir Coffey","ovr":74,"pos":"SF/SG","team":"Phoenix Suns","era":"current"},{"name":"Anthony Gill","ovr":74,"pos":"PF/C","team":"Washington Wizards","era":"current"},{"name":"Bogdan Bogdanovic","ovr":74,"pos":"SG/SF","team":"Los Angeles Clippers","era":"current"},{"name":"Dalton Knecht","ovr":74,"pos":"SF/SG","team":"Los Angeles Lakers","era":"current"},{"name":"Dwight Powell","ovr":74,"pos":"C","team":"Dallas Mavericks","era":"current"},{"name":"Jamaree Bouyea","ovr":74,"pos":"PG/SG","team":"Phoenix Suns","era":"current"},{"name":"Jeremy Sochan","ovr":74,"pos":"PF/C","team":"New York Knicks","era":"current"},{"name":"Jericho Sims","ovr":74,"pos":"C","team":"Milwaukee Bucks","era":"current"},{"name":"Jonathan Mogbo","ovr":74,"pos":"PF/C","team":"Toronto Raptors","era":"current"},{"name":"Kris Murray","ovr":74,"pos":"PF/SF","team":"Portland Trail Blazers","era":"current"},{"name":"LJ Cryer","ovr":74,"pos":"PG","team":"Golden State Warriors","era":"current"},{"name":"Maxi Kleber","ovr":74,"pos":"C/PF","team":"Los Angeles Lakers","era":"current"},{"name":"Mohamed Diawara","ovr":74,"pos":"PF/SF","team":"New York Knicks","era":"current"},{"name":"Mouhamed Gueye","ovr":74,"pos":"PF/C","team":"Atlanta Hawks","era":"current"},{"name":"Nate Williams","ovr":74,"pos":"SF/SG","team":"Golden State Warriors","era":"current"},{"name":"Nicolas Batum","ovr":74,"pos":"PF/SF","team":"Los Angeles Clippers","era":"current"},{"name":"Nikola Jovic","ovr":74,"pos":"C/PF","team":"Miami Heat","era":"current"},{"name":"Pete Nance","ovr":74,"pos":"PF/C","team":"Milwaukee Bucks","era":"current"},{"name":"Seth Curry","ovr":74,"pos":"SG/PG","team":"Golden State Warriors","era":"current"},{"name":"Sharife Cooper","ovr":74,"pos":"PG","team":"Washington Wizards","era":"current"},{"name":"Sidy Cissoko","ovr":74,"pos":"SF/SG","team":"Portland Trail Blazers","era":"current"},{"name":"Tre Mann","ovr":74,"pos":"PG/SG","team":"Charlotte Hornets","era":"current"},{"name":"Tyler Kolek","ovr":74,"pos":"PG/SG","team":"New York Knicks","era":"current"},{"name":"Jalen Wilson","ovr":74,"pos":"SF/PF","team":"Brooklyn Nets","era":"current"},{"name":"Craig Porter Jr.","ovr":74,"pos":"PG","team":"Cleveland Cavaliers","era":"current"},{"name":"Nae'Qwan Tomlin","ovr":74,"pos":"PF/C","team":"Cleveland Cavaliers","era":"current"},{"name":"Johnny Furphy","ovr":74,"pos":"SF/SG","team":"Indiana Pacers","era":"current"},{"name":"Kam Jones","ovr":74,"pos":"SG/PG","team":"Indiana Pacers","era":"current"},{"name":"Rayan Rupert","ovr":74,"pos":"SF/SG","team":"Memphis Grizzlies","era":"current"},{"name":"Kevon Looney","ovr":74,"pos":"C","team":"New Orleans Pelicans","era":"current"},{"name":"Jamal Cain","ovr":74,"pos":"SF/PF","team":"Orlando Magic","era":"current"},{"name":"Jett Howard","ovr":74,"pos":"SG/SF","team":"Orlando Magic","era":"current"},{"name":"Blake Hinson","ovr":73,"pos":"PF/SF","team":"Utah Jazz","era":"current"},{"name":"Blake Wesley","ovr":73,"pos":"PG/SG","team":"Portland Trail Blazers","era":"current"},{"name":"Branden Carlson","ovr":73,"pos":"C","team":"Oklahoma City Thunder","era":"current"},{"name":"Christian Koloko","ovr":73,"pos":"C","team":"Atlanta Hawks","era":"current"},{"name":"Dalano Banton","ovr":73,"pos":"PG/SG","team":"Boston Celtics","era":"current"},{"name":"Gabe Vincent","ovr":73,"pos":"PG/SG","team":"Atlanta Hawks","era":"current"},{"name":"Gary Harris","ovr":73,"pos":"SG/SF","team":"Milwaukee Bucks","era":"current"},{"name":"Haywood Highsmith","ovr":73,"pos":"SF/PF","team":"Phoenix Suns","era":"current"},{"name":"Jae'Sean Tate","ovr":73,"pos":"SF/PF","team":"Houston Rockets","era":"current"},{"name":"Jeff Green","ovr":73,"pos":"PF/C","team":"Houston Rockets","era":"current"},{"name":"Leaky Black","ovr":73,"pos":"SF/SG","team":"Washington Wizards","era":"current"},{"name":"Lindy Waters III","ovr":73,"pos":"SG/SF","team":"San Antonio Spurs","era":"current"},{"name":"Moussa Cisse","ovr":73,"pos":"C","team":"Dallas Mavericks","era":"current"},{"name":"Nick Smith Jr.","ovr":73,"pos":"PG/SG","team":"Los Angeles Lakers","era":"current"},{"name":"Nikola Topic","ovr":73,"pos":"PG/SG","team":"Oklahoma City Thunder","era":"current"},{"name":"Oscar Tshiebwe","ovr":73,"pos":"C/PF","team":"Utah Jazz","era":"current"},{"name":"Pat Connaughton","ovr":73,"pos":"SG/SF","team":"Charlotte Hornets","era":"current"},{"name":"Ron Harper Jr.","ovr":73,"pos":"SF/SG","team":"Boston Celtics","era":"current"},{"name":"Tony Bradley","ovr":73,"pos":"C","team":"Atlanta Hawks","era":"current"},{"name":"Trayce Jackson-Davis","ovr":73,"pos":"C/PF","team":"Toronto Raptors","era":"current"},{"name":"Drake Powell","ovr":73,"pos":"SG/PG","team":"Brooklyn Nets","era":"current"},{"name":"Chaney Johnson","ovr":73,"pos":"SF/PF","team":"Brooklyn Nets","era":"current"},{"name":"Rob Dillingham","ovr":73,"pos":"PG/SG","team":"Chicago Bulls","era":"current"},{"name":"Larry Nance Jr.","ovr":73,"pos":"C/PF","team":"Cleveland Cavaliers","era":"current"},{"name":"Tyrese Proctor","ovr":73,"pos":"SG/PG","team":"Cleveland Cavaliers","era":"current"},{"name":"Zeke Nnaji","ovr":73,"pos":"C/PF","team":"Denver Nuggets","era":"current"},{"name":"Tyus Jones","ovr":73,"pos":"PG","team":"Denver Nuggets","era":"current"},{"name":"Jalen Pickett","ovr":73,"pos":"PG/SG","team":"Denver Nuggets","era":"current"},{"name":"DaRon Holmes II","ovr":73,"pos":"C/PF","team":"Denver Nuggets","era":"current"},{"name":"KJ Simpson","ovr":73,"pos":"PG","team":"Denver Nuggets","era":"current"},{"name":"Spencer Jones","ovr":73,"pos":"PF/SF","team":"Denver Nuggets","era":"current"},{"name":"Jalen Slawson","ovr":73,"pos":"SF/PF","team":"Indiana Pacers","era":"current"},{"name":"Ethan Thompson","ovr":73,"pos":"SG/SF","team":"Indiana Pacers","era":"current"},{"name":"Taelon Peter","ovr":73,"pos":"PG/SG","team":"Indiana Pacers","era":"current"},{"name":"Jahmai Mashack","ovr":73,"pos":"SG/SF","team":"Memphis Grizzlies","era":"current"},{"name":"Joe Ingles","ovr":73,"pos":"PF/SF","team":"Minnesota Timberwolves","era":"current"},{"name":"Jaylen Clark","ovr":73,"pos":"SG/SF","team":"Minnesota Timberwolves","era":"current"},{"name":"Jonathan Isaac","ovr":73,"pos":"PF/C","team":"Orlando Magic","era":"current"},{"name":"Jase Richardson","ovr":73,"pos":"SG/PG","team":"Orlando Magic","era":"current"},{"name":"Kyle Lowry","ovr":73,"pos":"PG/SG","team":"Philadelphia 76ers","era":"current"},{"name":"Dalen Terry","ovr":73,"pos":"SG/SF","team":"Philadelphia 76ers","era":"current"},{"name":"Tyrese Martin","ovr":73,"pos":"SG/PG","team":"Philadelphia 76ers","era":"current"},{"name":"Daeqwon Plowden","ovr":73,"pos":"SF/SG","team":"Sacramento Kings","era":"current"},{"name":"AJ Johnson","ovr":72,"pos":"SG/PG","team":"Dallas Mavericks","era":"current"},{"name":"Andre Jackson Jr.","ovr":72,"pos":"SF/SG","team":"Milwaukee Bucks","era":"current"},{"name":"Cormac Ryan","ovr":72,"pos":"SG/SF","team":"Milwaukee Bucks","era":"current"},{"name":"Drew Timme","ovr":72,"pos":"C/PF","team":"Los Angeles Lakers","era":"current"},{"name":"Elijah Harkless","ovr":72,"pos":"PG/SG","team":"Utah Jazz","era":"current"},{"name":"Jordan McLaughlin","ovr":72,"pos":"PG","team":"San Antonio Spurs","era":"current"},{"name":"Keaton Wallace","ovr":72,"pos":"PG/SG","team":"Atlanta Hawks","era":"current"},{"name":"Keshad Johnson","ovr":72,"pos":"PF/SF","team":"Miami Heat","era":"current"},{"name":"Liam McNeeley","ovr":72,"pos":"SF/SG","team":"Charlotte Hornets","era":"current"},{"name":"PJ Hall","ovr":72,"pos":"C/PF","team":"Charlotte Hornets","era":"current"},{"name":"Xavier Tillman Sr.","ovr":72,"pos":"C/PF","team":"Charlotte Hornets","era":"current"},{"name":"Tyson Etienne","ovr":72,"pos":"PG/SG","team":"Brooklyn Nets","era":"current"},{"name":"Malachi Smith","ovr":72,"pos":"PG/SG","team":"Brooklyn Nets","era":"current"},{"name":"Noa Essengue","ovr":72,"pos":"PF/SF","team":"Chicago Bulls","era":"current"},{"name":"Yuki Kawamura","ovr":72,"pos":"PG","team":"Chicago Bulls","era":"current"},{"name":"Dariq Whitehead","ovr":72,"pos":"SG/SF","team":"Memphis Grizzlies","era":"current"},{"name":"Julian Phillips","ovr":72,"pos":"SF/PF","team":"Minnesota Timberwolves","era":"current"},{"name":"Joan Beringer","ovr":72,"pos":"C","team":"Minnesota Timberwolves","era":"current"},{"name":"Jordan Hawkins","ovr":72,"pos":"SG/PG","team":"New Orleans Pelicans","era":"current"},{"name":"Micah Peavy","ovr":72,"pos":"SF/SG","team":"New Orleans Pelicans","era":"current"},{"name":"Jabari Walker","ovr":72,"pos":"PF/SF","team":"Philadelphia 76ers","era":"current"},{"name":"Killian Hayes","ovr":72,"pos":"PG/SG","team":"Sacramento Kings","era":"current"},{"name":"Alijah Martin","ovr":71,"pos":"SG/PG","team":"Toronto Raptors","era":"current"},{"name":"Bronny James Jr.","ovr":71,"pos":"PG/SG","team":"Los Angeles Lakers","era":"current"},{"name":"David Jones-Garcia","ovr":71,"pos":"SG/PG","team":"San Antonio Spurs","era":"current"},{"name":"Isaac Jones","ovr":71,"pos":"PF/C","team":"Detroit Pistons","era":"current"},{"name":"Isaiah Livers","ovr":71,"pos":"SF/PF","team":"Phoenix Suns","era":"current"},{"name":"John Poulakidas","ovr":71,"pos":"SG/SF","team":"Dallas Mavericks","era":"current"},{"name":"Kevin McCullar Jr.","ovr":71,"pos":"SF/SG","team":"New York Knicks","era":"current"},{"name":"RayJ Dennis","ovr":71,"pos":"PG/SG","team":"Atlanta Hawks","era":"current"},{"name":"Thomas Sorber","ovr":71,"pos":"C/PF","team":"Oklahoma City Thunder","era":"current"},{"name":"Trey Jemison III","ovr":71,"pos":"C","team":"New York Knicks","era":"current"},{"name":"Mac McClung","ovr":71,"pos":"SG/PG","team":"Chicago Bulls","era":"current"},{"name":"David Roddy","ovr":71,"pos":"PF/SF","team":"Denver Nuggets","era":"current"},{"name":"Patrick Baldwin Jr.","ovr":71,"pos":"PF/SF","team":"Sacramento Kings","era":"current"},{"name":"Doug McDermott","ovr":71,"pos":"SF/PF","team":"Sacramento Kings","era":"current"},{"name":"Adou Thiero","ovr":70,"pos":"SF/PF","team":"Los Angeles Lakers","era":"current"},{"name":"Antonio Reeves","ovr":70,"pos":"SG/SF","team":"Charlotte Hornets","era":"current"},{"name":"Bismack Biyombo","ovr":70,"pos":"C","team":"San Antonio Spurs","era":"current"},{"name":"Cam Christie","ovr":70,"pos":"SG/SF","team":"Los Angeles Clippers","era":"current"},{"name":"Garrett Temple","ovr":70,"pos":"SG/SF","team":"Toronto Raptors","era":"current"},{"name":"Malevy Leons","ovr":70,"pos":"PF/C","team":"Golden State Warriors","era":"current"},{"name":"Tosan Evbuomwan","ovr":70,"pos":"SF/PF","team":"Charlotte Hornets","era":"current"},{"name":"TyTy Washington","ovr":70,"pos":"PG/SG","team":"Los Angeles Clippers","era":"current"},{"name":"Wendell Moore Jr.","ovr":70,"pos":"SF/SG","team":"Detroit Pistons","era":"current"},{"name":"Yang Hansen","ovr":70,"pos":"C","team":"Portland Trail Blazers","era":"current"},{"name":"E.J. Liddell","ovr":70,"pos":"PF/SF","team":"Brooklyn Nets","era":"current"},{"name":"Lachlan Olbrich","ovr":70,"pos":"C/PF","team":"Chicago Bulls","era":"current"},{"name":"Taj Gibson","ovr":70,"pos":"C","team":"Memphis Grizzlies","era":"current"},{"name":"Colin Castleton","ovr":70,"pos":"PF/C","team":"Orlando Magic","era":"current"},{"name":"Johni Broome","ovr":70,"pos":"PF/C","team":"Philadelphia 76ers","era":"current"},{"name":"MarJon Beauchamp","ovr":70,"pos":"SF/SG","team":"Philadelphia 76ers","era":"current"},{"name":"Amari Williams","ovr":69,"pos":"C/PF","team":"Boston Celtics","era":"current"},{"name":"Bez Mbeng","ovr":69,"pos":"SG/PG","team":"Utah Jazz","era":"current"},{"name":"Brooks Barnhizer","ovr":69,"pos":"SF/SG","team":"Oklahoma City Thunder","era":"current"},{"name":"Dillon Jones","ovr":69,"pos":"PF/C","team":"New York Knicks","era":"current"},{"name":"JD Davison","ovr":69,"pos":"PG/SG","team":"Houston Rockets","era":"current"},{"name":"John Tonje","ovr":69,"pos":"SF/SG","team":"Boston Celtics","era":"current"},{"name":"Pacome Dadiet","ovr":69,"pos":"SF/PF","team":"New York Knicks","era":"current"},{"name":"Thanasis Antetokounmpo","ovr":69,"pos":"PF/C","team":"Milwaukee Bucks","era":"current"},{"name":"Tyler Smith","ovr":69,"pos":"C/PF","team":"Dallas Mavericks","era":"current"},{"name":"Enrique Freeman","ovr":69,"pos":"PF/C","team":"Minnesota Timberwolves","era":"current"},{"name":"Alex Antetokounmpo","ovr":68,"pos":"SF/PF","team":"Milwaukee Bucks","era":"current"},{"name":"CJ Huntley","ovr":68,"pos":"PF/C","team":"Phoenix Suns","era":"current"},{"name":"Chaz Lanier","ovr":68,"pos":"SG/SF","team":"Detroit Pistons","era":"current"},{"name":"Chris Manon","ovr":68,"pos":"SG/SF","team":"Los Angeles Lakers","era":"current"},{"name":"Chris Youngblood","ovr":68,"pos":"SG/SF","team":"Portland Trail Blazers","era":"current"},{"name":"Chucky Hepburn","ovr":68,"pos":"PG","team":"Toronto Raptors","era":"current"},{"name":"Emanuel Miller","ovr":68,"pos":"SF/SG","team":"San Antonio Spurs","era":"current"},{"name":"Hayden Gray","ovr":68,"pos":"SG/PG","team":"Utah Jazz","era":"current"},{"name":"Isaiah Crawford","ovr":68,"pos":"SF/SG","team":"Houston Rockets","era":"current"},{"name":"Jayson Kent","ovr":68,"pos":"SF/SG","team":"Portland Trail Blazers","era":"current"},{"name":"Keshon Gilbert","ovr":68,"pos":"SG/SF","team":"Atlanta Hawks","era":"current"},{"name":"Koby Brea","ovr":68,"pos":"SG/SF","team":"Phoenix Suns","era":"current"},{"name":"Norchad Omier","ovr":68,"pos":"PF/C","team":"Los Angeles Clippers","era":"current"},{"name":"Payton Sandfort","ovr":68,"pos":"SF/SG","team":"Oklahoma City Thunder","era":"current"},{"name":"Sean Pedulla","ovr":68,"pos":"PG","team":"Los Angeles Clippers","era":"current"},{"name":"Trevor Keels","ovr":68,"pos":"SG","team":"Miami Heat","era":"current"},{"name":"Tristen Newton","ovr":68,"pos":"SG/PG","team":"Houston Rockets","era":"current"},{"name":"Vladislav Goldin","ovr":68,"pos":"C","team":"Miami Heat","era":"current"},{"name":"Olivier Sarr","ovr":68,"pos":"C","team":"Cleveland Cavaliers","era":"current"},{"name":"Tristan Enaruna","ovr":68,"pos":"SF/SG","team":"Cleveland Cavaliers","era":"current"},{"name":"Curtis Jones","ovr":68,"pos":"SG/PG","team":"Denver Nuggets","era":"current"},{"name":"Adama Bal","ovr":68,"pos":"SG/PG","team":"Memphis Grizzlies","era":"current"},{"name":"Rocco Zikarsky","ovr":68,"pos":"C","team":"Minnesota Timberwolves","era":"current"},{"name":"Trey Alexander","ovr":68,"pos":"PG/SG","team":"New Orleans Pelicans","era":"current"},{"name":"Hunter Dickinson","ovr":68,"pos":"C","team":"New Orleans Pelicans","era":"current"},{"name":"Josh Oduro","ovr":68,"pos":"PF/C","team":"New Orleans Pelicans","era":"current"},{"name":"Alex Morales","ovr":68,"pos":"SG/SF","team":"Orlando Magic","era":"current"},{"name":"Isaiah Stevens","ovr":68,"pos":"PG/SG","team":"Sacramento Kings","era":"current"},{"name":"Jahmir Young","ovr":67,"pos":"PG","team":"Miami Heat","era":"current"},{"name":"Tolu Smith","ovr":67,"pos":"C/PF","team":"Detroit Pistons","era":"current"},{"name":"Trevon Scott","ovr":67,"pos":"PF/SF","team":"Brooklyn Nets","era":"current"},{"name":"Mouhamadou Gueye","ovr":67,"pos":"C/PF","team":"Chicago Bulls","era":"current"},{"name":"Riley Minix","ovr":67,"pos":"PF/SF","team":"Cleveland Cavaliers","era":"current"},{"name":"Zyon Pullin","ovr":67,"pos":"PG/SG","team":"Minnesota Timberwolves","era":"current"}];
-const PLAYERS = PLAYERS_RAW.map((p,i)=>({id:i, name:p.name, ovr:p.ovr, pos:p.pos||"", team:p.team, era:p.era,
-  posPrim:(p.pos||"").split("/")[0]||"?"}));
-const PLAYER_BY_ID = Object.fromEntries(PLAYERS.map(p=>[p.id,p]));
+const $=(s,el=document)=>el.querySelector(s);
+const el=(h)=>{const t=document.createElement('template');t.innerHTML=h.trim();return t.content.firstChild;};
+const esc=(s)=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-/* ===== small helpers ===== */
-const $=(s,r=document)=>r.querySelector(s);
-const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;};
-const esc=s=>String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
-const rid=(n=4)=>{const c="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let s="";for(let i=0;i<n;i++)s+=c[Math.random()*c.length|0];return s;};
-const uuid=()=>"u"+Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-4);
-function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("show"),2600);}
-function ovrClass(o){return o>=99?"t99":o>=90?"t90":o>=80?"t80":"t0";}
-const save=o=>localStorage.setItem("nba2kdraft",JSON.stringify(o));
-const load=()=>{try{return JSON.parse(localStorage.getItem("nba2kdraft")||"null")}catch(e){return null}};
-const POSES=["PG","SG","SF","PF","C"];
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.add('hidden'),3200);}
 
-/* ============================================================
-   STORE ADAPTERS — same interface, two backends.
-   LocalStore  : offline, single device, in-memory (pass & play)
-   CloudStore  : Firebase Realtime DB, real-time across devices
-   ============================================================ */
-let DB=null;
-if(FIREBASE_READY){ try{ firebase.initializeApp(firebaseConfig); DB=firebase.database(); }catch(e){ console.warn(e); } }
+function saveSession(){try{localStorage.setItem('nbaDraft',JSON.stringify({roomCode:ME.roomCode,token:ME.token}));}catch(e){}}
+function clearSession(){try{localStorage.removeItem('nbaDraft');}catch(e){}}
 
-function CloudStore(){
-  let code=null, cb=null, ref=null;
-  return {
-    online:true,
-    async create(roomCode,room){ code=roomCode; ref=DB.ref("rooms/"+code); await ref.set(room); },
-    async exists(roomCode){ const s=await DB.ref("rooms/"+roomCode).get(); return s.exists(); },
-    setCode(c){ code=c; ref=DB.ref("rooms/"+code); },
-    subscribe(fn){ cb=fn; ref.on("value",s=>cb(s.val())); },
-    async update(patch){ await ref.update(patch); },
-    async addMember(uid,m){ await ref.child("members/"+uid).set(m); },
-    async pick(pickNo,obj,next){
-      const cell=ref.child("picks/"+pickNo);
-      const res=await cell.transaction(cur=> cur===null?obj:undefined );
-      if(res.committed){ await ref.update(next); return true; }
-      return false;
-    },
-    async setRaw(path,val){ await ref.child(path).set(val); }
-  };
-}
-function LocalStore(){
-  let room=null, cb=null;
-  const emit=()=>cb&&cb(JSON.parse(JSON.stringify(room)));
-  return {
-    online:false,
-    async create(roomCode,r){ room=r; emit(); },
-    async exists(){ return true; },
-    setCode(){},
-    subscribe(fn){ cb=fn; emit(); },
-    async update(patch){ Object.assign(room,patch); emit(); },
-    async addMember(uid,m){ room.members=room.members||{}; room.members[uid]=m; emit(); },
-    async pick(pickNo,obj,next){ room.picks=room.picks||{}; if(room.picks[pickNo])return false;
-      room.picks[pickNo]=obj; Object.assign(room,next); emit(); return true; },
-    async setRaw(path,val){ const parts=path.split("/"); let o=room; while(parts.length>1){o=o[parts.shift()]=o[parts[0]]&&o[parts.shift?parts[0]:0]||o[parts[0]];} room[path]=val; emit(); }
-  };
-}
-
-/* ============================================================
-   GAME STATE
-   ============================================================ */
-let store=null, ME={uid:null,name:null,isHost:false,code:null,mode:null}, ROOM=null, autoTimer=null, tick=null, confettiShown=false;
-
-function pickerUidForPickNo(room,pn){
-  const order=room.order||[]; const N=order.length; if(!N)return null;
-  const r=Math.floor(pn/N), i=pn%N;
-  const pos=(room.cfg.snake && r%2===1)? N-1-i : i;
-  return order[pos];
-}
-function totalPicks(room){ return (room.order?room.order.length:0)*room.cfg.rosterSize; }
-function takenIds(room){ const s=new Set(); const pk=room.picks||{}; for(const k in pk)s.add(pk[k].pid); return s; }
-function teamPicks(room,uid){ const out=[]; const pk=room.picks||{}; const keys=Object.keys(pk).map(Number).sort((a,b)=>a-b);
-  for(const k of keys)if(pk[k].uid===uid)out.push(pk[k]); return out; }
-function avgOvr(picks){ if(!picks.length)return 0; return Math.round(picks.reduce((a,p)=>a+p.ovr,0)/picks.length); }
-function sumOvr(picks){ return picks.reduce((a,p)=>a+p.ovr,0); }
-
-/* ============================================================
-   ROUTER / RENDER
-   ============================================================ */
-function render(){
-  const root=$("#app");
-  if(!ROOM){ root.innerHTML=""; root.appendChild(homeView()); return; }
-  if(ROOM.status==="lobby"){ root.innerHTML=""; root.appendChild(lobbyView()); return; }
-  root.innerHTML=""; root.appendChild(draftView());
-  manageHostTimer();
-}
-
-/* ---------- HOME ---------- */
-function homeView(){
-  const v=el("div","center");
-  v.innerHTML=`
-   <div class="logo">2K<span>DRAFT</span></div>
-   <div class="sub" style="margin:2px 0 18px">Live NBA 2K snake draft with friends · ${PLAYERS.length} players (current + legends)</div>
-   <div class="card">
-     <div class="tabs">
-       <div class="tab on" data-t="create">Create draft</div>
-       <div class="tab" data-t="join">Join draft</div>
-     </div>
-     <div id="paneCreate">
-       <div class="col"><label>Your name</label><input id="hName" placeholder="e.g. Rahul" maxlength="16"></div>
-       <div class="grid2" style="margin-top:12px">
-         <div class="col"><label>Roster size (players per team)</label>
-           <select id="cRoster"><option>5</option><option>8</option><option>10</option><option selected>13</option><option>12</option></select></div>
-         <div class="col"><label>Pick clock</label>
-           <select id="cTimer"><option value="0">No timer</option><option value="30">30s</option><option value="60" selected>60s</option><option value="90">90s</option><option value="120">2 min</option></select></div>
-         <div class="col"><label>Player pool</label>
-           <select id="cPool"><option value="all" selected>Current + Legends</option><option value="current">Current NBA only</option><option value="legend">Legends only</option></select></div>
-         <div class="col"><label>Draft type</label>
-           <select id="cSnake"><option value="1" selected>Snake (1-2-3-3-2-1)</option><option value="0">Straight rounds</option></select></div>
-       </div>
-       <div class="row" style="margin-top:8px;align-items:center"><label style="display:flex;gap:8px;align-items:center;cursor:pointer"><input type="checkbox" id="cMode" style="width:auto" ${FIREBASE_READY?"checked":""} ${FIREBASE_READY?"":"disabled"}> Online (everyone on their own device)</label></div>
-       <div id="modeNote" class="sub" style="font-size:12px;margin-top:6px"></div>
-       <button class="btn" id="goCreate" style="margin-top:14px;width:100%">Create draft room →</button>
-     </div>
-     <div id="paneJoin" class="hide">
-       <div class="col"><label>Your name</label><input id="jName" placeholder="e.g. Mike" maxlength="16"></div>
-       <div class="col" style="margin-top:12px"><label>Room code</label><input id="jCode" placeholder="4-letter code" maxlength="4" style="text-transform:uppercase;letter-spacing:4px;font-weight:700"></div>
-       <button class="btn" id="goJoin" style="margin-top:14px;width:100%">Join →</button>
-       <div class="sub" style="font-size:12px;margin-top:8px">Online drafts only. Ask the host for the room code.</div>
-     </div>
-   </div>
-   <div class="sub" style="font-size:12px;margin-top:14px;text-align:center">${FIREBASE_READY?'✓ Online mode ready':'Offline only — add Firebase config to enable online play (see SETUP.md)'}</div>`;
-  // tabs
-  v.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
-    v.querySelectorAll(".tab").forEach(x=>x.classList.remove("on"));t.classList.add("on");
-    $("#paneCreate",v).classList.toggle("hide",t.dataset.t!=="create");
-    $("#paneJoin",v).classList.toggle("hide",t.dataset.t!=="join");
-  });
-  const noteFn=()=>{ const on=$("#cMode",v).checked;
-    $("#modeNote",v).textContent= on? "Each player joins from their own phone/laptop using a room code. Needs your Firebase config (already detected)."
-      : "Pass & Play on one device — add each player, then pass the screen as turns rotate. No internet/setup needed."; };
-  $("#cMode",v).onchange=noteFn; noteFn();
-  $("#goCreate",v).onclick=()=>doCreate(v);
-  $("#goJoin",v).onclick=()=>doJoin(v);
-  return v;
-}
-
-async function doCreate(v){
-  const name=$("#hName",v).value.trim();
-  if(!name)return toast("Enter your name");
-  const online=$("#cMode",v).checked && FIREBASE_READY;
-  const cfg={rosterSize:+$("#cRoster",v).value, timer:+$("#cTimer",v).value,
-    pool:$("#cPool",v).value, snake:$("#cSnake",v).value==="1"};
-  ME.uid=uuid(); ME.name=name; ME.isHost=true; ME.mode=online?"online":"local";
-  store=online?CloudStore():LocalStore();
-  let code=rid();
-  if(online){ for(let i=0;i<5;i++){ if(!(await store.exists(code)))break; code=rid(); } }
-  ME.code=code; store.setCode&&store.setCode(code);
-  const room={host:ME.uid, status:"lobby", cfg, createdAt:Date.now(),
-    members:{[ME.uid]:{name, joinedAt:Date.now()}}, order:[], pickNo:0, deadline:0, picks:{}};
-  if(online){
-    // local mode: pre-add nobody; host adds teams in lobby
-  }
-  await store.create(code,room);
-  store.subscribe(onRoom);
-  save({uid:ME.uid,name:ME.name,isHost:true,code:ME.code,mode:ME.mode});
-}
-
-async function doJoin(v){
-  if(!FIREBASE_READY)return toast("Online play needs Firebase config (see SETUP.md)");
-  const name=$("#jName",v).value.trim(); const code=$("#jCode",v).value.trim().toUpperCase();
-  if(!name)return toast("Enter your name");
-  if(code.length<4)return toast("Enter the 4-letter code");
-  store=CloudStore(); store.setCode(code);
-  if(!(await store.exists(code)))return toast("No room found with that code");
-  ME.uid=uuid(); ME.name=name; ME.isHost=false; ME.code=code; ME.mode="online";
-  await store.addMember(ME.uid,{name,joinedAt:Date.now()});
-  store.subscribe(onRoom);
-  save({uid:ME.uid,name:ME.name,isHost:false,code,mode:"online"});
-}
-
-function onRoom(r){
-  if(!r){ toast("Room was closed"); leave(); return; }
-  ROOM=r; render();
-}
-
-function leave(){ localStorage.removeItem("nba2kdraft"); ROOM=null; ME={uid:null}; confettiShown=false; if(autoTimer){clearInterval(autoTimer);autoTimer=null;} render(); }
-
-/* ---------- LOBBY ---------- */
-function lobbyView(){
-  const v=el("div","wrap"); const r=ROOM; const mems=Object.entries(r.members||{});
-  const isHost=ME.uid===r.host;
-  v.innerHTML=`
-   <div class="row" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
-     <div class="logo">2K<span>DRAFT</span> <span class="sub" style="font-size:15px;font-weight:600">· Lobby</span></div>
-     <div class="row wrap">
-       <span class="pill">Room code <b style="letter-spacing:3px;font-size:18px;margin-left:6px">${esc(ME.code)}</b></span>
-       <span class="pill">${r.cfg.rosterSize}-player rosters</span>
-       <span class="pill">${r.cfg.timer?r.cfg.timer+"s clock":"No timer"}</span>
-       <span class="pill">${r.cfg.snake?"Snake":"Straight"}</span>
-       <span class="pill">${r.cfg.pool==="all"?"Current + Legends":r.cfg.pool==="current"?"Current only":"Legends only"}</span>
-     </div>
-   </div>
-   <div class="grid2" style="margin-top:18px">
-     <div class="card">
-       <h3 style="margin:0 0 4px">Teams <span class="sub">(${mems.length}/30)</span></h3>
-       <div class="sub" style="font-size:13px;margin-bottom:12px">${ME.mode==="online"?"Share the room code. Everyone who joins gets a team.":"Add each person playing on this device."}</div>
-       <div id="memList"></div>
-       ${ME.mode==="local"&&isHost?`<div class="row" style="margin-top:10px"><input id="addName" placeholder="Add player name" maxlength="16" style="flex:1"><button class="btn alt" id="addBtn">Add</button></div>`:""}
-     </div>
-     <div class="card">
-       <h3 style="margin:0 0 10px">How it works</h3>
-       <div class="sub" style="font-size:14px">
-         <p>Players are drafted <b>${r.cfg.snake?"snake-style":"in fixed order"}</b>: each team builds a ${r.cfg.rosterSize}-man roster from ${r.cfg.pool==="current"?"current NBA":r.cfg.pool==="legend"?"all-time legend":"current + legend"} players.</p>
-         <p>When the draft starts, pick order is <b>randomized</b>. ${r.cfg.timer?`If a pick isn't made within <b>${r.cfg.timer}s</b>, the best available player is auto-drafted.`:""}</p>
-         <p>Final standings rank teams by <b>average overall</b>.</p>
-       </div>
-       ${isHost?`<button class="btn gold" id="startBtn" style="width:100%;margin-top:8px">🏀 Randomize order & start draft</button>
-         <div class="sub" style="font-size:12px;margin-top:8px;text-align:center">Need at least 2 teams.</div>`
-        :`<div class="banner">Waiting for the host to start the draft…</div>`}
-       <button class="btn alt sm" id="leaveBtn" style="margin-top:12px">Leave</button>
-     </div>
-   </div>`;
-  const ml=$("#memList",v);
-  mems.sort((a,b)=>a[1].joinedAt-b[1].joinedAt).forEach(([uid,m],i)=>{
-    const row=el("div","mem");
-    row.innerHTML=`<span class="num">${i+1}</span><span class="dot"></span><b>${esc(m.name)}</b>${uid===r.host?'<span class="tag cur" style="margin-left:auto">HOST</span>':''}${uid===ME.uid?'<span class="sub" style="margin-left:auto;font-size:12px">you</span>':''}`;
-    if(ME.mode==="local"&&isHost&&uid!==r.host){
-      const x=el("button","btn alt sm","✕"); x.style.marginLeft="auto";
-      x.onclick=async()=>{ const mm={...r.members}; delete mm[uid]; await store.update({members:mm}); };
-      row.appendChild(x);
+// ---------------- networking ----------------
+function connect(then){
+  const proto=location.protocol==='https:'?'wss':'ws';
+  ws=new WebSocket(proto+'://'+location.host);
+  ws.onopen=()=>{WS_READY=true; then&&then();};
+  ws.onclose=()=>{WS_READY=false; setTimeout(()=>connect(()=>tryRejoin()),1200);};
+  ws.onmessage=(e)=>{
+    let m; try{m=JSON.parse(e.data);}catch(_){return;}
+    if(m.type==='joined'){
+      ME.playerId=m.playerId; ME.token=m.token; ME.isHost=m.isHost; ME.roomCode=m.roomCode;
+      saveSession(); render();
+    } else if(m.type==='state'){
+      STATE=m.state;
+      ME.isHost = STATE.hostId===ME.playerId;
+      if(!ui.teamTab) ui.teamTab=ME.playerId;
+      render();
+    } else if(m.type==='error'){
+      toast(m.message||'Error');
+      if(m.fatal){clearSession(); ME={playerId:null,token:null,isHost:false,roomCode:null}; STATE=null; render();}
     }
-    ml.appendChild(row);
-  });
-  if(ME.mode==="local"&&isHost){
-    const ab=$("#addBtn",v), ai=$("#addName",v);
-    const add=async()=>{ const n=ai.value.trim(); if(!n)return; if(Object.keys(r.members).length>=30)return toast("Max 30 teams");
-      await store.addMember(uuid(),{name:n,joinedAt:Date.now()}); ai.value=""; ai.focus(); };
-    ab.onclick=add; ai.onkeydown=e=>{if(e.key==="Enter")add();};
-  }
-  const sb=$("#startBtn",v); if(sb)sb.onclick=startDraft;
-  $("#leaveBtn",v).onclick=leave;
-  return v;
+  };
+}
+function sendMsg(o){ if(WS_READY) ws.send(JSON.stringify(o)); }
+
+function tryRejoin(){
+  let s; try{s=JSON.parse(localStorage.getItem('nbaDraft'));}catch(e){}
+  if(s&&s.roomCode&&s.token){ ME.roomCode=s.roomCode; ME.token=s.token; sendMsg({type:'rejoin',roomCode:s.roomCode,token:s.token}); }
 }
 
-async function startDraft(){
-  const r=ROOM; const ids=Object.keys(r.members);
-  if(ids.length<2)return toast("Need at least 2 teams to start");
-  const need=ids.length*r.cfg.rosterSize;
-  const have=PLAYERS.filter(p=>r.cfg.pool==="all"?true:p.era===r.cfg.pool).length;
-  if(need>have)return toast(`Not enough players: ${ids.length} teams × ${r.cfg.rosterSize} = ${need} needed, but only ${have} in this pool. Lower roster size or widen the pool.`);
-  // randomize order
-  for(let i=ids.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[ids[i],ids[j]]=[ids[j],ids[i]];}
-  await store.update({order:ids, status:"draft", pickNo:0,
-    deadline:r.cfg.timer?Date.now()+r.cfg.timer*1000:0});
-  toast("Draft started — good luck!");
+// ---------------- boot ----------------
+fetch('players.json').then(r=>r.json()).then(d=>{
+  PLAYERS=d; d.forEach(p=>BYID[p.id]=p);
+  connect(()=>tryRejoin());
+  render();
+});
+
+// ---------------- render root ----------------
+function render(){
+  $('#roomTag').textContent = (STATE&&STATE.code)? ('Room '+STATE.code+' · '+STATE.players.length+' drafter'+(STATE.players.length!==1?'s':'')) : '';
+  const app=$('#app'); app.innerHTML='';
+  if(!STATE || !ME.playerId){ app.appendChild(viewLanding()); return; }
+  if(STATE.phase==='lobby') app.appendChild(viewLobby());
+  else if(STATE.phase==='draft') app.appendChild(viewDraft());
+  else if(STATE.phase==='voting_setup'||STATE.phase==='voting') app.appendChild(viewVoting());
+  else if(STATE.phase==='results') app.appendChild(viewResults());
 }
 
-/* ---------- DRAFT ---------- */
-let UI={tab:"teams", q:"", pos:"ALL", era:"ALL", sort:"ovr"};
-function draftView(){
-  const r=ROOM; const v=el("div","wrap");
-  const pn=r.pickNo, total=totalPicks(r), done=r.status==="done"||pn>=total;
-  const curUid=done?null:pickerUidForPickNo(r,pn);
-  const myTurn=curUid===ME.uid && !done;
-  const canPick = !done && (ME.mode==="local" || myTurn); // local: one device drafts for whoever is on the clock
-  const round=Math.floor(pn/r.order.length)+1, rounds=r.cfg.rosterSize;
-  // header
-  const top=el("div","top");
-  top.innerHTML=`
-    <div class="logo" style="font-size:22px">2K<span>DRAFT</span></div>
-    ${done?`<div class="onclock"><b>Draft complete 🎉</b></div>`:
-    `<div class="clock" id="clock">${r.cfg.timer?"—":"∞"}</div>
-     <div class="onclock ${canPick?"mine":""}">On the clock<br><b>${(ME.mode==="online"&&myTurn)?"YOU":esc(r.members[curUid]?.name||"…")}</b></div>
-     <div class="onclock">Round <b>${round}</b>/${rounds} · Pick <b>${pn+1}</b>/${total}</div>`}
-    <div style="margin-left:auto" class="row wrap">
-      <span class="pill">${esc(ME.code)}</span>
-      ${ME.uid===r.host&&!done?`<button class="btn alt sm" id="undoBtn">↩ Undo</button>`:""}
-      ${done?`<button class="btn gold sm" id="exportBtn">⬇ Export results</button>`:""}
-      <button class="btn alt sm" id="leaveBtn2">Exit</button>
-    </div>`;
-  v.appendChild(top);
-
-  if(done){ v.appendChild(resultsView());
-    const eb=$("#exportBtn",top); if(eb)eb.onclick=exportResults;
-    $("#leaveBtn2",top).onclick=leave;
-    if(!confettiShown){confettiShown=true;confetti();}
-    return v; }
-
-  const layout=el("div","dlayout");
-  // ---- left: pool ----
-  const left=el("div","");
-  const head=el("div","poolhead");
-  head.innerHTML=`<input id="q" placeholder="Search players…" value="${esc(UI.q)}" style="flex:1;min-width:160px">
-    <select id="sort"><option value="ovr">Sort: Overall</option><option value="name">Sort: Name</option></select>`;
-  left.appendChild(head);
-  const chips=el("div","poolhead");
-  ["ALL",...POSES].forEach(p=>{const c=el("div","chip"+(UI.pos===p?" on":""),p==="ALL"?"All pos":p);c.onclick=()=>{UI.pos=p;render();};chips.appendChild(c);});
-  if(r.cfg.pool==="all"){
-    [["ALL","All"],["current","Current"],["legend","Legends"]].forEach(([k,lab])=>{
-      const c=el("div","chip"+(UI.era===k?" on":""),lab);c.onclick=()=>{UI.era=k;render();};chips.appendChild(c);});
-  }
-  left.appendChild(chips);
-  const list=el("div","plist"); left.appendChild(list);
-  const taken=takenIds(r);
-  let pool=PLAYERS.filter(p=>!taken.has(p.id));
-  if(r.cfg.pool!=="all")pool=pool.filter(p=>p.era===r.cfg.pool);
-  if(UI.era!=="ALL")pool=pool.filter(p=>p.era===UI.era);
-  if(UI.pos!=="ALL")pool=pool.filter(p=>p.pos.split("/").includes(UI.pos));
-  if(UI.q){const q=UI.q.toLowerCase();pool=pool.filter(p=>p.name.toLowerCase().includes(q)||p.team.toLowerCase().includes(q));}
-  pool.sort(UI.sort==="name"?(a,b)=>a.name.localeCompare(b.name):(a,b)=>b.ovr-a.ovr||a.name.localeCompare(b.name));
-  const bpaId=pool.length?[...pool].sort((a,b)=>b.ovr-a.ovr)[0].id:-1;
-  pool.slice(0,300).forEach(p=>{
-    const row=el("div","prow"+(p.id===bpaId&&canPick?" bpa":""));
-    row.innerHTML=`<div class="ovr ${ovrClass(p.ovr)}">${p.ovr}</div>
-      <div class="grow"><div class="nm nowrap">${esc(p.name)} ${p.id===bpaId&&canPick?'<span class="tag" style="background:rgba(255,201,77,.18);color:var(--gold)">BEST</span>':''}</div>
-      <div class="meta nowrap">${esc(p.pos)} · ${esc(p.team)}</div></div>
-      <span class="tag ${p.era==="legend"?"leg":"cur"}">${p.era==="legend"?"LEG":"NBA"}</span>`;
-    const b=el("button","btn sm","Draft"); b.disabled=!canPick; b.style.marginLeft="8px";
-    b.onclick=()=>makePick(p.id);
-    row.appendChild(b); list.appendChild(row);
-  });
-  if(!pool.length)list.appendChild(el("div","prow","<span class='sub'>No players match.</span>"));
-  layout.appendChild(left);
-
-  // ---- right: tabs ----
-  const right=el("div","side");
-  const tabs=el("div","tabs");
-  [["teams","All teams"],["me","My team"],["log","Pick log"]].forEach(([k,lab])=>{
-    const t=el("div","tab"+(UI.tab===k?" on":""),lab);t.onclick=()=>{UI.tab=k;render();};tabs.appendChild(t);});
-  right.appendChild(tabs);
-  if(UI.tab==="log")right.appendChild(logPane());
-  else if(UI.tab==="me")right.appendChild(teamPane(ME.uid,curUid));
-  else { r.order.forEach(uid=>right.appendChild(teamCard(uid,curUid))); }
-  layout.appendChild(right);
-  v.appendChild(layout);
-
-  // wire
-  $("#q",v).oninput=e=>{UI.q=e.target.value; clearTimeout(window._qd); window._qd=setTimeout(render,180);};
-  $("#sort",v).value=UI.sort; $("#sort",v).onchange=e=>{UI.sort=e.target.value;render();};
-  const ub=$("#undoBtn",top); if(ub)ub.onclick=undoPick;
-  $("#leaveBtn2",top).onclick=leave;
-  startClock();
-  return v;
-}
-
-function teamCard(uid,curUid){
-  const r=ROOM; const picks=teamPicks(r,uid); const m=r.members[uid];
-  const c=el("div","teamcard"+(uid===ME.uid?" me":"")+(uid===curUid?" turn":""));
-  const need=r.cfg.rosterSize-picks.length;
-  c.innerHTML=`<h4><span>${esc(m?.name||"?")}${uid===ME.uid?' <span class="sub" style="font-weight:500;font-size:12px">(you)</span>':''}</span>
-    <span class="pill" style="padding:3px 9px">AVG ${avgOvr(picks)||"—"}</span></h4>
-    <div class="sub" style="font-size:12px;margin-bottom:6px">${picks.length}/${r.cfg.rosterSize} picked · ${posBreak(picks)}</div>`;
-  picks.slice().sort((a,b)=>b.ovr-a.ovr).forEach(p=>{
-    c.appendChild(el("div","slot",`<span><span class="pos">${esc((p.pos||"").split("/")[0])}</span>${esc(p.name)}</span><b>${p.ovr}</b>`));
-  });
+// ---------------- landing ----------------
+function viewLanding(){
+  const c=el('<div class="center"></div>');
+  c.appendChild(el('<div class="tag" style="text-align:center;max-width:520px">Draft your ultimate NBA roster from '+PLAYERS.length+' current stars & all-time legends — ratings from 2K. Everyone joins from their own device.</div>'));
+  const card=el('<div class="card" style="width:min(440px,92vw)"></div>');
+  card.innerHTML=`
+    <h2>Start a game</h2>
+    <p class="mut small">Create a room and share the 4-letter code. Up to 16 drafters.</p>
+    <div class="grid">
+      <input id="nmC" maxlength="24" placeholder="Your name / team name"/>
+      <button class="btn" id="btnCreate">Create room</button>
+    </div>
+    <hr style="border-color:var(--line);margin:18px 0"/>
+    <h3>Join a game</h3>
+    <div class="row">
+      <input id="code" maxlength="4" placeholder="CODE" style="text-transform:uppercase;width:110px;letter-spacing:3px;font-weight:800"/>
+      <input id="nmJ" maxlength="24" placeholder="Your name / team name" style="flex:1;min-width:140px"/>
+    </div>
+    <button class="btn sec" id="btnJoin" style="margin-top:10px;width:100%">Join room</button>`;
+  c.appendChild(card);
+  card.querySelector('#btnCreate').onclick=()=>{const n=card.querySelector('#nmC').value.trim();if(!n)return toast('Enter a name');sendMsg({type:'create',name:n});};
+  card.querySelector('#btnJoin').onclick=()=>{const code=card.querySelector('#code').value.trim().toUpperCase();const n=card.querySelector('#nmJ').value.trim();if(!code||!n)return toast('Enter code and name');sendMsg({type:'join',roomCode:code,name:n});};
   return c;
 }
-function teamPane(uid,curUid){
-  const wrap=el("div"); wrap.appendChild(teamCard(uid,curUid));
-  const r=ROOM, picks=teamPicks(r,uid);
-  const need=POSES.filter(P=>!picks.some(p=>(p.pos||"").split("/").includes(P)));
-  const tip=el("div","sub"); tip.style.fontSize="13px"; tip.style.marginTop="8px";
-  tip.innerHTML= need.length? `Positions you still lack: <b>${need.join(", ")}</b>` : "You have every position covered ✓";
-  wrap.appendChild(tip);
-  return wrap;
-}
-function posBreak(picks){ const c={}; POSES.forEach(P=>c[P]=0);
-  picks.forEach(p=>{const P=(p.pos||"").split("/")[0]; if(c[P]!=null)c[P]++;});
-  return POSES.map(P=>`${P} ${c[P]}`).join(" · "); }
-function logPane(){
-  const r=ROOM; const wrap=el("div","logfeed"); const pk=r.picks||{};
-  const keys=Object.keys(pk).map(Number).sort((a,b)=>b-a);
-  if(!keys.length)wrap.appendChild(el("div","sub","No picks yet."));
-  keys.forEach(k=>{const p=pk[k]; const m=r.members[p.uid];
-    wrap.appendChild(el("div","li",`<b>#${k+1}</b> ${esc(m?.name||"?")} → <b>${esc(p.name)}</b> <span class="sub">(${p.ovr} ${esc(p.pos)})</span>`));});
-  return wrap;
-}
 
-/* ---------- pick logic ---------- */
-async function makePick(pid){
-  const r=ROOM, pn=r.pickNo;
-  if(pickerUidForPickNo(r,pn)!==ME.uid && ME.mode==="online")return toast("Not your turn");
-  if(takenIds(r).has(pid))return toast("Already drafted");
-  const p=PLAYER_BY_ID[pid];
-  const obj={pid, name:p.name, ovr:p.ovr, pos:p.pos, nba:p.team, era:p.era, uid:pickerUidForPickNo(r,pn), ts:Date.now()};
-  const next=nextState(r,pn);
-  const ok=await store.pick(pn,obj,next);
-  if(!ok)toast("Pick didn't go through — board moved on");
-}
-function nextState(r,pn){
-  const np=pn+1; const done=np>=totalPicks(r);
-  const next={pickNo:np};
-  if(done)next.status="done";
-  else next.deadline=r.cfg.timer?Date.now()+r.cfg.timer*1000:0;
-  return next;
-}
-async function undoPick(){
-  const r=ROOM; const pn=r.pickNo; if(pn<=0)return toast("Nothing to undo");
-  const last=pn-1; const pk={...(r.picks||{})}; delete pk[last];
-  await store.update({picks:pk, pickNo:last, status:"draft",
-    deadline:r.cfg.timer?Date.now()+r.cfg.timer*1000:0});
-  toast("Last pick undone");
-}
-
-/* auto-pick: host only drives the clock so there are no races */
-function manageHostTimer(){
-  const r=ROOM; if(!r)return;
-  const isHost=ME.uid===r.host;
-  if(!isHost||r.status!=="draft"||!r.cfg.timer){ if(autoTimer){clearInterval(autoTimer);autoTimer=null;} return; }
-  if(autoTimer)return;
-  autoTimer=setInterval(async()=>{
-    const rr=ROOM; if(!rr||rr.status!=="draft"||!rr.cfg.timer){clearInterval(autoTimer);autoTimer=null;return;}
-    if(rr.deadline && Date.now()>rr.deadline+400){
-      // auto draft best available for current picker
-      const taken=takenIds(rr); let pool=PLAYERS.filter(p=>!taken.has(p.id));
-      if(rr.cfg.pool!=="all")pool=pool.filter(p=>p.era===rr.cfg.pool);
-      pool.sort((a,b)=>b.ovr-a.ovr); const best=pool[0]; if(!best)return;
-      const pn=rr.pickNo; const uid=pickerUidForPickNo(rr,pn);
-      const obj={pid:best.id,name:best.name,ovr:best.ovr,pos:best.pos,nba:best.team,era:best.era,uid,ts:Date.now(),auto:true};
-      await store.pick(pn,obj,nextState(rr,pn));
-    }
-  },1000);
-}
-function startClock(){
-  if(tick)clearInterval(tick);
-  tick=setInterval(()=>{
-    const r=ROOM; const c=$("#clock"); if(!r||!c||r.status!=="draft"){return;}
-    if(!r.cfg.timer){c.textContent="∞";return;}
-    const left=Math.max(0,Math.ceil((r.deadline-Date.now())/1000));
-    c.textContent=left; c.classList.toggle("warn",left<=10);
-  },300);
-}
-
-/* ---------- results ---------- */
-function standings(){
-  const r=ROOM; return r.order.map(uid=>{const pk=teamPicks(r,uid);
-    return {uid,name:r.members[uid]?.name||"?",picks:pk,avg:avgOvr(pk),sum:sumOvr(pk)};})
-    .sort((a,b)=>b.avg-a.avg||b.sum-a.sum);
-}
-function resultsView(){
-  const wrap=el("div"); const S=standings(); const maxAvg=S[0]?.avg||1;
-  const head=el("div","card"); head.style.marginTop="16px";
-  head.innerHTML=`<h2 style="margin:0 0 4px">🏆 Final standings</h2><div class="sub">Ranked by average overall rating</div>`;
-  const grid=el("div"); grid.style.marginTop="14px";
-  S.forEach((t,i)=>{
-    const card=el("div","teamcard"+(t.uid===ME.uid?" me":""));
-    card.innerHTML=`<h4><span><span class="num" style="margin-right:8px">${i+1}</span>${esc(t.name)}${t.uid===ME.uid?' <span class="sub" style="font-size:12px">(you)</span>':''} ${i===0?'<span class="tag" style="background:var(--gold);color:#1a1300">CHAMP</span>':''}</span>
-      <span class="pill">AVG <b style="margin-left:4px">${t.avg}</b></span></h4>
-      <div class="bar" style="margin:6px 0 10px"><i style="width:${Math.round(t.avg/maxAvg*100)}%"></i></div>`;
-    const ros=el("div"); ros.style.display="grid"; ros.style.gridTemplateColumns="1fr 1fr"; ros.style.gap="0 14px";
-    t.picks.slice().sort((a,b)=>b.ovr-a.ovr).forEach(p=>ros.appendChild(el("div","slot",`<span><span class="pos">${esc((p.pos||"").split("/")[0])}</span>${esc(p.name)}</span><b>${p.ovr}</b>`)));
-    card.appendChild(ros); grid.appendChild(card);
+// ---------------- lobby ----------------
+function viewLobby(){
+  const s=STATE, host=ME.isHost;
+  const c=el('<div class="grid" style="grid-template-columns:1fr 1fr;gap:16px"></div>');
+  // left: room + players
+  const left=el('<div class="card"></div>');
+  left.innerHTML=`<h2>Lobby</h2>
+    <div class="row" style="justify-content:space-between">
+      <div>Room code: <span style="font-size:26px;font-weight:900;letter-spacing:4px;color:var(--acc)">${s.code}</span></div>
+      <button class="btn ghost sm" id="copy">Copy invite link</button>
+    </div>
+    <p class="mut small">Share the code (or link) so others join from their phones/laptops on the same server.</p>
+    <h3>Drafters (${s.players.length}/16)</h3>
+    <div id="plist"></div>`;
+  const pl=left.querySelector('#plist');
+  s.players.forEach(p=>{
+    const li=el(`<div class="kv"><div><span class="dot ${p.connected?'on':'off'}"></span>${esc(p.teamName)}${p.id===s.hostId?'<span class="badge-host">HOST</span>':''}${p.id===ME.playerId?' <span class="pill">you</span>':''}</div><div></div></div>`);
+    if(host && p.id!==ME.playerId){const k=el('<button class="btn ghost sm">remove</button>');k.onclick=()=>sendMsg({type:'kick',playerId:p.id});li.lastElementChild.appendChild(k);}
+    pl.appendChild(li);
   });
-  head.appendChild(grid); wrap.appendChild(head); return wrap;
+  left.querySelector('#copy').onclick=()=>{const url=location.origin+'/?room='+s.code;navigator.clipboard&&navigator.clipboard.writeText(url);toast('Invite link copied');};
+  c.appendChild(left);
+
+  // right: settings + your team + start
+  const right=el('<div class="card"></div>');
+  const me=s.players.find(p=>p.id===ME.playerId);
+  right.innerHTML=`<h2>Your team</h2>
+    <div class="row"><input id="tn" maxlength="28" value="${esc(me?me.teamName:'')}" style="flex:1"/><button class="btn sec sm" id="saveTn">Save</button></div>
+    <hr style="border-color:var(--line);margin:16px 0"/>
+    <h2>Settings ${host?'':'<span class="pill">host controls</span>'}</h2>
+    <div class="grid" style="grid-template-columns:1fr 1fr">
+      <label class="small mut">Roster size (rounds)<br><input id="rs" type="number" min="1" max="15" value="${s.settings.rosterSize}" ${host?'':'disabled'} style="width:100%"/></label>
+      <label class="small mut">Pick timer (sec, 0=off)<br><input id="ps" type="number" min="0" max="600" value="${s.settings.pickSeconds}" ${host?'':'disabled'} style="width:100%"/></label>
+    </div>
+    <p class="mut small">${s.players.length} teams × ${s.settings.rosterSize} = <b>${s.players.length*s.settings.rosterSize}</b> total picks · snake order.</p>
+    ${host?`<div class="row" style="margin-top:8px"><button class="btn sec" id="shuffle">🎲 Shuffle draft order</button><button class="btn good" id="start">Start draft →</button></div>
+    <p class="mut small" id="orderPrev"></p>`:'<p class="mut">Waiting for the host to start…</p>'}`;
+  right.querySelector('#saveTn').onclick=()=>{const v=right.querySelector('#tn').value.trim();if(v)sendMsg({type:'setTeamName',name:v});};
+  if(host){
+    const rs=right.querySelector('#rs'), ps=right.querySelector('#ps');
+    const pushCfg=()=>sendMsg({type:'config',rosterSize:rs.value,pickSeconds:ps.value});
+    rs.onchange=pushCfg; ps.onchange=pushCfg;
+    right.querySelector('#shuffle').onclick=()=>{ lobbyOrder=shuffle(s.players.map(p=>p.id)); showOrder(right,s); };
+    right.querySelector('#start').onclick=()=>{ if(s.players.length<2)return toast('Need at least 2 drafters'); sendMsg({type:'startDraft',order:lobbyOrder&&lobbyOrder.length===s.players.length?lobbyOrder:null}); };
+    showOrder(right,s);
+  }
+  c.appendChild(right);
+  return c;
 }
-function exportResults(){
-  const r=ROOM; const S=standings(); let csv="Rank,Team,AvgOVR,Player,OVR,Pos,From,Era\n";
-  S.forEach((t,i)=>t.picks.slice().sort((a,b)=>b.ovr-a.ovr).forEach(p=>{
-    csv+=`${i+1},"${t.name}",${t.avg},"${p.name}",${p.ovr},${p.pos},"${p.nba}",${p.era}\n`;}));
-  const blob=new Blob([csv],{type:"text/csv"}); const a=el("a"); a.href=URL.createObjectURL(blob);
-  a.download="2kdraft-results-"+ME.code+".csv"; a.click(); toast("Results exported as CSV");
+let lobbyOrder=null;
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function showOrder(right,s){const o=(lobbyOrder&&lobbyOrder.length===s.players.length)?lobbyOrder:s.players.map(p=>p.id);const names=o.map((id,i)=>(i+1)+'. '+(s.players.find(p=>p.id===id)||{teamName:'?'}).teamName);const pv=right.querySelector('#orderPrev');if(pv)pv.innerHTML='<b>Order:</b> '+names.map(esc).join('  ·  ');}
+
+// ---------------- draft ----------------
+function teamName(id){const p=STATE.players.find(x=>x.id===id);return p?p.teamName:'?';}
+function viewDraft(){
+  const s=STATE;
+  const onClock=s.onClock;
+  const myTurn=onClock===ME.playerId;
+  const finished=s.pickNo>=s.totalPicks;
+  const c=el('<div></div>');
+  // header
+  let timer='';
+  if(s.clockEnds){const left=Math.max(0,Math.ceil((s.clockEnds-Date.now())/1000));timer=`<span class="clock ${left<=5?'warn':''}">⏱ ${left}s</span>`;}
+  const hdr=el(`<div class="card" style="margin-bottom:14px"><div class="row" style="justify-content:space-between">
+    <div><b>Round ${s.round}</b> / ${s.rounds} · Pick ${Math.min(s.pickNo+1,s.totalPicks)} of ${s.totalPicks}</div>
+    <div class="row">${timer}<div>On the clock: <b style="color:${myTurn?'var(--good)':'var(--acc)'}">${esc(teamName(onClock))}${myTurn?" — that's you!":""}</b></div></div>
+  </div></div>`);
+  c.appendChild(hdr);
+
+  const main=el('<div class="grid" style="grid-template-columns:1.6fr 1fr;gap:16px"></div>');
+  // left: player pool
+  const poolCard=el('<div class="card"></div>');
+  poolCard.innerHTML=`<div class="row" style="justify-content:space-between"><h3 style="margin:0">Available players</h3><span class="pill">${PLAYERS.length-s.drafted.length} left</span></div>
+    <div class="row" style="margin:10px 0">
+      <input id="search" placeholder="Search name…" value="${esc(ui.search)}" style="flex:1;min-width:120px"/>
+      <select id="fpos">${['ALL','PG','SG','SF','PF','C'].map(p=>`<option ${ui.filterPos===p?'selected':''}>${p}</option>`).join('')}</select>
+      <select id="fera"><option value="ALL" ${ui.filterEra==='ALL'?'selected':''}>All eras</option><option value="current" ${ui.filterEra==='current'?'selected':''}>Current</option><option value="classic" ${ui.filterEra==='classic'?'selected':''}>Legends</option></select>
+    </div>
+    <div class="pool" id="pool"></div>`;
+  const pool=poolCard.querySelector('#pool');
+  const drafted=new Set(s.drafted);
+  const list=PLAYERS.filter(p=>{
+    if(ui.filterPos!=='ALL'&&!p.positions.includes(ui.filterPos))return false;
+    if(ui.filterEra!=='ALL'&&p.era!==ui.filterEra)return false;
+    if(ui.search&&!p.name.toLowerCase().includes(ui.search.toLowerCase()))return false;
+    return true;
+  });
+  list.forEach(p=>{
+    const taken=drafted.has(p.id);
+    const row=el(`<div class="prow ${taken?'taken':''}">
+      <span class="ovr ${p.era==='classic'?'c2':''}">${p.overall}</span>
+      <div><div class="pname">${esc(p.name)} <span class="era ${p.era}">${p.era==='classic'?'LEGEND':'NBA'}</span></div>
+      <div class="psub"><span class="pos">${p.positions.join('/')}</span> · ${p.height||''} · ${esc(p.team||'')}</div></div>
+      <div></div></div>`);
+    if(!taken){
+      const b=el(`<button class="btn sm ${myTurn?'':'sec'}" ${myTurn?'':'disabled'}>Draft</button>`);
+      b.onclick=()=>{ if(!myTurn)return; sendMsg({type:'pick',playerId:p.id}); };
+      row.lastElementChild.appendChild(b);
+    } else {
+      const who=s.picks.find(x=>x.playerId===p.id);
+      row.lastElementChild.innerHTML=`<span class="pill">${esc(who?teamName(who.teamId):'taken')}</span>`;
+    }
+    pool.appendChild(row);
+  });
+  poolCard.querySelector('#search').oninput=(e)=>{ui.search=e.target.value;rerenderPool(poolCard);};
+  poolCard.querySelector('#fpos').onchange=(e)=>{ui.filterPos=e.target.value;rerenderPool(poolCard);};
+  poolCard.querySelector('#fera').onchange=(e)=>{ui.filterEra=e.target.value;rerenderPool(poolCard);};
+  main.appendChild(poolCard);
+
+  // right: rosters + feed
+  const side=el('<div class="grid" style="gap:14px"></div>');
+  const feedCard=el('<div class="card"><h3 style="margin-top:0">Pick feed</h3><div class="feed" id="feed"></div></div>');
+  const feed=feedCard.querySelector('#feed');
+  s.picks.slice().reverse().forEach(pk=>{const pp=BYID[pk.playerId];feed.appendChild(el(`<div class="fitem"><b>${esc(teamName(pk.teamId))}</b> — R${pk.round} P${pk.pickNo}: ${esc(pp?pp.name:'')} <span class="ovr ${pp&&pp.era==='classic'?'c2':''}" style="font-size:11px">${pp?pp.overall:''}</span>${pk.auto?' <span class="pill">auto</span>':''}</div>`));});
+  if(!s.picks.length)feed.innerHTML='<div class="mut small">No picks yet.</div>';
+  side.appendChild(feedCard);
+
+  // rosters card with team tabs
+  const rc=el('<div class="card"><h3 style="margin-top:0">Rosters</h3><div class="tabs" id="ttabs"></div><div id="teamRoster"></div></div>');
+  const tabs=rc.querySelector('#ttabs');
+  if(!ui.teamTab||!s.players.find(p=>p.id===ui.teamTab))ui.teamTab=ME.playerId;
+  s.players.forEach(p=>{const t=el(`<div class="tab ${ui.teamTab===p.id?'active':''}">${esc(p.teamName)}${p.id===ME.playerId?' (you)':''}</div>`);t.onclick=()=>{ui.teamTab=p.id;renderTeamRoster(rc);};tabs.appendChild(t);});
+  side.appendChild(rc);
+  main.appendChild(side);
+  c.appendChild(main);
+  setTimeout(()=>renderTeamRoster(rc),0);
+  return c;
 }
-function confetti(){
-  const colors=["#1d9bf0","#f0531d","#ffc94d","#37d67a","#7b2ff7"];
-  for(let i=0;i<120;i++){const c=el("div","confetti");c.style.left=Math.random()*100+"vw";
-    c.style.background=colors[i%colors.length];c.style.animationDelay=Math.random()*0.6+"s";
-    c.style.transform="rotate("+Math.random()*360+"deg)";document.body.appendChild(c);
-    const dur=2200+Math.random()*1600, fall=()=>{c.animate([{transform:"translateY(0) rotate(0)"},
-      {transform:`translateY(105vh) rotate(${Math.random()*720}deg)`}],{duration:dur,easing:"cubic-bezier(.3,.1,.6,1)"})
-      .onfinish=()=>c.remove();}; fall();}
+function rerenderPool(card){
+  // rebuild just the view by re-rendering whole draft (cheap enough); keep focus on search
+  const active=document.activeElement, val=active&&active.id==='search'?active.value:null, pos=active&&active.selectionStart;
+  render();
+  if(val!==null){const ni=document.getElementById('search');if(ni){ni.focus();ni.value=val;try{ni.setSelectionRange(pos,pos);}catch(e){}}}
+}
+function renderTeamRoster(rc){
+  const s=STATE, id=ui.teamTab;
+  const ids=(s.rosters[id]||[]);
+  const box=rc.querySelector('#teamRoster');
+  const total=ids.reduce((a,pid)=>a+(BYID[pid]?BYID[pid].overall:0),0);
+  const avg=ids.length?(total/ids.length).toFixed(1):'0';
+  box.innerHTML=`<div class="row" style="justify-content:space-between"><span class="mut small">${ids.length}/${s.rounds} picked</span><span class="pill">avg OVR ${avg}</span></div>`;
+  const order=['PG','SG','SF','PF','C'];
+  ids.map(pid=>BYID[pid]).filter(Boolean).sort((a,b)=>order.indexOf(a.positions[0])-order.indexOf(b.positions[0])||b.overall-a.overall).forEach(p=>{
+    box.appendChild(el(`<div class="roster-li"><span><span class="pos">${p.positions.join('/')}</span> ${esc(p.name)} <span class="era ${p.era}">${p.era==='classic'?'L':'N'}</span></span><span class="ovr ${p.era==='classic'?'c2':''}" style="font-size:11px">${p.overall}</span></div>`));
+  });
+  if(!ids.length)box.innerHTML+='<div class="mut small" style="margin-top:8px">No players yet.</div>';
 }
 
-/* ---------- boot / reconnect ---------- */
-(function boot(){
-  const s=load();
-  if(s&&s.code){
-    if(s.mode==="online"&&FIREBASE_READY){
-      store=CloudStore(); store.setCode(s.code);
-      store.exists(s.code).then(ok=>{ if(!ok){localStorage.removeItem("nba2kdraft");render();return;}
-        ME={uid:s.uid,name:s.name,isHost:s.isHost,code:s.code,mode:"online"}; store.subscribe(onRoom); });
-      return;
+// ---------------- voting ----------------
+function viewVoting(){
+  const s=STATE, host=ME.isHost, setup=s.phase==='voting_setup';
+  const c=el('<div class="grid" style="grid-template-columns:1fr;gap:16px;max-width:900px;margin:0 auto"></div>');
+  const head=el(`<div class="card"><div class="row" style="justify-content:space-between"><div><h2 style="margin:0">${setup?'Set up the vote':'Vote for the best team'}</h2><p class="mut small" style="margin:.3em 0">${setup?"Host adds the categories you'll vote on (e.g. Best Offense, Best Starting 5, Most Fun). Run your sim on 2K, then everyone votes here.":'Pick the team you think wins each category. You can change your vote until the host reveals results.'}</p></div><div></div></div></div>`);
+  // rosters quick-reference tabs
+  const ref=el('<div class="card"><h3 style="margin-top:0">Team rosters</h3><div class="tabs" id="ttabs"></div><div id="teamRoster"></div></div>');
+  const tabs=ref.querySelector('#ttabs');
+  if(!ui.teamTab||!s.players.find(p=>p.id===ui.teamTab))ui.teamTab=ME.playerId;
+  s.players.forEach(p=>{const t=el(`<div class="tab ${ui.teamTab===p.id?'active':''}">${esc(p.teamName)}</div>`);t.onclick=()=>{ui.teamTab=p.id;renderTeamRoster(ref);};tabs.appendChild(t);});
+
+  const catCard=el('<div class="card"></div>');
+  catCard.innerHTML='<h3 style="margin-top:0">Categories</h3><div id="cats"></div>';
+  const cats=catCard.querySelector('#cats');
+  if(!s.categories.length)cats.innerHTML='<div class="mut small">No categories yet.</div>';
+  s.categories.forEach(cat=>{
+    const box=el(`<div class="catbox"><div class="row" style="justify-content:space-between"><b>${esc(cat.text)}</b>${host?'<button class="btn ghost sm" data-rm="'+cat.id+'">remove</button>':''}</div></div>`);
+    if(!setup){
+      const myVote=(s.votes[cat.id]||{})[ME.playerId];
+      const wrap=el('<div class="row" style="margin-top:8px"></div>');
+      s.players.forEach(p=>{const b=el(`<button class="votebtn ${myVote===p.id?'mine':''}">${esc(p.teamName)}</button>`);b.onclick=()=>sendMsg({type:'vote',categoryId:cat.id,teamId:p.id});wrap.appendChild(b);});
+      box.appendChild(wrap);
+      const voters=Object.keys(s.votes[cat.id]||{}).length;
+      box.appendChild(el(`<div class="mut small" style="margin-top:6px">${voters}/${s.players.length} voted${myVote?' · you voted '+esc(teamName(myVote)):''}</div>`));
     }
-    // local mode can't be restored (in-memory) — clear
-    localStorage.removeItem("nba2kdraft");
+    if(host){const rm=box.querySelector('[data-rm]');if(rm)rm.onclick=()=>sendMsg({type:'removeCategory',id:cat.id});}
+    cats.appendChild(box);
+  });
+  if(host){
+    const add=el(`<div class="row" style="margin-top:10px"><input id="catIn" maxlength="60" placeholder="Add a category (e.g. Best Defense)" style="flex:1"/><button class="btn sec" id="addCat">Add</button></div>`);
+    const inp=add.querySelector('#catIn'), go=()=>{const v=inp.value.trim();if(v){sendMsg({type:'addCategory',text:v});inp.value='';}};
+    add.querySelector('#addCat').onclick=go; inp.onkeydown=(e)=>{if(e.key==='Enter')go();};
+    catCard.appendChild(add);
+    const actions=el('<div class="row" style="margin-top:14px"></div>');
+    if(setup){const b=el('<button class="btn good">Open voting →</button>');b.onclick=()=>sendMsg({type:'openVoting'});actions.appendChild(b);}
+    else{const b=el('<button class="btn good">Reveal results 🏆</button>');b.onclick=()=>sendMsg({type:'revealResults'});actions.appendChild(b);}
+    catCard.appendChild(actions);
+  } else if(setup){
+    catCard.appendChild(el('<p class="mut" style="margin-top:12px">Waiting for the host to open voting…</p>'));
   }
-  render();
-})();
+  c.appendChild(head); c.appendChild(catCard); c.appendChild(ref);
+  setTimeout(()=>renderTeamRoster(ref),0);
+  return c;
+}
+
+// ---------------- results ----------------
+function viewResults(){
+  const s=STATE, host=ME.isHost;
+  const c=el('<div class="grid" style="grid-template-columns:1fr;gap:16px;max-width:900px;margin:0 auto"></div>');
+  // crowns count
+  const crowns={}; s.players.forEach(p=>crowns[p.id]=0);
+  Object.values(s.results||{}).forEach(r=>{if(r.winner&&!r.tie)crowns[r.winner]=(crowns[r.winner]||0)+1;});
+  const ranked=s.players.slice().sort((a,b)=>crowns[b.id]-crowns[a.id]);
+  const champ=ranked[0];
+  const head=el(`<div class="card" style="text-align:center"><div style="font-size:40px">🏆</div><h2 style="margin:.2em 0">${champ&&crowns[champ.id]>0?esc(champ.teamName)+' leads with '+crowns[champ.id]+' categor'+(crowns[champ.id]!==1?'ies':'y'):'Results'}</h2><div class="row" style="justify-content:center;flex-wrap:wrap">${ranked.map(p=>`<span class="pill">${esc(p.teamName)}: ${crowns[p.id]} 🏅</span>`).join('')}</div></div>`);
+  c.appendChild(head);
+  const rc=el('<div class="card"><h3 style="margin-top:0">By category</h3><div id="cr"></div></div>');
+  const cr=rc.querySelector('#cr');
+  s.categories.forEach(cat=>{
+    const r=(s.results||{})[cat.id]||{tally:{},winner:null};
+    const maxv=Math.max(1,...Object.values(r.tally||{}));
+    const box=el(`<div class="catbox"><div class="row" style="justify-content:space-between"><b>${esc(cat.text)}</b><span class="winner">${r.winner?(r.tie?'Tie':'🏆 '+esc(teamName(r.winner))):'No votes'}</span></div></div>`);
+    s.players.forEach(p=>{const v=(r.tally||{})[p.id]||0;const pct=Math.round(v/maxv*100);box.appendChild(el(`<div style="margin-top:6px"><div class="row" style="justify-content:space-between"><span class="small ${r.winner===p.id&&!r.tie?'winner':''}">${esc(p.teamName)}</span><span class="small mut">${v}</span></div><div class="bar"><i style="width:${pct}%"></i></div></div>`));});
+    cr.appendChild(box);
+  });
+  c.appendChild(rc);
+  if(host){const a=el('<div class="row" style="justify-content:center"><button class="btn sec" id="back">← Back to voting</button><button class="btn" id="ng">New game (same room)</button></div>');a.querySelector('#back').onclick=()=>sendMsg({type:'backToVoting'});a.querySelector('#ng').onclick=()=>sendMsg({type:'newGame'});c.appendChild(a);}
+  return c;
+}
+
+// prefill room code from ?room=
+(function(){const m=location.search.match(/room=([A-Za-z0-9]{4})/);if(m){window.__prefRoom=m[1].toUpperCase();}})();
+const _origLanding=viewLanding;
+viewLanding=function(){const n=_origLanding();const ci=n.querySelector('#code');if(ci&&window.__prefRoom){ci.value=window.__prefRoom;}return n;};
 </script>
 </body>
 </html>
