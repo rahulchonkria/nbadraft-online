@@ -1,0 +1,22 @@
+// Cloudflare Workers deployment of the NBA All-Time Draft.
+// public/ is served as static assets; WebSocket upgrades go to the DraftServer
+// Durable Object (worker/index.js), which replaces server.js on Render.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "nba-draft",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": true,
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    // The game's WebSocket connects to "/", which is also index.html, so the Worker
+    // must see every request first and decide.
+    "run_worker_first": true
+  },
+  "durable_objects": {
+    "bindings": [{ "name": "DRAFT", "class_name": "DraftServer" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["DraftServer"] }],
+  "observability": { "enabled": true }
+}

@@ -23,6 +23,18 @@ You'll see:
     Network: http://<your-LAN-IP>:3000
 ```
 
+## Hosting on Cloudflare (free)
+The game also runs on Cloudflare Workers with no server to pay for. `worker/index.js` is a
+port of `server.js`: the Worker serves `public/` as static assets and hands every WebSocket
+to one Durable Object that holds all rooms, using the exact same message protocol, so the
+client is unchanged. Rooms are saved to Durable Object storage on every change (instead of
+`data/rooms.json`), and pick clocks survive restarts.
+
+```bash
+npx wrangler dev      # local, http://localhost:8787
+npx wrangler deploy   # publish (config in wrangler.jsonc)
+```
+
 ## How players connect
 - **Same machine / testing:** open `http://localhost:3000`.
 - **Friends on the same WiFi:** share `http://<your-LAN-IP>:3000` (find your IP with
